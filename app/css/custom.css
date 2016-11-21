@@ -1,0 +1,384 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  /*src: url(https://example.com/MaterialIcons-Regular.eot);  For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../font/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../font/MaterialIcons-Regular.woff) format('woff'),
+       url(../font/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px !important; }
+.material-icons.md-24 { font-size: 24px !important; }
+.material-icons.md-36 { font-size: 36px !important; }
+.material-icons.md-48 { font-size: 48px !important; }
+
+.side-nav li > a > i.material-icons{
+  /*color:rgb(155,15,53);*/
+}
+
+html{
+	font-family: Tahoma, Helvetica, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", sans-serif;
+}
+
+
+header.has-side-nav, main.has-side-nav{
+      padding-left: 300px;
+}
+footer.has-side-nav{
+	margin-left:300px;
+}
+
+@media only screen and (max-width : 992px) {
+      header.has-side-nav, main.has-side-nav {
+        padding-left: 0;
+      }
+      footer.has-side-nav{
+      	margin-left:0;
+      }
+}
+/*.page.center*/ 
+html {
+  height: 100%;
+}
+
+.content-holder{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    
+    /*overflow: auto;*/
+}
+
+main{
+    /*flex: 1 0 auto;*/
+    flex:1;
+}
+
+
+footer {
+  margin-top: auto;
+}
+
+main .container{
+    margin-top: 10px;
+}
+
+nav .profile-pic{
+  max-height: 50px;
+  padding-top:7px;
+}
+
+.nav-wrapper a.dropdown-button{
+  height:56px;
+}
+/*
+
+footer.page-footer {
+  background-color: #00838f !important;
+}
+
+
+.side-nav{
+  background-color:#e1f5fe;
+
+}
+*/
+
+
+#collapse-nav{
+	height:100%;
+	overflow: hidden;
+}
+
+#collapse-nav img.button-collapse{
+	height:64px;
+}
+
+main{
+	margin-top: 10px;
+}
+
+#collapse-nav a{
+  /*background-image: url("../img/side-nav-2.png");*/
+  width:70px;
+  height:70px;
+  display: flex;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: transparent !important;
+}
+
+img#logo{
+  width:45px;
+  padding-top: 10px;
+}
+
+#collapse-nav span{
+  display:inline-block;
+  height:100%;
+  z-index: -1;
+
+}
+
+#collapse-nav span#nav-1{
+  width:62%;
+  
+}
+
+#collapse-nav span#nav-2{
+  width:14%;
+  
+}
+
+#collapse-nav span#nav-3{
+  width:24%;
+  
+}
+
+#login-modal {
+  max-width: 400px; 
+}
+/*-------------- search view-----------------------*/
+
+#search-breadcrumbs.row{
+  height:50px;
+  margin-top:-10px;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  width:100%;
+}
+
+.search-step{
+  height:100%;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  transition: all .3s ease-out;
+
+}
+ 
+ /*.search-step:hover,  .search-step.active{
+  background-color: #8d6e63;
+}*/
+
+#search-breadcrumbs.row .search-step a{
+  font-size: 1.2em;
+  text-decoration: none;
+  text-transform: none;
+  color:#fff;
+}
+
+.tabs {
+  background-color: transparent;
+}
+
+#search-breadcrumbs .tabs .indicator {
+    background-color: #fff;
+}
+
+.pin-top {
+  position: relative;
+}
+
+.pin-bottom {
+  position: relative;
+}
+
+.pinned {
+  position: fixed !important;
+  top:10px !important;
+}
+
+.search-step i.material-icons{
+	display: block;
+    float: left;
+    text-align: center;
+    margin-left: 15px;
+    line-height: 2em;
+}
+
+@media only screen and (max-width: 600px){
+	.search-step i.material-icons{
+		display: block;
+    	float: none;
+    	text-align: center;
+    	margin-left: auto;
+    	line-height: 2em;
+	}
+
+	.btn i.material-icons{
+		float:none;
+		margin:auto;
+	}
+}
+
+/*--------------drawing board-----------*/
+#custom-board{
+  height:400px;
+  width:95%;
+}
+
+.pick-a-color-markup .color-preview {
+    /*height: 1.875em;
+    width: 1.875em;*/
+    height:26px;
+    width:26px;
+}
+
+.drawing-board-controls .pick-a-color-markup {
+    height:28px;
+}
+
+
+.drawing-board-controls .input-group-btn{
+    height:28px;
+}
+
+.drawing-board-controls button.color-dropdown{
+    height:28px !important;
+    padding:0 !important; 
+    width: 28px;
+}
+
+#farbtastic-color-picker #color{
+    width:70px;
+    text-align: center;
+    border: 1px dotted rgba(0,0,0,0.26);
+}
+
+#farbtastic-color-picker .dropdown-button{
+    width:70px;
+    margin-left: 5px;
+    padding:0px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+#picker-wrapper.dropdown-content{
+    width:195px !important;
+}
+
+form#farbtastic-color-picker{
+    width:80px;
+    display:inline-block;
+}
+#supplement{
+    padding: 10px;
+}
+
+ul#picker-wrapper.active{
+    opacity:1;
+    z-index: 1000;
+    display: block;
+}
+
+ul#picker-wrapper{
+	position: fixed;
+    opacity:0;
+    display: none;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    transition: .2s ease-out;
+}
+
+
+div#custom-board{
+    margin-bottom: 20px; 
+}
+
+#supplement .btn{
+    margin:5px;
+}
+
+.drawing-board-canvas-wrapper{
+    overflow: auto;
+    width:100% !important;
+    background-color: rgba(0,0,0,.2);
+}
+
+.drawing-board{
+    width:95% !important;
+}
+
+div{
+    box-sizing: border-box;
+}
+
+canvas{
+    /*background-color: white;*/
+    background-image: url("../img/paper3.png");
+}
+
+a#reset-canvas-size{
+    width:100%;
+    max-width: 100px;
+    padding:0;
+}
+
+input.drawing-board-control-size-range-input{
+    border:none;
+}
+
+.drawing-board-control-size div.drawing-board-control-inner{
+    
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+div.drawing-board-control-inner span.thumb{
+    display: none;
+}
+/*-----------------end drawing board--------------------*/
+/*-----------------search settings in less-------------------------*/
+
+.parallax-container {
+  height: 500px;
+}
+
+@media only screen and (max-width : 992px) {
+  .parallax-container {
+    height: 400px;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  .parallax-container {
+    height: 300px;
+  }
+}

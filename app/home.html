@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+    <title>Elefind</title>
+      <!--Import Google Icon Font
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+
+      <!--Import materialize.css-->
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />  
+      
+      <!--<link type="text/css" rel="stylesheet" href="css/template/materialize.css"  media="screen,projection"/>-->
+      <link type="text/css" rel="stylesheet" href="experiments/materialize-src/css/materialize-cyan-brown.css"  media="screen,projection"/>
+      
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <link rel="stylesheet" href="plugins/drawingboard/css/drawingboard.css">
+
+      <meta http-equiv="x-ua-compatible" content="IE=10">   
+
+      <link rel="stylesheet" href="plugins/farbtastic/farbtastic.css" type="text/css" />
+
+      <link type="text/css" rel="stylesheet" href = "css/custom.css" />
+      <link type="text/css" rel="stylesheet" href = "css/try.css" />
+      <link type="text/css" rel="stylesheet" href = "css/dropzone.css" />
+
+      <!--<link href="css/pageslider.css" rel="stylesheet">-->
+
+    </head>
+
+    <body>
+
+    <script id = "home-nav-footer" type="text/template">
+    <header class="has-side-nav">
+    <nav>
+      <div class="nav-wrapper">
+        
+        <a href="#" class="brand-logo right hide-on-small-only">
+          <img id="logo" class="circle" src="img/logo1.png" alt="logo" /> 
+          {{lang.elefindBrand}}
+        </a>
+
+        <span id="mobile-header" class="hide-on-med-and-up">{{header.prefix}}{{header.main}}</span>
+        
+        <ul id="collapse-nav" class="left hide-on-large-only">
+          <li>
+              <a class="btn waves-effect waves-light button-collapse right" data-activates="slide-out">
+              <!--<div ><img class="background"   src="img/side-nav-2.png"/> class="valign-wrapper"</div> valign-wrapper-->
+                <span id = "nav-1" class = "cyan lighten-1"><i class="material-icons md-24">more_vert</i></span>
+                <span id = "nav-2" class = "brown darken-3"></span>
+                <span id = "nav-3" class = "teal lighten-4"></span>
+              </a>
+          </li>
+        </ul>
+
+        <!--
+        <ul id="nav-mobile" class="right">
+        {{#if isLoggedIn}}
+          <li>
+          <a class='dropdown-button' href="#" data-activates='account-opts'><img class = "circle profile-pic" src="{{user.profilePic}}" alt = "{{user.name}}"></a>  
+          <ul id='account-opts' class='dropdown-content'>
+            <li><a href="#accountSettings">{{lang.accountSettings}}</a></li>
+            <li class="divider"></li>
+            <li><a id="sign-out">{{lang.signOut}}</a></li>            
+          </ul>
+          
+          </li>
+          {{else}}
+          <li>
+            <a id="sign-in">{{lang.signIn}}</a>
+          </li>
+          <li>
+            <a>{{lang.register}}</a>
+          </li>
+        {{/if}}
+        </ul>
+        -->
+      </div>
+    </nav>
+    
+    </header>
+    <main class="has-side-nav">
+      <div class="container">  
+        <h3 class="page-header"><span class="page-header-prefix">#</span>{{header.main}}</h3>        
+      </div>
+      
+      <div class="hero" style = "background-image: url('img/main-1.jpg')">
+        <div class="container image-overlay">
+          <h2 class="page-header"><span class="page-header-prefix">{{lang.part1}}Part 1 </span>{{lang.overview}}Overview</h2>
+        </div>
+      </div>
+
+      <div class="container intro-section">
+        <h5 class="section-header">{{lang.overviewHeader}}Retrieve your vivid memory via a sketch</h5>
+        <p class="flow-text"><span class="section-text-prefix"></span>
+          {{lang.overviewText}}Elefind is the nick name of this image retrieval project. With Elefind, you can search in your electronic albums for your treasured memory via a rough sketch. You may use the built-in drawing board or upload a sketch for searching, and you can feel free to leave out empty spaces in your sketch. You don't need to be an artist to find your photo. If its impression is printed in your mind, we can help you find it. 
+        </p>
+        <h5 class="section-header">{{lang.overviewHeader}}Contents</h5>
+        <ul class="flow-text">
+          <li><a>Part 2 Image Management</a>
+            <ol>
+              <li><a>Album</a></li>
+              <li><a>Gallery</a></li>
+            </ol>
+          </li>
+          <li><a>Part 3 Initiate a Search</a>
+            <ol>
+              <li><a>Get a Sketch</a></li>
+              <li><a>Configure Your Search</a></li>
+            </ol>
+          </li>
+          <li><a>Part 4 Get the Result</a>
+            <ol>
+              <li><a>Progress</a></li>
+              <li><a>Result List</a></li>
+            </ol>
+          </li>
+          <li><a>Part 5 Inside the Box</a>         
+            <ol>
+              <li><a>Sketch Processing</a></li>
+              <li><a>Candidate Photo Processing</a></li>
+              <li><a>Comparing</a></li>
+              <li><a>Other Methods</a></li>
+            </ol>
+          </li>
+          <li><a>Part 6 About Us</a>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="hero" style = "background-image: url('img/album-gallery.jpg')">
+        <div class="container image-overlay">
+          <h2 class="page-header"><span class="page-header-prefix">{{lang.part2}}Part 2 </span>{{lang.space}} Image Management</h2>
+        </div>
+      </div>
+
+      <div class="container intro-section">  
+        <h5 class="section-header">{{lang.albumHeader}}Album</h5>
+        <p class="flow-text"><span class="section-text-prefix">{{lang.part1}}</span>{{lang.albumText}}An Album in Elefind is where you choose to look for your target photo. You can specify the searching scope in <a>Search Settings</a>, or, in the future, the albums in your device. Besides, you can download a photo from an album, and add or delete one if it's in your private album. </p>
+        <h5 class="section-header">{{lang.galleryHeader}}Gallery</h5>
+        <p class="flow-text"><span class="section-text-prefix">{{lang.part1}}</span>{{lang.galleryText}}The Galleries store your sketches. You can pick a sketch you drew earlier and search with it again, or simply download a sketch for any purpose.</p>
+       <blockquote class="flow-text">In both the galleries and the albums, you can click an image tile to view more information about it. By clicking the larger image above the information, you can view the image full screen. </blockquote>
+      </div>
+
+      <!--part-main-img-->
+      <div class="hero" style = "background-image: url('img/draw-settings-s.jpg')">
+        <div class="container image-overlay">
+          <h2 class="page-header"><span class="page-header-prefix">{{lang.part3}}Part 3</span>{{lang.searchSteps}} Initiate a Search</h2>
+        </div>
+      </div>
+
+      <div class="container intro-section">  
+        <h5 class="section-header"> Step 1: Get a Sketch</h5>
+        <p class="flow-text"><span class="section-text-prefix">{{lang.part1}}</span>{{lang.albumText}}There are two ways to get a sketch for searching.</p>
+        <div class="row">
+          <div class="col s12 l4">
+            <img class="responsive-img" src = "img/search-from-gallery.png" alt="{{lang.searchFromGalleryAlt}}">
+          </div>
+          <div class="col s12 l8">
+            <p class = "flow-text"><span class="emphasis-underline">From Gallery. </span>By clicking the "search" icon, you can search with this sketch, and you will be navigated to the settings page.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 l4">
+            <img class="responsive-img" src = "img/search-drawing.png" alt="{{lang.searchDrawingAlt}}">
+          </div>
+          <div class="col s12 l8">
+            <p class = "flow-text"><span class="emphasis-underline">From Drawing Board. </span>You can also draw your sketch here. If you click "next", this sketch will be used for searching and automatically saved to your gallery, 
+            and you will be navigated to the settings page as well. However, you can also save it to your own gallery and search with it later. </p>
+          </div>
+        </div>
+
+        <h5 class="section-header">Step 2: Configure Your Search</h5>
+        <p class="flow-text"><span class="section-text-prefix">{{lang.part1}}</span>{{lang.albumText}}This section is designed to improve searching efficiency. There are two parts in this section. </p>
+        <div class="row">
+          <div class="col s12 l4">
+            <img class="responsive-img" src = "img/search-params.png" alt="search-params">
+          </div>
+          <div class="col s12 l8">
+            <p class = "flow-text"><span class="emphasis-underline">Search Parameters. </span>Settings in this section adjust slightly the behavior of the searching process and affect the result directly. They control how finely the processing and comparing take place, which part of the candidate photos is compared with the sketch and so on. Click the setting's nametag to view detailed explanation. </p>
+            <blockquote class = "flow-text">The advanced section here is usually hidden. Usually you won't need to change anything there for your task, but you can play around with the settings there and feel how the searching algorithm works.  However, it’s recommended that you read <a>Part 5</a> of this article before you do such experiments. </blockquote>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 l4">
+            <img class="responsive-img" src = "img/search-scope.png" alt="{{lang.searchDrawingAlt}}">
+          </div>
+          <div class="col s12 l8">
+            <p class = "flow-text"><span class="emphasis-underline">Search Scope. </span>If you provide accurate information in this section, you may be able to speed up 
+            the searching process dramatically by narrowing down the number of candidate photos. </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hero" style = "background-image: url('img/progress-result.jpg')">
+        <div class="container image-overlay">
+          <h2 class="page-header"><span class="page-header-prefix">{{lang.part3}}Part 4</span>{{lang.searchSteps}} Get the Result</h2>
+        </div>
+      </div>
+
+      <div class="container intro-section">
+        <h5 class="section-header">Progress</h5>
+        <p class="flow-text">{{lang.albumText}}Relax and wait while the searching is in progress. Click "next" to view the result. </p>
+        <h5 class="section-header">Result List</h5>
+        <p class="flow-text">{{lang.albumText}}The scores candidates receive are listed in descending order. The higher the score one candidate has, the more likely Elefind considers it to be the target photo. Click a list item to view the details of a photo. Then, you can choose to download it or to delete it or just to have a closer look by clicking it. Seeing your target, do you find your memory refreshed? </p>
+      </div>
+
+      <div class="hero" style = "background-image: url('img/algorithm.jpg')">
+        <div class="container image-overlay">
+          <h2 class="page-header"><span class="page-header-prefix">{{lang.part2}}Part 5 </span>{{lang.space}} Inside the Box</h2>
+        </div>
+      </div>
+
+      <div class="container intro-section">
+        <p class = "flow-text">If you are curious about how Elefind default searching method works, read on. </p>
+
+        <h5 class="section-header">Sketch Processing</h5>
+        <p class="flow-text">{{lang.albumText}}Generally speaking, it takes two steps to process a sketch.</p>
+        <p class = "flow-text"><span class="emphasis-underline">Get the Edges. </span>Based on the original sketch, edges that separate different patches of colors are marked out.</p>
+        <p class = "flow-text"><span class="emphasis-underline">Isolate patches. </span>The sketch is then down-scaled, and the color patches previously marked out are isolated and stored in a list.</p>
+
+        <h5 class="section-header">Candidate Photo Processing</h5>
+
+        <div class="row">
+          <div class="col s12 l4">
+            <img class="responsive-img" src = "img/slide-illustr.png" alt="{{lang.alt}}">
+          </div>
+          <div class="col s12 l8">
+            <p class = "flow-text"><span class="emphasis-underline">Calculate sliding windows. </span>Given the dimension of the sketch, the center and the size of the searching region and the extent to which the candidates can be scaled, a number of "windows" at the ratio of the sketch slide across the searching region at different sizes. The part of the candidate cut out by each window is considered a "sub-candidate" and the actual comparison is always made between a series of sub-candidates and the sketch.</p>
+            <p class = "flow-text">This step is necessary because no one can possibly remember the exact place of an object in a photo. By matching the sketch with all the windows a candidate has, the window that scores the highest can represent the similarity between the candidate and the sketch.</p>
+          </div>
+        </div>
+       
+        <p class = "flow-text"><span class="emphasis-underline">Drop windows. </span>Some windows are then dropped to speed up the comparing process. The farther the center of the window is from the given search center, the more likely it will be dropped. </p>
+
+        <blockquote class="flow-text">You can choose apply additional preprocessing to the photos in the Advanced Settings part.</blockquote>
+
+        <h5 class="section-header">Comparing</h5>
+        <p class="flow-text">{{lang.albumText}}There are four steps in comparing.</p>
+        <p class = "flow-text"><span class="emphasis-underline">Map the sketch. </span>For every window generated in the previous step, map the sketch onto it. </p>
+        <p class = "flow-text"><span class="emphasis-underline">Cut out patches. </span>For every color patch the sketch has, cut out the corresponding area in the candidate. </p>
+        <p class = "flow-text"><span class="emphasis-underline">Extract and compare. </span>Extract several feature colors in that corresponding area. If one of them is similar to the color of the corresponding color patch in the sketch according to similarity functions, the window "wins" this patch, and a few points are added to this window. </p>
+        <p class = "flow-text"><span class="emphasis-underline">Find the winner. </span>Find the highest score in the windows each candidate has and assign it as the score of that candidate. Sort the candidate list by their scores. Now, the list is ready to be returned.</p>
+         <h5 class="section-header">Other Methods</h5>
+         <p class = "flow-text"><span class="emphasis-underline">Search by another photo. </span>
+         This is implemented with the Haar algorithm found <a target="_blank" href="http://grail.cs.washington.edu/projects/query/"><i class="material-icons">launch</i>here</a>. </p>
+      </div>
+
+      <div class="hero" style = "background-image: url('img/about-us.jpg')">
+        <div class="container image-overlay">
+          <h2 class="page-header"><span class="page-header-prefix">{{lang.part2}}Part 6 </span>{{lang.space}} About Us</h2>
+        </div>
+      </div>
+
+      <div class="container intro-section">
+        <p class = "flow-text">I started to build this project when I found it extremely difficult to find a photo based on its contents in my phone. With a mixture of Java, php, SQL, JavaScript, HTML, CSS and a bit of Less and Sass, this is the first CS project I have ever completed. Except Java and CSS, I learned everything else from scratch to meet my needs. However, I believe Elefind could be even better. Currently it does not support searching in your phones, which was my dream. The algorithm I use here is also pretty intuitive, which is not the trend in this field. In the future, computers should be able to decide more “on their own”, involving some machine learning techniques. Nevertheless, I hope with Elefind you can pay more attention to the life around you while drawing your photos in order to retrieve them, and meanwhile be amazed by the infinite potential of computer science. </p>
+        <h5 class="section-header">Team</h5>
+        <div class="row">
+          <div class="col s12 m3">
+            <img class="responsive-img circle" src = "img/self.png">
+          </div>
+          <div class = "col s12 m9">
+            <p class = "flow-text"><span class="emphasis-underline">Caltha</span><br/>This is me, who is never satisfied by her work and is always "fixing" her project. </p>
+          </div>
+        </div>
+        <p class="flow-text">Special thanks to the following teammates. </p>
+        <div class="row">
+          <div class="col s12 m3">
+            <img class="responsive-img circle" src = "img/turtle.png">
+          </div>
+          <div class = "col s12 m9">
+            <p class = "flow-text"><span class="emphasis-underline">Turtle</span><br/>My classmate in junior high school and close friend today. He helped me conquer the fear of computers, advised me to learn Java, taught me how to use the abundant resources online and encouraged me to learn more. He constantly shares his ideas about our projects with me. He also invited me to participate in his project <a href="http://110.90.118.122/" target="_blank"><i class="material-icons">launch</i>WeScreen</a>.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m3">
+            <img class="responsive-img circle" src = "img/luo.jpg">
+          </div>
+          <div class = "col s12 m9">
+            <p class = "flow-text"><span class="emphasis-underline">Luo</span><br/>My tutor for the last few parts of the project. Before I knew him, I had never thought about reading papers on image retrieval and other algorithms regarding machine vision. He made me confident enough to have a try and gave me a great overview about the CS field today. The various kinds of algorithms arouse my interest in this field. </p>
+          </div>
+        </div>
+        <p class = "flow-text">These creatures also gave me inspirations to move on in the nights I coded alone.</p>
+        <div class="row">
+          <div class="col s4 person-wrapper">
+            <img class="responsive-img circle" src = "img/edwurd.png">
+            <p class = "flow-text"><span class="emphasis-underline">Edwurd Edmud</span></p>
+          </div>
+          <div class="col s4 person-wrapper">
+            <img class="responsive-img circle" src = "img/edword.png">
+            <p class = "flow-text"><span class="emphasis-underline">Edword Edmud</span></p>
+          </div>
+          <div class="col s4 person-wrapper">
+            <img class="responsive-img circle" src = "img/francine.png">
+            <p class = "flow-text"><span class="emphasis-underline">Francine</span></p>
+          </div>
+        </div>
+        <h5 class="section-header">Public Libraries and Plugins Used</h5>
+        <ul class="flow-text">
+          <li><a target="_blank" href="https://github.com/Leimi/drawingboard.js">Drawingboard.js</a></li>
+          <li><a target="_blank" href="http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/">Farbtastic color picker</a></li>
+          <li><a target="_blank" href="http://materializecss.com/">Materializecss</a></li>
+          <li><a target="_blank" href="http://http://www.dropzonejs.com/">Dropzone.js</a></li>
+          <li><a target="_blank" href="http://handlebarsjs.com/">Handlebars</a></li>
+        </ul>
+      </div>
+
+    </main>
+    <footer class="page-footer has-side-nav">
+      <div class="container hide-on-small-only">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">{{lang.about}}</h5>
+                <p class="white-text">One Girl, two elephants, three imaginary friends and four real ones. <a style="text-decoration: underline;">more</a></p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">{{lang.team}}</h5>
+                <ul>
+                  <li><a class="white-text-m" href="#!">Caltha</a></li>
+                  <li><a class="white-text-m" href="http://www.cnblogs.com/turtlegood/" target="_blank">Turtle</a></li>
+                  <li><a class="white-text-m" href="#!">Luo</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Edmud</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Francine</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Edmod</a></li>
+                </ul>
+              </div>
+            </div>
+      </div>
+      <div class="footer-copyright secondary-color">
+            <div class="container">
+              {{lang.copyrightText}}
+            <a class="grey-text text-lighten-4 right hide-on-med-and-up" href="#!">{{lang.about}}</a>
+            </div>
+      </div>
+    </footer>
+    </script>
+
+    <script id="side-nav" type="text/template">
+    <ul id="slide-out" class="side-nav fixed">
+      <li><div class="userView">
+        <img class="background" src="img/user-background.png">
+        {{#if isLoggedIn}}
+        <a><img class="circle" src="{{user.profilePic}}"></a>
+        <a><span class="white-text name">{{user.name}}</span></a>
+        <a><span class="white-text email">{{user.email}}</span></a>
+        <div class="row">
+          <a href="#accountSettings" class="col s6"><span class="accent-light">{{lang.accountSettings}}</span></a>
+          <a href="#" id="sign-out" class="col s6"><span class="accent-light">{{lang.signOut}}</span></a>
+        </div>
+        {{else}}
+        <div class="row">
+        <!-- Modal Trigger 
+          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>-->
+          <a href="#login-modal" class="col s6 modal-trigger"><span class="accent-light">{{lang.signIn}}</span></a>
+          <a href="#register-modal" class="col s6 modal-trigger"><span class="accent-light" >{{lang.register}}</span></a>
+        </div>
+        {{/if}}
+      </div></li>
+
+      <li><a  href="#publicGallery" class="waves-effect waves-light"><i class="material-icons">collections_bookmark</i>{{lang.publicGallery}}</a></li>
+      <li><a href="#publicAlbum" class="waves-effect waves-light"><i class="material-icons">photo_library</i>{{lang.publicAlbum}}</a></li>
+      <li><a class="waves-effect waves-light"><i class="material-icons">link</i>{{lang.publicMatches}}</a></li>
+
+      <li><div class="divider"></div></li>
+
+      <li><a href="#drawingBoard" class="waves-effect waves-light"><i class="material-icons">search</i>{{lang.newSearch}}</a></li>
+      {{#if isLoggedIn}}
+      <li><a href="#myGallery" class="waves-effect waves-light"><i class="material-icons">format_paint</i>{{lang.myGallery}}</a></li>
+      <li><a href="#myAlbum" class="waves-effect waves-light"><i class="material-icons">camera</i>{{lang.myAlbum}}</a></li>     
+      <li><a href="#searchResult" class="waves-effect waves-light"><i class="material-icons">history</i>{{lang.history}}</a></li>
+      {{/if}}
+      <li><div class="divider"></div></li>
+
+      <li><a href="#" class="waves-effect waves-light"><i class="material-icons">group</i>{{lang.introduction}}</a></li>
+    </ul>
+
+    {{#if isLoggedIn}}
+    {{else}}
+    <!-- Modal Structure modal-action modal-close-->
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <div class="row center">
+          <img class="circle" src="img/logo1.png" alt="logo" />  
+          <div>
+            <span>{{lang.loginText}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="Email" id="login-email" type="email" class="validate">
+            <label for="login-email">{{lang.email}}</label>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="login-password" type="password" class="">
+            <label for="login-password">{{lang.password}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="sign-in" class=" modal-action modal-close waves-effect waves-primary btn-flat">{{lang.signIn}}</a>
+      </div>
+    </div>
+
+    <div id="register-modal" class="modal">
+      <div class="modal-content">
+        <div class="row center">
+          <img class="circle" src="img/logo1.png" alt="logo" />  
+          <div>
+            <span>{{lang.loginText}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="{{lang.email}}" id="register-email" type="email" class="validate">
+            <label for="register-email">{{lang.email}}</label>
+          </div>         
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="{{lang.username}}" id="register-username" type="text" class="">
+            <label for="register-username">{{lang.userName}}</label>
+          </div>         
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="register-password" type="password" class="">
+            <label for="register-password">{{lang.password}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="register-password-2" type="password" class="">
+            <label for="register-password-2">{{lang.retypePassword}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <p>
+            <input name="lang" type="radio" id="choose-en" value="en" />
+            <label for="choose-en">English</label>
+          </p>
+          <p>
+            <input name="lang" type="radio" id="choose-zh" value="zh"/>
+            <label for="choose-zh">中文</label>
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="register" class="waves-effect waves-primary btn-flat">{{lang.register}}</a>
+      </div>
+    </div>
+    {{/if}}
+    </script>
+
+    <script id = "account-settings" type="text/template">
+    <header>
+      <nav>
+        <div class="nav-wrapper cyan darken-3">
+          <a class="right">{{lang.accountSettings}}</a>
+          <ul id="nav-mobile" class="left">
+            <li><a class="go-back"><i class="material-icons go-back">chevron_left</i></a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+    <div id="top-container" class="container">
+      <div class="row">
+        <h5 class="brown-text text-darken-2 secondary-d">{{lang.greetUser}} {{user.email}}</h5>
+      </div>
+      
+      <div class="row">
+        <form class="col s12 m9 l7">
+          <div class="row">
+            <img class="circle" src="{{user.profilePic}}">
+            <a class = "btn sync">edit sync</a>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <i class="material-icons prefix">account_circle</i>
+              <input value="{{user.name}}" id="username" type="text" class="validate">
+              <label class = "active" for="username">{{lang.username}}</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input value="{{user.password}}" id="old-password" type="password" >
+              <label class = "active" for="old-password" data-error="{{lang.wrongOldPassword}}">{{lang.oldPassword}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="new-password" type="password">
+              <label for="new-password">{{lang.newPassword}}</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input  id="new-password-2" type="password">
+              <label for="new-password-2">{{lang.confirm}} {{lang.newPassword}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <p>
+              <input name="lang" type="radio" id="choose-en" value="en" />
+              <label for="choose-en">English</label>
+            </p>
+            <p>
+              <input name="lang" type="radio" id="choose-zh" value="zh"/>
+              <label for="choose-zh">中文</label>
+            </p>
+          </div>
+          <a id = "submit-account-settings" class="btn waves-effect">{{lang.submit}}</a>
+        </form>
+      </div>
+
+    </main>
+    </script>
+
+    <script id="drawing-page" type="text/template">
+      <div class="container">
+        <h3 class="page-header"><span class="page-header-prefix">{{lang.step1}}#</span>{{lang.drawingHeader}}</h3>
+          <div id="canvas-ratio-control">
+            <div class="row"  id="drawingboard-separator">
+            </div>
+            <div class="row">
+              <div class="input-field col s8">
+                <input id="sketch-title" type="text" length="100">
+                <label for="sketch-title">{{lang.title}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s4 m3">
+                <input value="" id="width-ratio" type="text">
+                <label class="active" for="width-ratio">{{lang.width}}</label>
+              </div>
+              <div class="input-field col s4 m3">
+                <input value="" id="height-ratio" type="text">
+                <label class="active" for="height-ratio">{{lang.height}}</label>
+              </div>
+              <div class="col s4 m3">
+                <a id="reset-canvas-size" class="btn">{{lang.applyRatio}}</a>
+              </div>
+            </div>
+          </div>
+          <div id="custom-board">
+          </div>
+          <div class = "row" id="supplement">
+            <form id="farbtastic-color-picker" action="" width="80px">
+              <div class="form-item">
+                <!--class="dropdown-content"-->
+                <button data-activates="picker-wrapper" class="btn dropdown-button btn-flat transparent" >
+                  <input type="text" id="color" name="color" value="#000000" disabled style="display: none;"/>
+                  <i id="color-lens" class="material-icons md-48">color_lens</i>
+                </button>
+              </div>
+              <ul id="picker-wrapper" class="dropdown-content" >
+                <li><div id="colorpicker"></div></li>
+              </ul>
+            </form>
+            <button class="btn" id = "save-to-phone"><span class="hide-on-small-only">{{lang.download}}</span> <i class="material-icons right">get_app</i></button>
+            <button class="btn" id = "save-to-server"><span class="hide-on-small-only">{{lang.saveToServer}}</span> <i class="material-icons right">cloud_upload</i></button>
+            <button class="btn next"><span class="hide-on-small-only">{{lang.next}}</span><i class="material-icons white-text right">chevron_right</i></button>
+        </div> 
+      </div>
+    </script>
+ 
+    <script id="search-page" type="text/template">
+
+      <!--<div id="search-breadcrumbs" class="row brown lighten-3 z-depth-1 secondary-l">
+          <div class="col s12">
+            <ul class="tabs">
+            always shows breadcrumb small: shows icons only, medium and up: shows icon and text 
+              <li class="tab col s3 search-step"><a href="#drawing-tab"><i class="material-icons white-text">mode_edit</i><span class="hide-on-small-only">{{lang.draw}}</span></a></li>
+              <li class="tab col s3 search-step"><a  href="#setting-tab"><i class="material-icons white-text">settings</i><span class="hide-on-small-only">{{lang.settings}}</span></a></li>
+              <li class="tab col s3 search-step"><a href="#progress-tab"><i class="material-icons white-text">launch</i><span class="hide-on-small-only">{{lang.progress}}</span></a></li>
+              <li class="tab col s3 search-step"><a href="#result-tab"><i class="material-icons white-text">view_list</i><span class="hide-on-small-only">{{lang.result}}</span></a></li>
+            </ul>
+          </div>
+      </div>-->
+
+      <div class="container">
+          <h3 class="page-header"><span class="page-header-prefix">{{lang.step1}}#</span>{{lang.searchSettingsHeader}}</h3>
+          <div class = "">
+            <form id="search-settings">
+              <div class="settings-option row">
+                  <div class = "settings-info col s12 m4">
+                    <span class = "settings-label">{{lang.maxPatchSize}}</span>
+                  </div>               
+                  <div class="input-field col s12 m8 l6">
+                    <select>
+                      <option value="1250" disabled selected>{{lang.default}}</option>
+                      <option value="625">{{lang.patchSmall}}</option>
+                      <option value="1250">{{lang.patchMedium}}</option>
+                      <option value="100000">{{lang.patchNoRestrict}}</option>
+                    </select>            
+                    <span class="settings-text"> {{lang.maxPatchSizeExpl}}</span>      
+                  </div>
+              </div>
+              <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.centerPos}}</span>
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <p class="range-field">
+                    <label for="center-x">X</label>
+                    <input type="range" id="center-x" min="0" max="10" value="{{settings.centerX}}"/>                    
+                  </p>
+                  <p class="range-field">
+                    <label for="center-y">Y</label>
+                    <input type="range" id="center-y" min="0" max="10" value="{{settings.centerY}}"/>                    
+                  </p>
+                  <span class = "settings-text">{{lang.centerPosExpl}}</span>
+                </div>
+                <!--<div class="input-field col s6 m4 l3">                  
+                </div>-->               
+              </div>
+
+              <div class="row">
+                <div class="col s4 m4">
+                <span class = "settings-label">{{lang.advanced}}</span>
+                </div>
+                <div class = "col s8 m8 l6">
+                <div class="switch">
+                  <label>
+                    <input type="checkbox" id="show-advanced-settings">
+                    <span class="lever"></span>
+                  </label>
+                </div>
+                </div>
+                
+               <!--<div class="divider col s12 m12 l10"></div>-->
+              </div>
+              
+              <div id="advanced-settings" style="display: none;">
+              <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.searchMethod}}</span>
+                  
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <select>
+                    <option value="1" disabled selected>{{lang.default}}</option>
+                    <option value="0">{{lang.RGB}}</option>
+                    <option value="1">{{lang.HSB}}</option>
+                    <option value="2" disabled>{{lang.greyScale}}</option>
+                  </select>
+                  <span class = "settings-text">{{lang.searchMethodExpl}}</span>
+                </div>
+              </div>
+              <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.preprocessing}}</span>
+                  
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <select>
+                    <option value="3" disabled selected>{{lang.default}}</option>
+                    <option value="0">{{lang.none}}</option>
+                    <option value="1">{{lang.equalize}}</option>
+                    <option value="2" disabled>{{lang.smooth}}</option>
+                    <option value="3">{{lang.compress}}</option>
+                    <!--should be multipul selected... but not implemented in java-->
+                  </select>
+                  <span class = "settings-text">{{lang.preprocessingExpl}}</span>
+                </div>
+              </div>
+              <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.maxAmRate}}</span>
+                  
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <p class="range-field">
+                    <input type="range" id="max-am-rate" min="1" max="10" value="{{settings.maxAmRate}}"/>
+                  </p>
+                  <span class = "settings-text">{{lang.maxAmRateExpl}}</span>
+                </div>
+              </div>
+              <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.maxFolds}}</span>
+                  
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <p class="range-field">
+                    <input type="range" id="max-folds" min="1" max="10" value="{{settings.maxFolds}}"/>
+                  </p>
+                  <span class = "settings-text">{{lang.maxFoldsExpl}}</span>
+                </div>
+              </div>
+              <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.searchRegion}}</span>
+                  
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <p class="range-field">
+                    <label for="search-w">W</label>
+                    <input type="range" id="search-w" min="0" max="10" value="{{settings.searchW}}"/>                    
+                  </p>
+                  <p class="range-field">
+                    <label for="search-h">H</label>
+                    <input type="range" id="search-h" min="0" max="10" value="{{settings.searchH}}"/>                    
+                  </p>
+                  <span class = "settings-text">{{lang.searchRegionExpl}}</span>
+                </div>
+              </div>
+              <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.slidingStep}}</span>
+                  
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <p class="range-field">
+                    <input type="range" id="sliding-step" min="1" max="8" value="{{settings.slidingStep}}"/>
+                  </p>
+                  <span class = "settings-text">{{lang.slidingStepExpl}}</span>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+              </div>
+
+            
+            <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.searchScope}}</span>
+                  
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <select multiple>
+                    <option value="0">{{lang.default}}</option>
+                    <option value="public" selected>{{lang.publicAlbum}}</option>
+                    <option value="private">{{lang.privateAlbum}}</option>
+                  </select>                  
+                  <span class = "settings-text">{{lang.searchScopeExpl}}</span>
+                </div>
+            </div>
+
+            <div class="settings-option row">
+                <div class = "settings-info col s12 m4">
+                  <span class = "settings-label">{{lang.targetTimeRange}}</span>
+                  
+                </div>
+                <div class="input-field col s12 m8 l6">
+                  <span for="start-date">{{lang.from}}</span>
+                  <input type="date" class="datepicker" id="start-date">  
+                  <span for="end-date">{{lang.to}}</span>
+                  <input type="date" class="datepicker" id="end-date">  
+                  
+                  <span class = "settings-text">{{lang.targetTimeRangeExpl}}</span>
+                </div>
+            </div>
+
+            </form>
+            <button id = "submit-settings-scope" class = "btn"><span class="hide-on-small-only">{{lang.submit}}</span><i class="material-icons white-text right">send</i></button> 
+          </div>
+      </div>     
+    </script>
+
+    <script id = "progress-page" type="text/template">
+    <button id="test-btn" class="btn">Click to test!</button>
+      <div class="container">
+        <h3 class="page-header"><span class="page-header-prefix">{{lang.step1}}#</span> {{lang.progressHeader}}</h3>
+          <div id = "progress-wrapper">
+
+            <div id = "progress-field" >
+              <div id="progress"></div>
+              <img src="img/full.png"/>
+            </div>
+          </div>
+          <div class="row">
+            <a id = "to-result" href="#searchResult" class = "btn" style="display:none">{{lang.next}}<i class="material-icons white-text right">chevron_right</i></a>
+          </div>
+      </div>
+    </script>
+
+    <script id = "stage-label" type="text/template">
+      <div class="stage-label" id="{{id}}" style = "top: {{top}}">
+        <div class = "pointer"></div>
+        <div class="stage-icon"><i class="material-icons">{{icon}}</i></div>
+        <span>{{text}}</span>
+      </div>
+    </script>
+
+    <script type="text/template">
+      <div class="preloader-wrapper large active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script id = "grid-gallery" type="text/template">
+      <div class="container">
+        <h3 class="page-header"><span class="page-header-prefix">{{header.prefix}}#</span>{{header.main}}</h3>
+        <div class = "row">
+          <div class = "col s12 m7">
+            <div class="row" id="gallery">
+              <div class="preloader-wrapper large active">
+                <div class="spinner-layer">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+              <!--tiles go in here--> 
+            </div>
+          </div>
+          
+          <div class="col s12 m5" id="image-view-wrapper">
+            <span>click a tile to view the details</span>
+          </div>
+          
+        </div>
+      </div>
+    </script>
+
+    <script id = "image-view" type="text/template">
+      <div class="image-view">
+        <div class="image-self-wrapper">
+          <div class = "image-self" style="background-image: url('{{src}}')">
+            <a class = "exit-view hide-on-med-and-up"><i class='material-icons'>arrow_back</i></a>
+            <img class="hidden-image materialboxed" src ="{{src}}">
+
+            
+          </div>
+        </div>
+        <div class="image-details">
+          <button class="btn-floating btn-large waves-effect waves-light search-by-this"><i class="material-icons">search</i></button>
+          <p class="view-author">{{lang.by}} {{#if author}}{{author}}{{else}}{{lang.noAuthor}}{{/if}}</p>
+          <p class="view-title">{{title}}</p>
+          
+          <span class="view-date">{{date}}</span>
+        </div>
+        <div class="image-actions">
+          <a class="btn btn-flat waves-effect" id = "save-to-phone" href="{{src}}" download="{{title}}"><span class="">{{lang.download}}</span> <i class="material-icons right">get_app</i></a>
+          <a class="btn btn-flat waves-effect" id = "delete-pic"><span class="">{{lang.delete}}</span> <i class="material-icons right">delete</i></a>
+          <!--<a class="" id = "save-to-server"><span class="hide-on-small-only">{{lang.saveToServer}}</span> <i class="material-icons right">cloud_upload</i></a>-->
+        </div>
+      </div>
+    </script>
+
+    <script id = "image-tile" type="text/template">
+      <div class="tile-wrapper" id={{image.filename}}>
+        <div class="card hoverable">
+          <div class="card-image">
+              <img data-caption="{{image.title}}" class = "" src="{{image.src}}" data-author="{{author}}" data-date="{{date}}" data-vis="{{visibility}}">
+              {{#if image.title}}
+              <span class="card-title">{{image.title}}</span>
+              {{/if}}
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script id = "text-tile" type="text/template">
+      <div class="tile-wrapper">
+        <div class="card-panel white-text hoverable" style="background-color: {{style}}">
+          <span class="text-title">{{text.title}}</span>
+          <span class="text-body">{{text.body}}</span>
+        </div>
+      </div>
+    </script>
+
+    <script id = "upload-tile" type="text/template">
+      <div class="tile-wrapper">
+        <div class="card-panel white-text blue-grey hoverable upload-tile" style="background-color: {{style}}">
+          <div id="upload-dropzone" class="dropzone"></div>
+        </div>
+      </div>
+    </script>
+
+    <script id = "result-page" type="text/template">
+      <div class="container">
+        <h3 class="page-header"><span class="page-header-prefix">{{header.prefix}}#</span>{{header.main}}</h3>
+        <div class = "row">
+          <div class = "col s12 m5">
+            <div class="row" id="gallery">              
+              <!--list go in here--> 
+              <table class="highlight">
+                <thead>
+                  <tr>
+                      <th data-field="preview">{{lang.preview}}</th>
+                      <!--<th data-field="title">{{lang.title}}</th>
+                      <th data-field="author">{{lang.author}}</th>-->
+                      <th data-field="score">{{lang.score}}</th>
+                  </tr>
+                </thead>
+                <tbody id="result-list">
+                  <tr>
+                    <td class="preview-image-wrapper">
+                      <img class="circle preview-image" src="img/logo1.png"/> 
+                    </td>
+                    <td>Alvin</td>
+                    <td>Eclair</td>
+                    <td>$0.87</td>
+                  </tr>
+                  <tr>
+                    <td class="preview-image-wrapper">
+                      <img class="circle preview-image" src="img/logo1.png"/> 
+                    </td>
+                    <td>Alan</td>
+                    <td>Jellybean</td>
+                    <td>$3.76</td>
+                  </tr>
+                  <tr>
+                    <td class="preview-image-wrapper">
+                      <img class="circle preview-image" src="img/logo1.png"/> 
+                    </td>
+                    <td>Jonathan</td>
+                    <td>Lollipop</td>
+                    <td>$7.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="col s12 m7" id="image-view-wrapper">
+            <span>click a list item to view the details</span>
+          </div>
+          
+        </div>
+      </div>
+    </script>
+
+    <script id = "result-tr" type="text/template">
+      <tr>
+        <td class="preview-image-wrapper">
+          <img alt="{{lang.brokenImage}}" data-caption= "{{title}}" class = "circle preview-image" src="{{src}}" data-author="{{author}}" data-date="{{date}}" data-vis="{{visibility}}">
+        </td>
+        <!--{{#if title}}
+        <td>{{title}}</td>
+        {{else}}
+        <td class="dark-text-disabled">{{lang.noTitle}}</td>
+        {{/if}}
+        <td>{{author}}</td>-->
+        <td>{{score}}</td>
+      </tr>
+    </script>
+
+    </body>
+
+      <!--Import jQuery before materialize.js-->
+      <script src="js/handlebars.js"></script>
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+      <!--<script src="js/pageslider.js"></script>-->
+      <script src="js/router.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+
+      <script type="text/javascript" src="js/template/materialize.js"></script>
+
+      <script src="plugins/drawingboard/js/utils.js"></script>
+      <script src="plugins/drawingboard/js/controls/control.js"></script>
+      <script src="plugins/drawingboard/js/controls/color.js"></script>
+      <script src="plugins/drawingboard/js/controls/drawingmode.js"></script>
+      <script src="plugins/drawingboard/js/controls/download.js"></script>
+      <script src="plugins/drawingboard/js/controls/navigation.js"></script>
+      <script src="plugins/drawingboard/js/controls/size.js"></script>
+      <script src="plugins/drawingboard/js/simple-undo.js"></script>
+      <script src="plugins/drawingboard/js/board.js"></script>
+
+      <script type="text/javascript" src="plugins/farbtastic/farbtastic.js"></script>
+
+      <script type="text/javascript" src="js/dropzone.js"></script>
+
+
+      <script type="text/javascript" src="js/Language.js"></script>
+      <script type="text/javascript" src="js/HomeView.js"></script>
+
+      <script type="text/javascript" src="js/DrawView.js"></script>
+      <script type="text/javascript" src="js/SearchView.js"></script>
+      <script type="text/javascript" src="js/ProgressView.js"></script>
+      <script type="text/javascript" src="js/ResultView.js"></script>
+
+      <script type="text/javascript" src="js/UserService.js"></script>
+      <script type="text/javascript" src="js/ActionQueue.js"></script>
+      <script type="text/javascript" src="js/AcSettingsView.js"></script>
+      <script type="text/javascript" src="js/GridView.js"></script>
+
+      <script type="text/javascript" src="js/app.js"></script>
+
+      
+  </html>

@@ -1,0 +1,89 @@
+CSS3 transition
+In general, you apply the transition
+property to the original style, the style that defines the look of an element
+before the animation begins.
+
+The transition property. CSS3 adds the transition property—the secret
+sauce that makes the animation possible. In general, you apply the transition
+property to the original style, the style that defines the look of an element
+before the animation begins.
+
+When the trigger no longer applies—when the visitor mouses off a navigation
+button, for example—then the browser returns the tag back to its previous style
+and animates the entire process. In other words, you only need to set a transition
+to an element once, and the browser takes care of animating from one style to
+another and back to the original style.
+
+A web browser can’t animate every single CSS property, but you still have a long
+list of properties to choose from. In addition to the rotate, scale, translate,
+and skew transformations you just read about, you can also animate color,
+background-color, border-color, border-width, font-size, height, width, letterspacing,
+line-height, margin, opacity, padding, word-spacing; the positioning
+properties—top, left, right, and bottom—which you’ll learn about in Chapter 15;
+and many other properties. You can find a complete list at www.w3.org/TR/css3-
+transitions/#animatable-properties.
+
+.navButton {
+background-color: orange;
+-webkit-transition-property: background-color;
+-moz-transition-property: background-color;
+-o-transition-property: background-color;
+transition-property: background-color;
+-webkit-transition-duration: 1s;
+-moz-transition-duration: 1s;
+-o-transition-duration: 1s;
+transition-duration: 1s;
+}
+
+The transition-timing-function property can take one of five keywords: linear,
+ease, ease-in, ease-out, and ease-in-out. If you don’t specify a timing function,
+the browser uses the ease method, which begins the animation slowly, speeds up
+in the middle, and slows down at the end, providing a more organic change.
+
+Visit www.the-art-of-web.com/css/timing-function/
+
+Transition Shorthand
+Writing out all the different properties—transition-property, transition-duration,
+transition-timing-function, and transition-duration—can get pretty tiring.
+Especially when you consider you need to also create vendor-prefixed versions of
+each of those as well. Fortunately, there’s a faster way to create transitions—the
+transition property.
+This property bundles all of the other properties into one. To use it, simply list the
+property, duration, timing function, and duration in a space-separated list. For
+example, to animate all CSS properties for one second using the ease-in timing
+function, with a half-second delay, write the following:
+transition: all 1s ease-in .5s;
+You need to list either all or a single CSS property and a duration, but the timing
+function and delay are optional. By default, the timing function is ease-in and there’s
+no delay. So if you simply want to animate the transition of all CSS properties for
+one second, then write this:
+transition: all 1s;
+If you only want to animate the change in the background color, then list that
+property:
+transition: background-color 1s;
+You can only list a single CSS property here, so if you wish to animate multiple
+CSS properties (but not all), then you can write a comma-separated list of spaceseparated
+transition properties. Take the example from page 347, where the bordercolor
+property is animated separately from the color and background color. You
+can rewrite that code like this:
+transition: color 1s, background-color 1s, border-color .5s 1s;
+To make the code easier to read, many web designers put each transition on a
+separate line, like this:
+transition: color 1s,
+background-color 1s,
+border-color .5s 1s;
+This is perfectly legal as long as you remember to separate them with a comma
+and end the whole shebang with a semicolon. And, of course, you need to create
+vendor-prefixed versions as well:
+-webkit-transition: color 1s,
+background-color 1s,
+border-color .5s 1s;
+-moz-transition: color 1s,
+background-color 1s,
+border-color .5s 1s;
+-o-transition: color 1s,
+background-color 1s,
+border-color .5s 1s;
+transition: color 1s,
+background-color 1s,
+border-color .5s 1s;

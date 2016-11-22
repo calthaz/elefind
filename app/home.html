@@ -250,7 +250,7 @@
 
       <div class="hero" style = "background-image: url('img/about-us.jpg')">
         <div class="container image-overlay">
-          <h2 class="page-header"><span class="page-header-prefix">{{lang.part2}}Part 6 </span>{{lang.space}} About Us</h2>
+          <h2 class="page-header" ><span class="page-header-prefix">{{lang.part2}}Part 6 </span>{{lang.space}} About Us</h2>
         </div>
       </div>
 
@@ -313,7 +313,7 @@
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="white-text">{{lang.about}}</h5>
-                <p class="white-text">One Girl, two elephants, three imaginary friends and four real ones. <a style="text-decoration: underline;">more</a></p>
+                <p class="white-text">One Girl, two elephants, three imaginary friends and four real ones. <a href="#" style="text-decoration: underline;">more</a></p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">{{lang.team}}</h5>
@@ -804,7 +804,7 @@
     <script id = "grid-gallery" type="text/template">
       <div class="container">
         <h3 class="page-header"><span class="page-header-prefix">{{header.prefix}}#</span>{{header.main}}</h3>
-        <div class = "row">
+        <div class = "row {{type}}">
           <div class = "col s12 m7">
             <div class="row" id="gallery">
               <div class="preloader-wrapper large active">

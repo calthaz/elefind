@@ -68,7 +68,12 @@
 			$result = $conn->query($sql);
 
 		*/
-
+		if(strpos($draft['type'],"sketch")){
+			$txt = "MANAGER_TYPE: ImprSearch\r\n";
+		}else{
+			$txt = "MANAGER_TYPE: FastQuerying\r\n";
+		}
+		fwrite($settings, $txt);
  		foreach($searchConfig as $itemName => $value) {
     		$txt = $itemName.":".$value."\r\n";
     		$sql = $sql.$itemName. " = '" . $value . "', ";
@@ -113,12 +118,12 @@
  		//how do I know where to get the progress??? 
  		//{startSearch: "start", relatingFileName: that.relatingFileName },
  		$filename = $_POST["relatingFileName"];
- 		$commandStr = 'java -cp d:\workspace\ImprSearch\bin imprSearch.QueryAgent '.$settingsDir.$filename;
+ 		$commandStr = 'java -cp d:\workspace\ImprSearch\bin general.QueryAgent '.$settingsDir.$filename;
  		$output="";
 
  		//echo $commandStr . ":";
  		exec($commandStr, $output);
- 		
+ 		//print_r($output); 
  		$result = file($resultDir.$_POST["relatingFileName"]);
  		
  		/*[0] => [storage\public_photos\running.jpg compared with 0zymdxlyx@sina.cn_1477905378.png-imp wins 1 color patches. Score:0.024926686217008796, 
@@ -143,7 +148,7 @@
  		storage\public_photos\zymdxlyx@sina.cn_14778227890.jpg compared with 0zymdxlyx@sina.cn_1477905378.png-imp wins 0 color patches. Score:0.0]*/
 
  		$results = explode(', ', substr($result[0], 1, strpos($result[0], "]")-1)); //?why there is still a bracket if -2? 
- 		//print_r($results);
+ 		//print_r($result);
 
  		$resultPackage = array();
  		$sql = "SELECT * FROM photos WHERE filename LIKE '";

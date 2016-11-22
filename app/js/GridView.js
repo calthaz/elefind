@@ -8,7 +8,7 @@ var GridView = function(service, type){
         var isLoggedIn = user.name != "";
 
     	this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header:this.header}));
-    	$('main', this.$el).html(this.innerTpl({user:user, lang:lang, header:this.header}));
+    	$('main', this.$el).html(this.innerTpl({user:user, lang:lang, header:this.header, type:this.type}));
     	return this;
 	};
 
@@ -183,6 +183,7 @@ var GridView = function(service, type){
 }
 
 var renderImageView = function(){
+
   $("#image-view-wrapper").addClass("has-view"); 
   if(window.innerWidth<600){
     $('.row#gallery').css("display", "none");
@@ -206,10 +207,17 @@ var renderImageView = function(){
   $('.materialboxed').materialbox();
 
   $(".image-view button.search-by-this").click(function(){
+    var type = this.parentNode.parentNode.parentNode.parentNode; 
+    console.log(type.className); 
     var img = this.parentNode.parentNode.children[0].children[0]; //[0] image-card
     console.log(img); 
     console.log($(img).css("background-image")); //url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
-    window.localStorage.setItem("userSketch", JSON.stringify({type: 'old-sketch', src: $(img).css("background-image")})); 
+    if(type.className.indexOf("Gallery")!=-1){
+       window.localStorage.setItem("userSketch", JSON.stringify({type: 'old-sketch', src: $(img).css("background-image")})); 
+    }else{
+      window.localStorage.setItem("userSketch", JSON.stringify({type: 'photo', src: $(img).css("background-image")})); 
+    }
+   
     window.location.hash = "#searchSettings";
     $(window).trigger("hashChange"); 
   });

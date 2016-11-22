@@ -1,5 +1,6 @@
 
 var defaultSettings = {
+			//MANAGER_TYPE:"ImprSearch",
 			searchMethod:1,
 			preprocessing:3,
 			maxPatchSize:1250,

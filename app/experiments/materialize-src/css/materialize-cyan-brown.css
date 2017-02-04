@@ -2147,7 +2147,7 @@ video.responsive-video {
   display: inline-block;
   float: none; }
 
-@media only screen and (max-width: 992px) {
+@media print, screen and (max-width: 992px) {
   .pagination {
     width: 100%; }
     .pagination li.prev,
@@ -2224,15 +2224,15 @@ ul.staggered-list li {
 /*********************
   Media Query Classes
 **********************/
-@media only screen and (max-width: 600px) {
+@media print, screen and (max-width: 600px) {
   .hide-on-small-only, .hide-on-small-and-down {
     display: none !important; } }
 
-@media only screen and (max-width: 992px) {
+@media print, screen and (max-width: 992px) {
   .hide-on-med-and-down {
     display: none !important; } }
 
-@media only screen and (min-width: 601px) {
+@media print, screen and (min-width: 601px) {
   .hide-on-med-and-up {
     display: none !important; } }
 
@@ -2240,11 +2240,11 @@ ul.staggered-list li {
   .hide-on-med-only {
     display: none !important; } }
 
-@media only screen and (min-width: 993px) {
+@media print, screen and (min-width: 993px) {
   .hide-on-large-only {
     display: none !important; } }
 
-@media only screen and (min-width: 993px) {
+@media print, screen and (min-width: 993px) {
   .show-on-large {
     display: block !important; } }
 
@@ -2252,19 +2252,19 @@ ul.staggered-list li {
   .show-on-medium {
     display: block !important; } }
 
-@media only screen and (max-width: 600px) {
+@media print, screen and (max-width: 600px) {
   .show-on-small {
     display: block !important; } }
 
-@media only screen and (min-width: 601px) {
+@media print, screen and (min-width: 601px) {
   .show-on-medium-and-up {
     display: block !important; } }
 
-@media only screen and (max-width: 992px) {
+@media print, screen and (max-width: 992px) {
   .show-on-medium-and-down {
     display: block !important; } }
 
-@media only screen and (max-width: 600px) {
+@media print, screen and (max-width: 600px) {
   .center-on-small-only {
     text-align: center; } }
 
@@ -2308,7 +2308,7 @@ td, th {
   vertical-align: middle;
   border-radius: 2px; }
 
-@media only screen and (max-width: 992px) {
+@media print, screen and (max-width: 992px) {
   table.responsive-table {
     width: 100%;
     border-collapse: collapse;
@@ -2585,10 +2585,10 @@ input[type=range] + .thumb {
   max-width: 1280px;
   width: 90%; }
 
-@media only screen and (min-width: 601px) {
+@media print, screen and (min-width: 601px) {
   .container {
     width: 85%; } }
-@media only screen and (min-width: 993px) {
+@media print, screen and (min-width: 993px) {
   .container {
     width: 70%; } }
 .container .row {
@@ -2752,7 +2752,7 @@ input[type=range] + .thumb {
       right: 100%; }
     .row .col.push-s12 {
       left: 100%; }
-    @media only screen and (min-width: 601px) {
+    @media print, screen and (min-width: 601px) {
       .row .col.m1 {
         width: 8.33333%;
         margin-left: auto;
@@ -2885,7 +2885,7 @@ input[type=range] + .thumb {
         right: 100%; }
       .row .col.push-m12 {
         left: 100%; } }
-    @media only screen and (min-width: 993px) {
+    @media print, screen and (min-width: 993px) {
       .row .col.l1 {
         width: 8.33333%;
         margin-left: auto;
@@ -3037,7 +3037,7 @@ nav {
   nav .nav-wrapper {
     position: relative;
     height: 100%; }
-  @media only screen and (min-width: 993px) {
+  @media print, screen and (min-width: 993px) {
     nav a.button-collapse {
       display: none; } }
   nav .button-collapse {
@@ -3059,7 +3059,7 @@ nav {
     nav .brand-logo.center {
       left: 50%;
       transform: translateX(-50%); }
-    @media only screen and (max-width: 992px) {
+    @media print, screen and (max-width: 992px) {
       nav .brand-logo {
         left: 50%;
         transform: translateX(-50%); }
@@ -3133,7 +3133,7 @@ nav {
   .navbar-fixed nav {
     position: fixed; }
 
-@media only screen and (min-width: 601px) {
+@media print, screen and (min-width: 601px) {
   nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
     height: 64px;
     line-height: 64px; }
@@ -3423,16 +3423,16 @@ small {
   display: block;
   position: fixed;
   z-index: 10000; }
-  @media only screen and (max-width: 600px) {
+  @media print, screen and (max-width: 600px) {
     #toast-container {
       min-width: 100%;
       bottom: 0%; } }
-  @media only screen and (min-width: 601px) and (max-width: 992px) {
+  @media print, screen and (min-width: 601px) and (max-width: 992px) {
     #toast-container {
       left: 5%;
       bottom: 7%;
       max-width: 90%; } }
-  @media only screen and (min-width: 993px) {
+  @media print, screen and (min-width: 993px) {
     #toast-container {
       top: 10%;
       right: 7%;
@@ -3463,14 +3463,14 @@ small {
     margin-left: 3rem; }
   .toast.rounded {
     border-radius: 24px; }
-  @media only screen and (max-width: 600px) {
+  @media print, screen and (max-width: 600px) {
     .toast {
       width: 100%;
       border-radius: 0; } }
-  @media only screen and (min-width: 601px) and (max-width: 992px) {
+  @media print, screen and (min-width: 601px) and (max-width: 992px) {
     .toast {
       float: left; } }
-  @media only screen and (min-width: 993px) {
+  @media print, screen and (min-width: 993px) {
     .toast {
       float: right; } }
 
@@ -3864,7 +3864,7 @@ button.btn-floating {
   overflow-y: auto;
   border-radius: 2px;
   will-change: top, opacity; }
-  @media only screen and (max-width: 992px) {
+  @media print, screen and (max-width: 992px) {
     .modal {
       width: 80%; } }
   .modal h1, .modal h2, .modal h3, .modal h4 {
@@ -4401,11 +4401,11 @@ textarea.materialize-textarea {
     width: calc(100% - 3rem); }
   .input-field .prefix ~ label {
     margin-left: 3rem; }
-  @media only screen and (max-width: 992px) {
+  @media print, screen and (max-width: 992px) {
     .input-field .prefix ~ input {
       width: 86%;
       width: calc(100% - 3rem); } }
-  @media only screen and (max-width: 600px) {
+  @media print, screen and (max-width: 600px) {
     .input-field .prefix ~ input {
       width: 80%;
       width: calc(100% - 3rem); } }
@@ -5181,7 +5181,7 @@ input[type=range]:focus::-ms-fill-upper {
     right: 0;
     left: auto; }
 
-@media only screen and (max-width: 992px) {
+@media print, screen and (max-width: 992px) {
   .side-nav.fixed {
     transform: translateX(-105%); }
     .side-nav.fixed.right-aligned {

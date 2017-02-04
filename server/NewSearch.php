@@ -2,12 +2,12 @@
 
 	$progressFile ="";
 	$resultFile = "";
-	$settingsDir = "D:\wamp\www\\elefind\server\searchSettingFiles\\"; //?? why use \\?
-	$progressDir = "D:\wamp\www\\elefind\server\searchProgressFiles\\";
-	$resultDir = "D:\wamp\www\\elefind\server\searchResultFiles\\";
-	$privateDraftDir = "D:\wamp\www\\elefind\server\\storage\\users\\"; // then: \\useremail\\sketches
-	$publicDraftDir = "D:\wamp\www\\elefind\server\\storage\\public_sketches\\";
-	$publicPhotoDir = "D:\wamp\\www\\elefind\\server\\storage\\public_photos";
+	$settingsDir = "searchSettingFiles\\"; //?? why use \\?
+	$progressDir = "searchProgressFiles\\";
+	$resultDir = "searchResultFiles\\";
+	$privateDraftDir = "storage\\users\\"; // then: \\useremail\\sketches
+	$publicDraftDir = "storage\\public_sketches\\";
+	$publicPhotoDir = "storage\\public_photos";
 	$msg = ""; 
 
 	$servername = "localhost";
@@ -105,23 +105,13 @@
  		
  		echo json_encode($dataToReturn);
 
- 		/*$commandStr = 'java -cp d:\workspace\ImprSearch\bin imprSearch.QueryAgent '.$settingsDir.$filename;
- 		$output="";
-
- 		echo $commandStr;
- 		exec($commandStr, $output);
- 		print_r($output);
- 		echo "You should have seen something, manager.";
-		*/
-
  	}elseif(isset($_POST["startSearch"]) && isset($_POST["relatingFileName"])){
  		//how do I know where to get the progress??? 
  		//{startSearch: "start", relatingFileName: that.relatingFileName },
  		$filename = $_POST["relatingFileName"];
- 		$commandStr = 'java -cp d:\workspace\ImprSearch\bin general.QueryAgent '.$settingsDir.$filename;
+ 		$commandStr = 'java -cp ImprSearch\bin general.QueryAgent '.$settingsDir.$filename;
  		$output="";
-
- 		//echo $commandStr . ":";
+ 		
  		exec($commandStr, $output);
  		//print_r($output); 
  		$result = file($resultDir.$_POST["relatingFileName"]);

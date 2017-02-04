@@ -154,8 +154,8 @@ var GridView = function(service, type){
         				}
           			//lastIndexOf()  从后向前搜索字符串。
                 // Well, /./g matches with everything 
-          			$(".row#gallery").append(that.imageTileTpl({image:{src: path+file.filename, title: file.title, filename: file.filename.replace("@","at").replace(/[.]/g, "dt")}, author:file.author, date: file.date, visibility: file.visibility}));
-
+          			$(".row#gallery").append(that.imageTileTpl({image:{src: path+file.filename, title: file.title, filename: classNameEncode(file.filename)}, author:file.author, date: file.date, visibility: file.visibility}));
+                                                                                //file.filename.replace("@","at").replace(/[.]/g, "dt")
           		}
           		
           	}else{
@@ -228,7 +228,7 @@ var renderImageView = function(){
     console.log($(img).css("background-image")); //url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
     var filename = $(img).css("background-image");
     filename = filename.substring(filename.lastIndexOf("/")+1, filename.indexOf('")'));
-    filename = filename.replace("@","at").replace(/[.]/g, "dt"); 
+    filename = classNameEncode(filename); //filename.replace("@","at").replace(/[.]/g, "dt"); 
     //lastIndexOf() 从后向前搜索字符串。
     //jQuery.post( url [, data ] [, success ] [, dataType ] )
     $.post("../server/ImageManager.php", {deletePic:$(img).css("background-image")}, function(data){
@@ -292,4 +292,65 @@ var resizeGallery = function(that){
       //$(".image-actions").css("height", Math.floor(w*1/5)+'px'); 
       $(".image-self .hidden-image").css("max-width", w+"px");
       $(".image-self .hidden-image").css("max-height", Math.floor(w*3/4)+"px");
+}
+
+var classNameEncode = function(str){
+  var arr = str.split("");
+  var arr2 = []; 
+  for (var i = arr.length - 1; i >= 0; i--) {
+    if(arr[i]=="@"){
+      arr2[2*i]='a';
+      arr2[2*i+1]='t';
+    }else if(arr[i]=="."){
+      arr2[2*i]='d';
+      arr2[2*i+1]='t';
+    }else if(arr[i]=="#"){
+      arr2[2*i]='h';
+      arr2[2*i+1]='a';
+    }else if(arr[i]=="<"){
+      arr2[2*i]='l';
+      arr2[2*i+1]='e';
+    }else if(arr[i]==">"){
+      arr2[2*i]='r';
+      arr2[2*i+1]='i';
+    }else if(arr[i]=='\''){
+      arr2[2*i]='n';
+      arr2[2*i+1]='o';
+    }else{
+      arr2[2*i]=arr[i];
+      arr2[2*i+1]=arr[i];
+    }
+    
+  }
+  //console.log(arr);
+  //console.log(arr2);
+  return arr2.join().replace(/[,]/g,"");
+}
+
+var classNameDecode = function(str){
+  var arr = str.split("");
+  var arr2 = []; 
+  if(arr.length%2!=0) return "can't decode"; 
+  for (var i = arr.length - 1; i >= 1; i-=2) {
+    if(arr[i]==arr[i-1]){
+      arr[(i-1)/2]=arr[i];
+    }else if(arr[i]=='a'&&arr[i-1]=='t'){
+      arr[(i-1)/2]="@";
+    }else if(arr[i]=='h'&&arr[i-1]=='a'){
+      arr[(i-1)/2]="#";
+    }else if(arr[i]=='d'&&arr[i-1]=='t'){
+      arr[(i-1)/2]=".";
+    }else if(arr[i]=='l'&&arr[i-1]=='e'){
+      arr[(i-1)/2]="<";
+    }else if(arr[i]=='r'&&arr[i-1]=='i'){
+      arr[(i-1)/2]=">";
+    }else if(arr[i]=='n'&&arr[i-1]=='o'){
+      arr[(i-1)/2]="\'";
+    }else{
+      arr[(i-1)/2]="_"; 
+    }
+  }
+
+  console.log(arr2.join().replace(/[,]/g,""));
+  return arr2.join().replace(/[,]/g,""); 
 }

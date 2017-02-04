@@ -1,0 +1,36 @@
+{
+	"language":"en",
+	"elefindBrand":"Elefind",
+	"publicGallery":"Public Gallery",
+	"publicAlbum":"Public Album",
+	"publicMatches":"Published Results",
+	"newSearch":"New Search",
+	"draftGallery":"My Draft Gallery",
+	"history":"History",
+	"about":"About us",
+
+	"signOut":"Sign out",
+	"signIn":"Sign In",
+	"accountSettings":"Account",
+	"register":"Register",
+	"username":"Username",
+	"password":"Password",
+	"oldPassword":"Old Password",
+	"newPassword":"New Password",
+
+	"submit":"Submit",
+	"confirm":"Confirm",
+
+	"setSuccessMsg":"Modification saved!",
+	"noChangeMsg":"No new settings.",
+	"greetUser":"Welcome back,",
+	"wrongOldPassword":"Password doesn't match.",
+
+	"copyrightText":"Copyright 2016",
+	"team":"Team",
+	"default":"default",
+	"none":"none",
+	"apply":"apply",
+	"welcome":"Welcome!"
+	
+}

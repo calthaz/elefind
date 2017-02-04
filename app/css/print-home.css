@@ -1,0 +1,52 @@
+a[href^="http://"]:after {
+	content: " (" attr(href) ") ";
+}
+
+a[href^="https://"]:after {
+	content: " (" attr(href) ") ";
+}
+
+html{
+	font-family: Calibri, Helvetica, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", sans-serif;
+}
+
+ul#slide-out, #add-word.modal{
+	display: none !important;
+}
+
+.has-side-nav{
+	padding-left: 0px !important;
+	margin-left: 0px !important; 
+}
+
+.hero {
+    background-attachment: initial !important;
+    page-break-inside: avoid;
+    width: 70%;
+    margin:auto;
+}
+
+.hero .image-overlay {
+    background-color: rgba(79, 79, 79, 0.4) !important;
+}
+
+p, blockquote{
+	color: rgb(40,40,40) !important;
+	font-size: 18pt !important; 
+}
+
+ul li{
+	font-size: 18pt !important; 
+}
+
+p.flow-text{
+	page-break-inside: avoid;
+}
+
+h3{
+	font-size: 60px !important; 
+}
+
+.hidden-for-print{
+	display: none !important; 
+}

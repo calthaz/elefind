@@ -109,9 +109,9 @@
  		//how do I know where to get the progress??? 
  		//{startSearch: "start", relatingFileName: that.relatingFileName },
  		$filename = $_POST["relatingFileName"];
- 		$commandStr = 'java -cp ImprSearch\bin general.QueryAgent '.$settingsDir.$filename;
+ 		$commandStr = 'java -cp ImprSearchJava\bin general.QueryAgent '.$settingsDir.$filename;
  		$output="";
- 		
+
  		exec($commandStr, $output);
  		//print_r($output); 
  		$result = file($resultDir.$_POST["relatingFileName"]);

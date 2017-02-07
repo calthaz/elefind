@@ -209,3 +209,21 @@ button.btn-floating {
 .btn-block {
   display: block;
 }
+
+
+//Btn with Color Classes -- by Caltha Feb 6, 2017
+
+@each $color_name, $color in $colors {
+  @each $color_type, $color_value in $color {
+    @if $color_type == "base" {
+      .#{$color_name}.btn:not(.btn-flat):hover {
+        background-color: lighten($color_value, 5%) !important;
+      }
+    }
+    @else if $color_name != "shades" {
+      .#{$color_name}.#{$color_type}.btn:not(.btn-flat):hover {
+        background-color: lighten($color_value, 5%) !important;
+      }
+    }
+  }
+}

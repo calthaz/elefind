@@ -188,6 +188,19 @@
     $("body").on("click", ".go-back", function(){
       window.history.back();
     });
+    $("body").on("click", ".switch-lang", function(){
+        var user = service.currentUser;
+        if(user == undefined || user.language == undefined) return; //Shouldn't be undefined
+        if(user.language === "en") {
+            user.language = "zh";
+        }else{
+            user.language = "en";
+        }
+        lang = new Lang(user.language);
+        service.updateUserInfo();
+        //window.location.reload(); 
+       // Materialize.toast(lang.setSuccessMsg, 4000);
+    });
 
     window.addEventListener("online", function(){
       console.log("Get online and process");
@@ -277,7 +290,7 @@
             }
         }
         if(!error){
-            service.register($("#register-email").val().trim(), $("#register-username").val().trim(), $("#register-password").val().trim(), $("form input[name='lang']:checked").val()); 
+            service.register($("#register-email").val().trim(), $("#register-username").val().trim(), $("#register-password").val().trim(), $("input[name='lang']:checked").val()); 
         }
     }
 

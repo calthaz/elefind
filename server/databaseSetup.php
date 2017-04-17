@@ -1,51 +1,92 @@
 <?php
 //data base set up
-$servername = "localhost";
-$username = "elefind";
-$password = "elefindtest";
-$dbname = "elefind";
+require "config.inc.php"; 
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+if((isset($_GET["pw"])) && $_GET["pw"]==="arugvj132kuy"){
 
-$sql="CREATE TABLE photos (
-id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-filename VARCHAR(200) NOT NULL , 
-author VARCHAR(50) NULL , 
-visibility VARCHAR(10) NOT NULL , 
-title VARCHAR(100) NULL , date VARCHAR(150) NOT NULL) "; 
 
-$conn->query($sql);
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
 
-if ($conn->query($sql) === TRUE) {
-    echo "Table users created successfully";
+    $sql="CREATE TABLE ".$photos." (
+    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+    filename VARCHAR(200) NOT NULL , 
+    author VARCHAR(50) NULL , 
+    visibility VARCHAR(10) NOT NULL , 
+    title VARCHAR(100) NULL , date VARCHAR(150) NOT NULL) "; 
+
+    $conn->query($sql);
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Table ".$photos." created successfully"."<br/>";
+    } else {
+        echo "Error creating table: " . $conn->error."<br/>";
+    }
+    /* sql to create table*/
+    $sql = "CREATE TABLE ".$users." (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+    username VARCHAR(30) NOT NULL,
+    password VARCHAR(200) NOT NULL,
+    email VARCHAR(50) UNIQUE,
+    language VARCHAR(4) NOT NULL,
+    reg_date VARCHAR(150),
+    priviledges VARCHAR(30),
+    profile_pic_url VARCHAR(100) DEFAULT '..\\server\\storage\\users\\profile_pics\\original\\user.png', 
+    server_draft_folder  VARCHAR(150),
+    server_photo_folder VARCHAR(150)
+    )";
+    //Note: backslashes doesn't work
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Table ".$users." created successfully"."<br/>";
+    } else {
+        echo "Error creating table: " . $conn->error."<br/>";
+    }
+
+    $sql =
+    "CREATE TABLE ".$usersearchsettings." 
+    ( searchMethod INT NOT NULL DEFAULT '1' , 
+    preprocessing INT NOT NULL DEFAULT '3' , 
+    maxAmRate INT NOT NULL DEFAULT '2' , 
+    maxFolds INT NOT NULL DEFAULT '2' , 
+    centerX DOUBLE NOT NULL DEFAULT '0.5' , 
+    centerY DOUBLE NOT NULL DEFAULT '0.5' , 
+    searchW DOUBLE NOT NULL DEFAULT '0.2' , 
+    searchH DOUBLE NOT NULL DEFAULT '0.2' , 
+    slidingStep INT NOT NULL DEFAULT '4' , 
+    maxPatchSize INT NOT NULL DEFAULT '1250' , 
+    email VARCHAR(50) NOT NULL PRIMARY KEY)";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Table ".$usersearchsettings." created successfully"."<br/>";
+    } else {
+        echo "Error creating table: " . $conn->error."<br/>";
+    }
+
+    $sql = "CREATE TABLE ".$sketches." (
+    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+    filename VARCHAR(200) NOT NULL,
+    author VARCHAR(50),
+    visibility VARCHAR(10) NOT NULL,
+    title VARCHAR(200),
+    date VARCHAR(150) NOT NULL) ";
+
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Table ".$sketches." created successfully"."<br/>";
+    } else {
+        echo "Error creating table: " . $conn->error."<br/>";
+    }
+
+    $conn->close();
+
 } else {
-    echo "Error creating table: " . $conn->error;
+ echo "Access denied. "; 
 }
-/* sql to create table
-$sql = "CREATE TABLE users (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-username VARCHAR(30) NOT NULL,
-password VARCHAR(30) NOT NULL,
-email VARCHAR(50) UNIQUE,
-language VARCHAR(4) NOT NULL,
-reg_date VARCHAR(150),
-priviledges VARCHAR(30),
-profile_pic_url VARCHAR(100),
-server_draft_folder  VARCHAR(150),
-server_photo_folder VARCHAR(150)
-)";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Table users created successfully";
-} else {
-    echo "Error creating table: " . $conn->error;
-}*/
-
 /*
 name:"admin",
 email:"zymdxlyx@sina.cn",
@@ -138,32 +179,5 @@ $result = $conn->query($sql);
 
 			echo json_encode($data);*/
 		
-$conn->close();
-/*
-CREATE TABLE 'elefind'.'userSearchSettings' 
-( 'searchMethod' INT NOT NULL DEFAULT '1' , 
-'preprocessing' INT NOT NULL DEFAULT '3' , 
-'maxAmRate' INT NOT NULL DEFAULT '2' , 
-'maxFolds' INT NOT NULL DEFAULT '2' , 
-'centerX' DOUBLE NOT NULL DEFAULT '0.5' , 
-'centerY' DOUBLE NOT NULL DEFAULT '0.5' , 
-'searchW' DOUBLE NOT NULL DEFAULT '0.2' , 
-'searchH' DOUBLE NOT NULL DEFAULT '0.2' , 
-'slidingStep' INT NOT NULL DEFAULT '4' , 
-'maxPatchSize' INT NOT NULL DEFAULT '1250' , 
-'email' VARCHAR(50) NOT NULL , 
-PRIMARY KEY ('email'(50))) 
-ENGINE = MyISAM;
-
-
-CREATE TABLE 'elefind'.'photos' 
-( 'filename' VARCHAR(200) NOT NULL , 
-'author' VARCHAR(50) NOT NULL , 
-'title' VARCHAR(100) NULL , 
-'date' VARCHAR(100) NOT NULL , 
-'visibility' VARCHAR(10) NOT NULL , 
-PRIMARY KEY ('filename'(200))) 
-ENGINE = MyISAM;
-*/
 ?>
 

@@ -51,28 +51,28 @@ var UserService = function(){
 			probFunc:1,
 		}
 
-		this.superUser = {
-			name:"admin",
-			email:"zymdxlyx@sina.cn",
-			password:"tempPass",
-			profilePic:"img/admin.png",
+		this.emptyUser = {
+			name:"",
+			email:"",
+			password:"",
+			profilePic:"..\\server\\storage\\users\\profile_pics\\original\\user.png",
 			language:"en",
-			draftFolderURL:"undecided",
-			photoAlbumURL:"undecided",
-			searchSettings: curSettings,
-			friends:"",
-			priviledges:"all",
+			//draftFolderURL:"undecided",
+			//photoAlbumURL:"undecided",
+			//searchSettings: curSettings,
+			//friends:"",
+			priviledges:"user",
 			logOut: function(){
 
 				this.name="";
 				this.email="";
 				this.password="";
-				this.profilePic="";
-				this.language="zh";
-				this.draftFolderURL="undecided";
-				this.photoAlbumURL="undecided";
-				this.searchSettings= defaultSettings;
-				this.friends="";
+				this.profilePic="..\\server\\storage\\users\\profile_pics\\original\\user.png";
+				this.language="en";
+				//this.draftFolderURL="undecided";
+				//this.photoAlbumURL="undecided";
+				//this.searchSettings= defaultSettings;
+				//this.friends="";
 				this.priviledges="";
 
 			},
@@ -85,7 +85,7 @@ var UserService = function(){
 			this.currentUser=JSON.parse(window.localStorage.getItem("elefindUser"));
 			console.log("Has user");
 		}else{
-			window.localStorage.setItem("elefindUser", JSON.stringify(this.superUser));
+			window.localStorage.setItem("elefindUser", JSON.stringify(this.emptyUser));
 			this.currentUser=JSON.parse(window.localStorage.getItem("elefindUser"));
 			console.log("add user");
 		}
@@ -113,7 +113,7 @@ var UserService = function(){
 		this.currentUser.email="";
 		this.currentUser.password="";
 		this.currentUser.profilePic="";
-		this.currentUser.language="zh";
+		this.currentUser.language="en";
 		this.currentUser.draftFolderURL="undecided";
 		this.currentUser.photoAlbumURL="undecided";
 		this.currentUser.searchSettings= defaultSettings;
@@ -170,11 +170,17 @@ var UserService = function(){
             	data=JSON.parse(data);
             	if(data.msg =="success"){
             		//window.alert("you are logged in!");
-            		window.localStorage.setItem("elefindUser", JSON.stringify(data.user));
-            		that.currentUser=data.user;
+            		var loc = {};
+            		loc.name = data.user.name;
+            		loc.email = data.user.email;
+            		loc.priviledges = data.user.priviledges; 
+            		loc.language = data.user.language;
+            		loc.profilePic = data.user.profilePic; 
+            		window.localStorage.setItem("elefindUser", JSON.stringify(loc));
+            		that.currentUser=loc;
             		//location.reload();//!! Too violent
             		$(window).trigger('hashchange');//
-            		Materialize.toast(Lang(data.user.language).welcome, 4000);
+            		Materialize.toast(Lang(loc.language).welcome, 4000);
             		return true;
             	}else if(data.msg == "denied"){
             		window.alert("wrong password.");
@@ -182,7 +188,7 @@ var UserService = function(){
             	}else{
             		window.alert("You are not logged in, but I don't know why. Error: "+data.msg);
             	}
-                console.log(data);
+                //console.log(data);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 console.log('ERRORS:' + textStatus +"errorThrown"+errorThrown);
@@ -237,16 +243,22 @@ var UserService = function(){
             	data=JSON.parse(data);
             	if(data.msg =="success"){
             		//window.alert("you are logged in!");
-            		window.localStorage.setItem("elefindUser", JSON.stringify(data.user));
-            		that.currentUser=data.user;
+            		var loc = {};
+            		loc.name = data.user.name;
+            		loc.email = data.user.email;
+            		loc.priviledges = data.user.priviledges; 
+            		loc.language = data.user.language;
+            		loc.profilePic = data.user.profilePic; 
+            		window.localStorage.setItem("elefindUser", JSON.stringify(loc));
+            		that.currentUser=loc;
             		//location.reload();//!! Too violent
             		$(window).trigger('hashchange');//
-            		Materialize.toast(Lang(data.user.language).welcome, 4000);
+            		Materialize.toast(Lang(loc.language).welcome, 4000);
 
             	}else{
             		window.alert("You are not registered, but I don't know why. Error: "+data.msg);
             	}
-                console.log(data);
+                //console.log(data);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 console.log('ERRORS:' + textStatus +"errorThrown"+errorThrown);

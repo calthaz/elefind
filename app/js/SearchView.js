@@ -264,6 +264,7 @@ Finished: Comparing finished in 3827 seconds
                      
                     $("div#progress-field").append(that.stageLabelTpl({icon:lang.finishedComparingIcon, text:lang.finishedComparing, id: "finish-tag", top:h}));
                     $("#to-result").css("display", "inline-block"); 
+                     $("#progress-field").addClass("stop-animation"); 
                     console.log("SEARCH FINISHED"); 
                     //window.location.hash = "#searchResult"; 
                     /*

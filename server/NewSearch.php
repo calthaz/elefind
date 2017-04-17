@@ -2,18 +2,7 @@
 
 	$progressFile ="";
 	$resultFile = "";
-	$settingsDir = "searchSettingFiles\\"; //?? why use \\?
-	$progressDir = "searchProgressFiles\\";
-	$resultDir = "searchResultFiles\\";
-	$privateDraftDir = "storage\\users\\"; // then: \\useremail\\sketches
-	$publicDraftDir = "storage\\public_sketches\\";
-	$publicPhotoDir = "storage\\public_photos";
 	$msg = ""; 
-
-	$servername = "localhost";
-	$username = "elefind";
-	$password = "elefindtest";
-	$dbname = "elefind";
 
 	require "ImageManager.php"; 
 
@@ -58,7 +47,7 @@
 
  		$settings  = fopen($settingsDir.$filename, "w") or die("Unable to open file!");
 
- 		$sql = "UPDATE usersearchsettings SET ";
+ 		$sql = "UPDATE ".$usersearchsettings." SET ";
 
  		/* 
 			username = '".$user['name']."', 
@@ -141,7 +130,7 @@
  		//print_r($result);
 
  		$resultPackage = array();
- 		$sql = "SELECT * FROM photos WHERE filename LIKE '";
+ 		$sql = "SELECT * FROM ".$photos." WHERE filename LIKE '";
 
  		for($i=0; $i<count($results); $i++){
  			$results[$i] = trim($results[$i]); 

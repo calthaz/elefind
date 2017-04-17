@@ -115,6 +115,8 @@ EnglishLang = {
 	brokenImage:"",
 	noTitle:"No Title",
 	noAuthor:"Anonymous User",
+
+	changeLang:"中文"
 }
 
 
@@ -142,7 +144,7 @@ ChineseLang = {
 	noChangeMsg:"没有新设置。",
 	greetUser:"欢迎回来,",
 	confirm:"确认",
-	wrongOldPassword:"暗号没对上。",
+	wrongOldPassword:"密码错误。",
 	//other
 	copyrightText:"2016 版权所有",
 	welcome:"欢迎！",
@@ -155,10 +157,10 @@ email:"电子邮件",
 applyRatio:"应用尺寸",
 maxPatchSize:"色块大小",
 maxPatchSizeExpl:"It controls how finely the searching process is, and it also greatly affects the speed of searching. Find your balance.",
-patchSmall:"Very finely but slow",
+patchSmall:"精细",
 patchMedium:"中等",
-patchNoRestrict:"Fast but rough",
-centerPos:"Center Position",
+patchNoRestrict:"快速",
+centerPos:"中心位置",
 centerPosExpl:"Tell us which part of the target you are drawing. X means horizontal distence from the left, and Y means vertical distance from the top.",
 searchMethod:"Search Method",
 searchMethodExpl:"Choose what value of the pixels' color you want to base on to search.",
@@ -218,7 +220,20 @@ brokenImage:"",
 noTitle:"No Title",
 noAuthor:"Anonymous User",
 
+targetTimeRange:"Time Range",
+targetTimeRangeExpl:"Give us a period of time during which you think your target photo was uploaded or created a record. ",
+startProcessingSketch: "Start processing sketch...",
+typicalMapGotten: "Processing sketch 50%...",
+startComparing: "Start comparing...",
+comparing: "Comparing",
+finishedComparing: "Finished!",
+startProcessingSketchIcon: "place",
+typicalMapGottenIcon: "compare",
+startComparingIcon: "send",
+comparingIcon: "keyboard_backspace",
+finishedComparingIcon: "done_all",
 
+changeLang: "English"
 }
 
 

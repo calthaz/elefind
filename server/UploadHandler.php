@@ -1,16 +1,5 @@
 <?php
 	require "ImageManager.php";
-	/*	
-	$privateDraftDir = "storage\\users\\"; // then: \\useremail\\sketches
-	$privatePhotoDir = "storage\\users\\"; // then: \\useremail\\photos
-	$publicDraftDir = "storage\\public_sketches\\";
-	$publicPhotoDir = "storage\\public_photos\\";
-
-	$servername = "localhost";
-	$username = "elefind";
-	$password = "elefindtest";
-	$dbname = "elefind";
-	*/
 
 	$sep = "\\";
 
@@ -37,7 +26,7 @@
 
 		$useremail = $_POST["useremail"];
 		if( $useremail != ''){
-			$sql = "SELECT username FROM users WHERE email LIKE '".$useremail."'";
+			$sql = "SELECT username FROM ".$users." WHERE email LIKE '".$useremail."'";
 			$result = $conn->query($sql);
 			if($result->num_rows <= 0){
 				//means unregistered user
@@ -61,7 +50,7 @@
 		
 		$filePackage = array(); 
 
-		$stmt = $conn->prepare("INSERT INTO photos (filename, author, visibility, title, date) VALUES (?, ?, ?, ?,?)");
+		$stmt = $conn->prepare("INSERT INTO ".$photos." (filename, author, visibility, title, date) VALUES (?, ?, ?, ?,?)");
 		$stmt->bind_param('sssss', $filename, $useremail, $vis, $title, $date);
 		//INSERT INTO `photos` (`id`, `filename`, `author`, `visibility`, `title`, `date`) VALUES (NULL, 'zymdxlyx@sina.cn_14780923090.jpg', 'zymdxlyx@sina.cn', '', 'Crazy', '2016-11-02');
 

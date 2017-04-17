@@ -1,13 +1,5 @@
 <?php
-	$privateDraftDir = "storage\\users\\"; // then: \\useremail\\sketches
-	$privatePhotoDir = "storage\\users\\"; // then: \\useremail\\photos
-	$publicDraftDir = "storage\\public_sketches\\";
-	$publicPhotoDir = "storage\\public_photos\\";
-
-	$servername = "localhost";
-	$username = "elefind";
-	$password = "elefindtest";
-	$dbname = "elefind";
+	require "config.inc.php"; 
 
 	$dataToReturn = array();
 
@@ -16,10 +8,10 @@
 
 		if(isset($_POST["myGallery"])){
 			$handle = opendir($privateDraftDir.$user['email']. DIRECTORY_SEPARATOR ."sketches");
-			$sql = "SELECT * FROM sketches WHERE filename LIKE '";
+			$sql = "SELECT * FROM ".$sketches." WHERE filename LIKE '";
 		}else{
 			$handle = opendir($privateDraftDir.$user['email']. DIRECTORY_SEPARATOR ."photos");
-			$sql = "SELECT * FROM photos WHERE filename LIKE '";
+			$sql = "SELECT * FROM ".$photos." WHERE filename LIKE '";
 		}
 		
 
@@ -100,9 +92,9 @@
 		} 
 
 		if(strpos($filePath, "photos")){
-			$sql = "DELETE FROM photos WHERE filename LIKE '";
+			$sql = "DELETE FROM ".$photos." WHERE filename LIKE '";
 		}else{
-			$sql = "DELETE FROM sketches WHERE filename LIKE '";
+			$sql = "DELETE FROM ".$sketches." WHERE filename LIKE '";
 		}
 		
 		$sqlresult = $conn->query($sql.$filename."'");
@@ -189,7 +181,7 @@
 
 	function saveDraft($draft, $useremail, $requestTime){
 
-		global $privateDraftDir, $publicDraftDir, $servername, $username, $dbname, $password; //Oh shit! 
+		global $privateDraftDir, $publicDraftDir, $servername, $username, $dbname, $password, $users, $sketches, $photos; //Oh shit! 
 		
 		$dataToReturn = array();
 
@@ -221,7 +213,7 @@
 
 		$title = $draft['title']; 
 
-		$stmt = $conn->prepare("INSERT INTO sketches (filename, author, visibility, title, date) VALUES (?, ?, ?, ?,?)");
+		$stmt = $conn->prepare("INSERT INTO ".$sketches." (filename, author, visibility, title, date) VALUES (?, ?, ?, ?,?)");
 		$stmt->bind_param('sssss', $filename, $useremail, $vis, $title, $date);
 
 		if($useremail!=""){

@@ -256,8 +256,8 @@ h3.page-header span.page-header-prefix {
   max-width: none !important;
   max-height: none !important;
 }
-.publicAlbum .image-view a#delete-pic,
-.publicGallery .image-view a#delete-pic {
+row.publicAlbum .image-view a#delete-pic,
+row.publicGallery .image-view a#delete-pic {
   display: none;
 }
 #drawing-board-separator {
@@ -354,10 +354,10 @@ div#progress-field div#progress {
   -moz-transition-property: height;
   -o-transition-property: height;
   transition-property: height;
-  -webkit-transition-duration: 0.4s;
-  -moz-transition-duration: 0.4s;
-  -o-transition-duration: 0.4s;
-  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
 }
 div#progress-field div#progress.thread-start {
   height: 150px;
@@ -690,10 +690,10 @@ div.stage-label {
   -moz-transition-property: top;
   -o-transition-property: top;
   transition-property: top;
-  -webkit-transition-duration: 0.4s;
-  -moz-transition-duration: 0.4s;
-  -o-transition-duration: 0.4s;
-  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
   min-width: 50px;
   height: 46px;
   padding-left: 5px;
@@ -711,6 +711,9 @@ div.stage-label .stage-icon {
   border-radius: 50%;
   background-color: #00acc1;
   align-items: center;
+}
+.stop-animation .stage-label {
+  transition: none !important;
 }
 div.pointer {
   position: absolute;

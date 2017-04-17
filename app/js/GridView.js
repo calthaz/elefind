@@ -52,7 +52,7 @@ var GridView = function(service, type){
 
 		$(".row").on("click", ".exit-view", function(){
 			$("#image-view-wrapper").removeClass("has-view"); 
-			$("#image-view-wrapper").html("<span>onbajb</span>");
+			$("#image-view-wrapper").html("<span>:-)</span>"); //TODO what shall i fill?
 			$('.row#gallery').css("display", "block");
 		}); 
 
@@ -242,7 +242,7 @@ var renderImageView = function(){
 
   $(".row").on("click", ".exit-view", function(){
     $("#image-view-wrapper").removeClass("has-view"); 
-    $("#image-view-wrapper").html("<span>onbajb</span>");
+    $("#image-view-wrapper").html("<span>:-)</span>");
     $('.row#gallery').css("display", "block");
     console.log("show gallery"); 
   }); 

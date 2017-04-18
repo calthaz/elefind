@@ -28,7 +28,7 @@
  			$filename = substr($rawPath, strpos($rawPath, "storage"));
  			$filename = substr($filename, 0, strrpos($filename, '")'));
  			//$filename = basename($filename);
- 			$draftPath = str_replace("/","\\", $filename); 
+ 			$draftPath = str_replace("/",DIRECTORY_SEPARATOR, $filename); 
  		}
 		
 		$randInt = rand(1000,9999); 
@@ -98,7 +98,7 @@
  		//how do I know where to get the progress??? 
  		//{startSearch: "start", relatingFileName: that.relatingFileName },
  		$filename = $_POST["relatingFileName"];
- 		$commandStr = 'java -cp ImprSearchJava\bin general.QueryAgent '.$settingsDir.$filename;
+ 		$commandStr = 'java -cp ImprSearchJava'.DIRECTORY_SEPARATOR.'bin general.QueryAgent '.$settingsDir.$filename;
  		$output="";
 
  		exec($commandStr, $output);

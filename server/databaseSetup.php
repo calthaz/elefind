@@ -83,9 +83,17 @@ if((isset($_GET["pw"])) && $_GET["pw"]==="arugvj132kuy"){
     }
 
     $conn->close();
+    mkdir($privateDraftDir);
+    mkdir($privatePhotoDir);
+    mkdir($publicDraftDir);
+    mkdir($publicPhotoDir);
+    mkdir($settingsDir);
+    mkdir($progressDir);
+    mkdir($resultDir);
+    mkdir($profilePicDir);
 
 } else {
- echo "Access denied. "; 
+    echo "Access denied. "; 
 }
 /*
 name:"admin",

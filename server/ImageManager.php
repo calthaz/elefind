@@ -81,7 +81,7 @@
 		$filename = substr($rawPath, strpos($rawPath, "storage"));
 		$filename = substr($filename, 0, strrpos($filename, '")'));
 		//$filename = basename($filename);
-		$filePath = str_replace("/","\\", $filename); 
+		$filePath = str_replace("/",DIRECTORY_SEPARATOR, $filename); 
 		$filename = basename($filePath); 
 
 		// Create connection
@@ -218,7 +218,7 @@
 
 		if($useremail!=""){
 			$filename = $useremail."_".$requestTime.".png";
-			$draftPath = $privateDraftDir.$useremail."\\sketches\\".$useremail."_".$requestTime.".png";
+			$draftPath = $privateDraftDir.$useremail.DIRECTORY_SEPARATOR."sketches".DIRECTORY_SEPARATOR.$useremail."_".$requestTime.".png";
 			$vis = "private";
 
 			$ifp = fopen( $draftPath, "wb" ); 

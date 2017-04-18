@@ -1,8 +1,6 @@
 <?php
 	require "ImageManager.php";
 
-	$sep = "\\";
-
 	//echo json_encode($_POST); 
 	//echo json_encode($_FILES); 
 
@@ -41,7 +39,7 @@
 
 		if(isset($_FILES["uploadToMyAlbum"]) && $useremail !== ""){
 			$vis = "private";
-			$targetDir = $privatePhotoDir.$useremail."\\"."photos\\"; 
+			$targetDir = $privatePhotoDir.$useremail.DIRECTORY_SEPARATOR."photos".DIRECTORY_SEPARATOR; 
 			//echo "to my album"; 
 		}else{
 			$vis = "public"; 

@@ -132,8 +132,8 @@ password: <input type="text" name="password">
 		}
 
 		mkdir($userDir.$info['email']);
-		mkdir($userDir.$info['email']."\\sketches");
-		mkdir($userDir.$info['email']."\\photos");
+		mkdir($userDir.$info['email'].DIRECTORY_SEPARATOR."sketches");
+		mkdir($userDir.$info['email'].DIRECTORY_SEPARATOR."photos");
 
 		//{"email":"mein@ele.com","password":"t","username":"julia","language":"zh"}
 		//$stmt = $conn->prepare("INSERT INTO users (username, password, email, title, date) VALUES (?, ?, ?, ?,?)");
@@ -143,7 +143,7 @@ password: <input type="text" name="password">
 		.$info['username']."', '".md5($info['password'])."', '"
 		.$info['email']."', '".$info['language']."', '"
 		.date('Y-m-d')."', 'user', '"
-		.$userDir.$info['email']."\\sketches', '".$userDir.$info['email']."\\photos')"; 
+		.$userDir.$info['email'].DIRECTORY_SEPARATOR."sketches', '".$userDir.$info['email'].DIRECTORY_SEPARATOR."photos')"; 
 
 		$result = $conn->query($sql);
 

@@ -193,7 +193,7 @@ h3.page-header span.page-header-prefix {
   transition: box-shadow 0.25s;
   border-radius: 0px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  overflow: auto;
 }
 .row#gallery .upload-tile:not(:hover) {
   box-shadow: none;
@@ -856,4 +856,17 @@ footer a {
 }
 .emphasis-underline {
   border-bottom: solid 2px #00acc1;
+}
+img[alt='logo'] {
+  max-width: 85px;
+}
+.notice {
+  background-color: #6d4c41;
+  color: #FFF;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.notice span {
+  padding: 10px;
+  display: block;
 }

@@ -162,6 +162,7 @@ var SearchView = function (service) {
                         $("#"+that.lastClassName).css("top", h); 
 
                         $("div#progress").removeClass();
+                        $(".stage-label").remove();
 
                         var className = ""; 
                         if(data.status == "Start"){                        
@@ -245,7 +246,7 @@ Finished: Comparing finished in 3827 seconds
                 //processData: false,
                 //contentType: false,
                 success:function(data, textStatus, jqXHR){
-                    console.log(data);
+                    //console.log(data);
 
                 },
                 error: function(jqXHR, textStatus, errorThrown){
@@ -256,16 +257,27 @@ Finished: Comparing finished in 3827 seconds
                 complete: function(data){ //No matter error or success. AND THIS DATA　IS NOT THAT DATA IN SUCCESS...
                     clearInterval(that.unfinishedCall);
                     that.isSearching = false; 
-                    ResultView.prototype.resultData = JSON.parse(data.responseText);
-                     $("div#progress").removeClass();
-                     $("div#progress").addClass("finish");
-                     //$("div#progress-field").append('<div class = "stage-label" style="top:'+h+'" id = "'+className+'">Label: Finished! </div>'); 
-                     var h = $("div#progress").css("height"); 
-                     
-                    $("div#progress-field").append(that.stageLabelTpl({icon:lang.finishedComparingIcon, text:lang.finishedComparing, id: "finish-tag", top:h}));
-                    $("#to-result").css("display", "inline-block"); 
-                     $("#progress-field").addClass("stop-animation"); 
-                    console.log("SEARCH FINISHED"); 
+                    try{
+                        ResultView.prototype.resultData = JSON.parse(data.responseText);
+                        $("div#progress").removeClass();
+                        $("div#progress").addClass("finish");
+                        //$("div#progress-field").append('<div class = "stage-label" style="top:'+h+'" id = "'+className+'">Label: Finished! </div>'); 
+                        var h = $("div#progress").css("height"); 
+                        $(".stage-label").remove();
+                        $("div#progress-field").append(that.stageLabelTpl({icon:lang.finishedComparingIcon, text:lang.finishedComparing, id: "finish-tag", top:h}));
+                        $("#to-result").css("display", "inline-block"); 
+                        $("#progress-field").addClass("stop-animation"); 
+                        console.log("SEARCH FINISHED"); 
+                    }catch(error){
+                        $("div#progress").removeClass();
+                        $("div#progress").addClass("finish");
+                        var h = $("div#progress").css("height"); 
+                        $(".stage-label").remove();
+                        $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.comparingError, id: "finish-tag", top:h})); 
+                        $("#progress-field").addClass("stop-animation"); 
+                        $("#to-gallery").css("display", "inline-block"); 
+                        console.log("SEARCH FINISHED WITH ERROR"); 
+                    }                    
                     //window.location.hash = "#searchResult"; 
                     /*
                     //well. the document is not loaded yet. so ...

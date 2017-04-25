@@ -209,6 +209,7 @@ var UserService = function(){
 			window.alert(lang.noInternetMsg+"No internet");
 			return;
 		}
+		username = username.replace(" ", "_"); 
 
 		data = {
 			userRegister:{

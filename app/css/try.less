@@ -294,7 +294,7 @@ h3.page-header{
     transition: box-shadow .25s;
     border-radius: 0px;
     border: 1px solid rgba(0,0,0,0.1);
-    overflow:hidden;
+    overflow:auto;
     &:not(:hover){
         box-shadow:none; 
     }
@@ -714,5 +714,22 @@ footer a{
 
 .emphasis-underline{
   border-bottom: solid 2px @primary-color;
+}
+
+img[alt='logo']{
+  max-width: 85px; 
+}
+
+.notice {
+    //border: 1px solid @primary-color;
+    //padding: 10px;
+    background-color: @secondary-color;//rgba(11, 213, 238, 0.39);
+    color:#FFF;
+    border-radius: 5px; 
+    margin-bottom: 15px;
+    span{
+      padding: 10px; 
+      display: block;
+    }
 }
 

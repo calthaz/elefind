@@ -23,7 +23,7 @@
       <link type="text/css" rel="stylesheet" href = "css/custom.css" />
       <link type="text/css" rel="stylesheet" href = "css/print-home.css" media="print" />
       <link type="text/css" rel="stylesheet" href = "css/try.css" />
-      <link type="text/css" rel="stylesheet" href = "css/dropzone.css" />
+      <link type="text/css" rel="stylesheet" href = "css/neat-dropzone.css" />
 
       <!--<link href="css/pageslider.css" rel="stylesheet">-->
 
@@ -446,6 +446,11 @@
             <label for="choose-zh">中文</label>
           </p>
         </div>
+        <div class='row'>
+          <div class="notice">
+            {{{lang.tempRegisterDeclaration}}}
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <a id="register" class="waves-effect waves-primary btn-flat">{{lang.register}}</a>
@@ -468,7 +473,7 @@
     <main>
     <div id="top-container" class="container">
       <div class="row">
-        <h5 class="brown-text text-darken-2 secondary-d">{{lang.greetUser}} {{user.email}}</h5>
+        <h5 class="brown-text text-darken-2 secondary-d">{{lang.greetUser}} {{user.name}}</h5>
       </div>
       
       <div class="row">
@@ -540,7 +545,7 @@
                 <label class="active" for="height-ratio">{{lang.height}}</label>
               </div>
               <div class="col s4 m3">
-                <a id="reset-canvas-size" class="btn">{{lang.applyRatio}}</a>
+                <a id="reset-canvas-size" class="btn tool-tipped" data-position="bottom" data-delay="10" data-tooltip="{{lang.clearCanvasNote}}">{{lang.applyRatio}}</a>
               </div>
             </div>
           </div>
@@ -581,6 +586,7 @@
       </div>-->
 
       <div class="container">
+          <div class="notice">{{{lang.searchSettingsNotice}}}</div>
           <h3 class="page-header"><span class="page-header-prefix">{{lang.step1}}#</span>{{lang.searchSettingsHeader}}</h3>
           <div class = "">
             <form id="search-settings">
@@ -773,6 +779,7 @@
           </div>
           <div class="row">
             <a id = "to-result" href="#searchResult" class = "btn" style="display:none">{{lang.next}}<i class="material-icons white-text right">chevron_right</i></a>
+            <a id = "to-gallery" href="#myGallery" class = "btn" style="display:none">{{lang.myGallery}}<i class="material-icons white-text right">chevron_right</i></a>
           </div>
       </div>
     </script>
@@ -801,6 +808,7 @@
 
     <script id = "grid-gallery" type="text/template">
       <div class="container">
+        <div class="notice">{{{lang.galleryNotice}}}</div>
         <h3 class="page-header"><span class="page-header-prefix">{{header.prefix}}#</span>{{header.main}}</h3>
         <div class = "row {{type}}">
           <div class = "col s12 m7">
@@ -883,6 +891,22 @@
       </div>
     </script>
 
+    <script id="dz-preview-template" type="text/template">
+      <div class="dz-preview"> 
+        <div class="dz-file-preview">
+          <div class="dz-details">
+            <img data-dz-thumbnail />
+            <div class="dz-filename"><span data-dz-name></span></div>
+            <div class="dz-size" data-dz-size></div>
+          </div>
+          <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+          <div class="dz-success-mark"><i class="material-icons">check</i></div>
+          <div class="dz-error-mark"><i class="material-icons">close</i></div>
+        </div>
+        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+      </div>
+    </script>
+
     <script id = "result-page" type="text/template">
       <div class="container">
         <h3 class="page-header"><span class="page-header-prefix">{{header.prefix}}#</span>{{header.main}}</h3>
@@ -959,7 +983,7 @@
       <script type="text/javascript" src="js/jquery.min.js"></script>
       <!--<script src="js/pageslider.js"></script>-->
       <script src="js/router.js"></script>
-      <script type="text/javascript" src="cordova.js"></script>
+      <!--This is the web version <script type="text/javascript" src="cordova.js"></script>-->
 
       <script type="text/javascript" src="js/template/materialize.js"></script>
 

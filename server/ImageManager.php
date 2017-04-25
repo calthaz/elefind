@@ -118,10 +118,10 @@
 	}elseif((isset($_POST["publicAlbum"])||isset($_POST['publicGallery']))){
 		if(isset($_POST["publicAlbum"])){
 			$handle = opendir($publicPhotoDir);
-			$sql = "SELECT * FROM photos WHERE filename LIKE '";
+			$sql = "SELECT * FROM ".$photos." WHERE filename LIKE '";
 		}else{
 			$handle = opendir($publicDraftDir);
-			$sql = "SELECT * FROM sketches WHERE filename LIKE '";
+			$sql = "SELECT * FROM ".$sketches." WHERE filename LIKE '";
 		}
 		
 
@@ -196,7 +196,7 @@
 		//echo $draft['base64str'];
  		//$requestTime = ;
 
- 		$sql = "SELECT username FROM users WHERE email LIKE '".$useremail."'";
+ 		$sql = "SELECT username FROM ".$users." WHERE email LIKE '".$useremail."'";
 		$result = $conn->query($sql);
 
 		if($result->num_rows <= 0){

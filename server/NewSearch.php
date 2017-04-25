@@ -173,7 +173,7 @@
  	}elseif(isset($_POST["getProgress"]) && isset($_POST["relatingFileName"])){
 
  		$progress = file($progressDir.$_POST["relatingFileName"]);
- 		$line = array_pop($progress);
+ 		$line = trim(array_pop($progress));
  		//data = {status: "Start/Progress/Finished/Error/Fatal Error", stage: text, processed:, total:,}
  		$dataToReturn = array();
  		$dataToReturn["status"] = substr($line, 0, stripos($line,":"));
@@ -181,7 +181,8 @@
  		if(strpos($line, "No")){
  			$dotPos = strpos($line,".");
  			$dataToReturn["processed"] = substr($line, $dotPos+1, strpos($line, " ", $dotPos)-$dotPos-1);
- 			$dataToReturn["total"] = substr($line, strpos($line, "of", $dotPos)+3, strpos($line, "\r", $dotPos)-(strpos($line, "of", $dotPos)+3));
+ 			$dataToReturn["total"] = substr($line, strpos($line, "of", $dotPos)+3);
+ 			//, strpos($line, "\r", $dotPos)-(strpos($line, "of", $dotPos)+3) Note the differences between operating systems
  		}
  		echo json_encode($dataToReturn);
  	}

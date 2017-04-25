@@ -140,7 +140,7 @@ password: <input type="text" name="password">
 		//$stmt->bind_param('sssss', $filename, $useremail, $vis, $title, $date);profile_pic_url, '".$profilePicDir.$info['email']."', 
 
 		$sql = "INSERT INTO ".$users." (username, password, email, language, reg_date, priviledges, server_draft_folder, server_photo_folder) VALUES ('"
-		.$info['username']."', '".md5($info['password'])."', '"
+		.htmlspecialchars($info['username'], ENT_SUBSTITUTE)."', '".md5($info['password'])."', '"
 		.$info['email']."', '".$info['language']."', '"
 		.date('Y-m-d')."', 'user', '"
 		.$userDir.$info['email'].DIRECTORY_SEPARATOR."sketches', '".$userDir.$info['email'].DIRECTORY_SEPARATOR."photos')"; 

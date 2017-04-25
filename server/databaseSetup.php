@@ -19,8 +19,6 @@ if((isset($_GET["pw"])) && $_GET["pw"]==="arugvj132kuy"){
     visibility VARCHAR(10) NOT NULL , 
     title VARCHAR(100) NULL , date VARCHAR(150) NOT NULL) "; 
 
-    $conn->query($sql);
-
     if ($conn->query($sql) === TRUE) {
         echo "Table ".$photos." created successfully"."<br/>";
     } else {
@@ -83,18 +81,34 @@ if((isset($_GET["pw"])) && $_GET["pw"]==="arugvj132kuy"){
     }
 
     $conn->close();
-    mkdir($privateDraftDir);
-    mkdir($privatePhotoDir);
-    mkdir($publicDraftDir);
-    mkdir($publicPhotoDir);
-    mkdir($settingsDir);
-    mkdir($progressDir);
-    mkdir($resultDir);
-    mkdir($profilePicDir);
+
+    echo "creating folders <br/>"; 
+    try {   
+	 	mkdir("storage"); 
+    	mkdir(getDirPath($userDir));
+    	mkdir(substr($privateDraftDir, 0, strlen($privateDraftDir)-1));
+	    mkdir(getDirPath($privatePhotoDir));
+	    mkdir(getDirPath($publicDraftDir));
+	    mkdir(getDirPath($publicPhotoDir));
+	    mkdir(getDirPath($settingsDir));
+	    mkdir(getDirPath($progressDir));
+	    mkdir(getDirPath($resultDir));
+	    mkdir(getDirPath($profilePicDir));
+	} catch (Exception $e) {   
+		print $e->getMessage();   
+		//exit();   
+	}   
+
+	echo "Finished creating folders"; 
 
 } else {
     echo "Access denied. "; 
 }
+
+function getDirPath($path){
+	return substr($path, 0, strlen($path)-1);
+}
+
 /*
 name:"admin",
 email:"zymdxlyx@sina.cn",

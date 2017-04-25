@@ -123,6 +123,9 @@ var GridView = function(service, type){
                   uploadMultiple:true, 
                   paramName:"uploadToPublicAlbum", 
                   params: {useremail:JSON.parse(window.localStorage.getItem("elefindUser")).email}, 
+                  previewTemplate: dropzoneTmpl, 
+                  maxFileSize: 2,
+                  dictDefaultMessage: lang.dzDefaultMsg,
                   });//maxFileSize: 2 cause the browser to crash? 
 
       					var path = "../server/storage/"+"public_photos/";
@@ -224,8 +227,8 @@ var renderImageView = function(){
 
   $(".image-view a#delete-pic").click(function(){
     var img = this.parentNode.parentNode.children[0].children[0]; //[0] image-card
-    console.log(img); 
-    console.log($(img).css("background-image")); //url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
+    //console.log(img); 
+    //console.log($(img).css("background-image")); //url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
     var filename = $(img).css("background-image");
     filename = filename.substring(filename.lastIndexOf("/")+1, filename.indexOf('")'));
     filename = classNameEncode(filename); //filename.replace("@","at").replace(/[.]/g, "dt"); 
@@ -233,7 +236,7 @@ var renderImageView = function(){
     //jQuery.post( url [, data ] [, success ] [, dataType ] )
     $.post("../server/ImageManager.php", {deletePic:$(img).css("background-image")}, function(data){
       if(data=="success"){
-        console.log("deleted a pic: "+filename); 
+        //console.log("deleted a pic: "+filename); 
         $(".image-view").remove();
         $("#"+filename).remove(); 
       }     

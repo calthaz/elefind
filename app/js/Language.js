@@ -99,7 +99,7 @@ EnglishLang = {
 	welcome:"Welcome!",
 	width:"width",
 	height:"height",
-	advanced:"advanced",
+	advanced:"advance",
 	draw:"draw",
 	settings:"settings",
 	progress:"progress",
@@ -116,7 +116,24 @@ EnglishLang = {
 	noTitle:"No Title",
 	noAuthor:"Anonymous User",
 
-	changeLang:"中文"
+	changeLang:"中文",
+
+	tempRegisterDeclaration:"<span>This website is a <b>demo</b> site for Elefind. "+
+	"Your email will NOT be used to verify your identity, "+
+	"nor will it be used for any purposes other than logging into this platform. "+
+	"Also, any information you give to Elefind can be access by its developers, "+
+	"and we are not responsible for keeping your sketches, photos, etc secure or private. <br/>"+
+	"Click REGISTER to acknowledge that you are fully aware of the statement above and are willing to create your acount.</span>",
+	galleryNotice:"<span>Due to the limited space on server, files larger than 2M will be rejected. Administrators may also delete files from time to time. </span>",
+
+	clearCanvasNote:"Clears the canvas.",
+
+	dzDefaultMsg:"Drop files here to upload, or click to choose",
+
+	searchSettingsNotice:"<span>After some testing we've found the best combination of those parameters in the Advance part. "+
+	" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
+	errorComparingIcon: "close",
+	comparingError: "Searching ends with error"
 }
 
 
@@ -233,7 +250,25 @@ startComparingIcon: "send",
 comparingIcon: "keyboard_backspace",
 finishedComparingIcon: "done_all",
 
-changeLang: "English"
+changeLang: "English",
+
+tempRegisterDeclaration:"<span>此网站是寻象<b>测试版</b>。"+
+	"您的邮箱<i>不会</i>被用来验证身份，"+
+	"也不会被用于除了登录本平台之外的其他目的。"+
+	"同时，开发者可以接触你提供给本平台的任何信息，比如照片，手绘图等，"+
+	"并且我们不会保证这些数据完好且不被公开。 <br/>"+
+	"点击注册表明您以理解上述声明且愿意注册该账号。</span>",
+
+galleryNotice:"<span>Due to the limited space on server, 超过2M的文件会被退回。 Administrators may also delete files from time to time. </span>",
+
+clearCanvasNote:"Clears the canvas.",
+
+dzDefaultMsg:"拖文件到此（或点击选择）上传",
+searchSettingsNotice:"<span>After some testing we've found the best combination of those parameters in the Advance part. "+
+	" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
+errorComparingIcon: "close",
+comparingError: "抱歉，搜索失败"
+
 }
 
 

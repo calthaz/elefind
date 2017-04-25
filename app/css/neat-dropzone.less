@@ -1,0 +1,72 @@
+.dz-default.dz-message{
+	line-height: 34px;
+    padding: 0px 46px;
+    border-bottom: 1px solid #263238;
+    cursor: pointer;
+}
+
+.dz-preview{
+	border-bottom: 1px solid #263238;
+	.dz-error-mark, .dz-success-mark,.dz-error-message{
+		display: none; 
+		align-items: center;
+	}
+}
+.dz-file-preview{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    .dz-details{
+    	display: flex;
+    	width: 80%; 
+    	white-space: nowrap;
+    	line-height: 30px;
+    	img{
+    		height: 34px; 
+    	}
+    	.dz-filename{
+    		max-width: 80%;
+	    	white-space: nowrap;
+	    	overflow: hidden;
+	    	text-overflow: ellipsis;
+	    	padding: 0px 4px; 
+    	}
+    	.dz-size{
+    		flex-grow: 1; 
+    		padding: 0px 4px; 
+    	}
+    }
+
+    
+}
+.dz-preview:not(.dz-complete){
+	.dz-details{
+		width: 60%;
+	}
+	.dz-progress{
+		width: 30%;
+		height: 34px;
+		padding: 7px 5px; 
+		span.dz-upload{
+			display: block;
+			height: 20px;
+			background-color: aliceblue;
+			border-radius: 16px;
+		}
+	}
+}
+
+.dz-success{
+	.dz-success-mark{
+		display: flex !important;
+	}
+}
+
+.dz-error{
+	.dz-error-mark{
+		display: flex !important;
+	}
+	.dz-error-message{
+		display: block !important;
+	}
+}

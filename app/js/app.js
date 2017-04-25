@@ -53,6 +53,8 @@
     GridView.prototype.uploadTileTpl = Handlebars.compile($("#upload-tile").html());
     GridView.prototype.sideNavTpl = Handlebars.compile($("#side-nav").html());
     GridView.prototype.imageViewTpl = Handlebars.compile($("#image-view").html());
+
+    dropzoneTmpl = document.getElementById('dz-preview-template').innerHTML; 
     
     //var slider = new PageSlider($('body'));
 
@@ -198,7 +200,7 @@
         }
         lang = new Lang(user.language);
         service.updateUserInfo();
-        //window.location.reload(); 
+        window.location.reload(); 
        // Materialize.toast(lang.setSuccessMsg, 4000);
     });
 

@@ -212,7 +212,7 @@ var DrawView = function (service) {
       });
 
       $('input#sketch-title').characterCounter();
-
+      $('.tool-tipped').tooltip({delay: 10});
   }
 
   this.saveDraftToServer = function(){

@@ -152,6 +152,7 @@
 
 				$fileinfo['filename']=$row['filename'];
 				$fileinfo['author']=$row['author'];
+				$fileinfo['authorname']=$row['authorname'];
 				$fileinfo['title']=$row['title'];
 				$fileinfo['vis']=$row['visibility'];
 				$fileinfo['date'] = $row['date'];

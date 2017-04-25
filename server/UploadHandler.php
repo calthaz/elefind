@@ -23,12 +23,17 @@
 		} 
 
 		$useremail = $_POST["useremail"];
+		$username = ""; 
 		if( $useremail != ''){
 			$sql = "SELECT username FROM ".$users." WHERE email LIKE '".$useremail."'";
 			$result = $conn->query($sql);
 			if($result->num_rows <= 0){
 				//means unregistered user
-				$useremail="";				
+				$useremail = "";		
+				$username = "";		
+			}else{
+				$row = $result->fetch_assoc();
+				$username = $row['username'];
 			}
 		}
 
@@ -48,8 +53,8 @@
 		
 		$filePackage = array(); 
 
-		$stmt = $conn->prepare("INSERT INTO ".$photos." (filename, author, visibility, title, date) VALUES (?, ?, ?, ?,?)");
-		$stmt->bind_param('sssss', $filename, $useremail, $vis, $title, $date);
+		$stmt = $conn->prepare("INSERT INTO ".$photos." (filename, author, authorname, visibility, title, date) VALUES (?, ?, ?, ?, ?,?)");
+		$stmt->bind_param('ssssss', $filename, $useremail, $username, $vis, $title, $date);
 		//INSERT INTO `photos` (`id`, `filename`, `author`, `visibility`, `title`, `date`) VALUES (NULL, 'zymdxlyx@sina.cn_14780923090.jpg', 'zymdxlyx@sina.cn', '', 'Crazy', '2016-11-02');
 
 		foreach ($_FILES[$paramName]["error"] as $key => $error) {
@@ -60,7 +65,6 @@
 		        // basename() may prevent filesystem traversal attacks; --how? 
 		        // further validation/sanitation of the filename may be appropriate
 		        $name = basename($_FILES[$paramName]["name"][$key]);
-
 
 		        //move_uploaded_file($tmp_name, "data/$name");
 		        $imageFileType = strtolower(pathinfo($name,PATHINFO_EXTENSION)) ;
@@ -82,6 +86,7 @@
 
 				        $fileinfo['filename']=$filename;
         				$fileinfo['author']=$useremail;
+        				$fileinfo['authorname']=$username;
         				$fileinfo['title']=$title;
         				$fileinfo['visibility']=$vis;
         				$fileinfo['date'] = $date;

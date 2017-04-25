@@ -38,7 +38,7 @@ var AcSettingsView = function (service) {
             error=true;
         }
 
-        
+        user.name = user.name.replace(" ", "_");
 
         //if($("#old-password").val().trim() == user.password){
             if($("#new-password").val().trim()!=""){

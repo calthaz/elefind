@@ -45,7 +45,7 @@ var GridView = function(service, type){
 
 		$("#gallery").on("click", ".card-image img", function(){
 			var src =  $(this).attr("src");
-			console.log(src); 			
+			//console.log(src); 			
 			$("#image-view-wrapper").html(that.imageViewTpl({src: src, author: $(this).attr("data-author"), title: $(this).attr("data-caption"), date: $(this).attr("data-date"), lang}));
       renderImageView(); 
 		});
@@ -100,7 +100,7 @@ var GridView = function(service, type){
           //processData: false,
           //contentType: false,
           success:function(data, textStatus, jqXHR){
-          	console.log(data);
+          	//console.log(data);
           	data=JSON.parse(data);
           	/*Example: 
           	files:[{filename: "zymdxlyx@sina.cn_1477030781.png", author: "zymdxlyx@sina.cn", title: null,…},…]
@@ -140,6 +140,9 @@ var GridView = function(service, type){
                   uploadMultiple:true, 
                   paramName:"uploadToMyAlbum", 
                   params: {useremail:JSON.parse(window.localStorage.getItem("elefindUser")).email}, 
+                  previewTemplate: dropzoneTmpl, 
+                  maxFileSize: 2,
+                  dictDefaultMessage: lang.dzDefaultMsg,
                   });//maxFileSize: 2 cause the browser to crash?
       					var path = "../server/storage/users/"+service.currentUser.email+"/photos/";
       				}
@@ -157,7 +160,7 @@ var GridView = function(service, type){
         				}
           			//lastIndexOf()  从后向前搜索字符串。
                 // Well, /./g matches with everything 
-          			$(".row#gallery").append(that.imageTileTpl({image:{src: path+file.filename, title: file.title, filename: classNameEncode(file.filename)}, author:file.author, date: file.date, visibility: file.visibility}));
+          			$(".row#gallery").append(that.imageTileTpl({image:{src: path+file.filename, title: file.title, filename: classNameEncode(file.filename)}, author:file.authorname, date: file.date, visibility: file.visibility}));
                                                                                 //file.filename.replace("@","at").replace(/[.]/g, "dt")
           		}
           		

@@ -48,7 +48,7 @@ var ResultView = function(){
         $("tbody#result-list tr").click(function(){
             var img = $(this.children[0].children[0]);
             //var img = $(this).children('img');
-            console.log(img); 
+            //console.log(img); 
             $("#image-view-wrapper").html(that.imageViewTpl({src: img.attr("src"), author: img.attr("data-author"), title: img.attr("data-caption"), date: img.attr("data-date"), lang}));
             renderImageView();
         });

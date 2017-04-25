@@ -15,7 +15,8 @@ if((isset($_GET["pw"])) && $_GET["pw"]==="arugvj132kuy"){
     $sql="CREATE TABLE ".$photos." (
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     filename VARCHAR(200) NOT NULL , 
-    author VARCHAR(50) NULL , 
+    author VARCHAR(100) NULL , 
+    authorname VARCHAR(200) NULL ,
     visibility VARCHAR(10) NOT NULL , 
     title VARCHAR(100) NULL , date VARCHAR(150) NOT NULL) "; 
 
@@ -69,6 +70,7 @@ if((isset($_GET["pw"])) && $_GET["pw"]==="arugvj132kuy"){
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     filename VARCHAR(200) NOT NULL,
     author VARCHAR(50),
+    authorname VARCHAR(200),
     visibility VARCHAR(10) NOT NULL,
     title VARCHAR(200),
     date VARCHAR(150) NOT NULL) ";

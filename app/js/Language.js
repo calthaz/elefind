@@ -124,7 +124,7 @@ EnglishLang = {
 	"Also, any information you give to Elefind can be access by its developers, "+
 	"and we are not responsible for keeping your sketches, photos, etc secure or private. <br/>"+
 	"Click REGISTER to acknowledge that you are fully aware of the statement above and are willing to create your acount.</span>",
-	galleryNotice:"<span>Due to the limited space on server, files larger than 2M will be rejected. Administrators may also delete files from time to time. </span>",
+	galleryNotice:"<span>Due to the limited space on server, files larger than 2M will be rejected. Administrators may also delete ANY file. </span>",
 
 	clearCanvasNote:"Clears the canvas.",
 
@@ -259,7 +259,7 @@ tempRegisterDeclaration:"<span>此网站是寻象<b>测试版</b>。"+
 	"并且我们不会保证这些数据完好且不被公开。 <br/>"+
 	"点击注册表明您以理解上述声明且愿意注册该账号。</span>",
 
-galleryNotice:"<span>Due to the limited space on server, 超过2M的文件会被退回。 Administrators may also delete files from time to time. </span>",
+galleryNotice:"<span>Due to the limited space on server, 超过2M的文件会被退回。 Administrators may also delete 任何文件. </span>",
 
 clearCanvasNote:"Clears the canvas.",
 

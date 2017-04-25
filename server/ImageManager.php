@@ -41,7 +41,8 @@
             			$fileinfo = array();
 
         				$fileinfo['filename']=$row['filename'];
-        				$fileinfo['author']=$row['author'];
+        				$fileinfo['author']=$row['author']; //todo 
+        				$fileinfo['authorname']=$row['authorname'];
         				$fileinfo['title']=$row['title'];
         				$fileinfo['visibility']=$row['visibility'];
         				$fileinfo['date'] = $row['date'];
@@ -150,7 +151,8 @@
             			$fileinfo = array();
 
         				$fileinfo['filename']=$row['filename'];
-        				$fileinfo['author']=$row['author'];
+        				$fileinfo['author']=$row['author'];//todo check
+        				$fileinfo['authorname']=$row['authorname'];
         				$fileinfo['title']=$row['title'];
         				$fileinfo['visibility']=$row['visibility'];
         				$fileinfo['date'] = $row['date'];
@@ -199,10 +201,15 @@
  		$sql = "SELECT username FROM ".$users." WHERE email LIKE '".$useremail."'";
 		$result = $conn->query($sql);
 
+		$username = ""; 
 		if($result->num_rows <= 0){
 			//means unregistered user
 			$draft["publish"]=true;
 			$useremail="";
+			$username="";
+		}else{
+			$row = $result->fetch_assoc();
+			$username = $row['username']; 
 		}
 
 		$draftPath = "";
@@ -213,8 +220,8 @@
 
 		$title = $draft['title']; 
 
-		$stmt = $conn->prepare("INSERT INTO ".$sketches." (filename, author, visibility, title, date) VALUES (?, ?, ?, ?,?)");
-		$stmt->bind_param('sssss', $filename, $useremail, $vis, $title, $date);
+		$stmt = $conn->prepare("INSERT INTO ".$sketches." (filename, author, authorname, visibility, title, date) VALUES (?, ?, ?, ?, ?,?)");
+		$stmt->bind_param('ssssss', $filename, $useremail, $username, $vis, $title, $date);
 
 		if($useremail!=""){
 			$filename = $useremail."_".$requestTime.".png";

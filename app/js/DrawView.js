@@ -1,36 +1,36 @@
 var DrawView = function (service) {
 
-	var findCommonFactor = function(a,b){
+  var findCommonFactor = function(a,b){
       var c=b;
       if(a<b){
         c=a;
         a=b;
         b=c;
       }
-      while(a%b!=0){
+      while(a%b!==0){
         c=a%b;
         a=b;
         b=c;
       }
       return c;
-    }
+    };
 
-	this.render = function() {
+  this.render = function() {
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
 
-    	this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header: {main:lang.drawingHeader}}));
-    	$('main', this.$el).html(this.innerTpl({user:user, lang:lang}));
-    	return this;
-	};
+      this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header: {main:lang.drawingHeader}}));
+      $('main', this.$el).html(this.innerTpl({user:user, lang:lang}));
+      return this;
+  };
 
   this.renderSideNav = function(){
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
         return this.sideNavTpl({lang:lang, user: user, isLoggedIn: isLoggedIn});
-  }
+  };
 
   this.initialize = function () {
         // Define a div wrapper for the view (used to attach events)
@@ -72,7 +72,7 @@ var DrawView = function (service) {
         var w=$("#width-ratio").val();
         var h=$("#height-ratio").val();
         //TODO: input check!!!
-        if(w==0||h==0||h/w>10){
+        if(w===0||h===0||h/w>10){
             window.alert("Naughty!");
             return;
         }
@@ -112,14 +112,14 @@ var DrawView = function (service) {
 
         myBoard.ev.trigger('color:changed', color);
         myBoard.$el.find('.drawing-board-control-colors-rainbows').addClass('drawing-board-utils-hidden');
-    }
+    };
 
     var farbCallback = function(color){
         $("#farbtastic-color-picker #color").val(color);
         $("#farbtastic-color-picker #color").css("background-color",color);
         $("#farbtastic-color-picker #color-lens").css("color",color);
         colorChanged(color);
-    }
+    };
 
     $('#colorpicker').farbtastic(farbCallback);
 
@@ -204,7 +204,7 @@ var DrawView = function (service) {
           title: $("#sketch-title").val(),
           base64str: that.board.getImg(), 
           publish: false, 
-        }
+        };
 
         window.localStorage.setItem("userSketch", JSON.stringify(draft));
         window.location.hash = "searchSettings"; 
@@ -213,7 +213,7 @@ var DrawView = function (service) {
 
       $('input#sketch-title').characterCounter();
       $('.tool-tipped').tooltip({delay: 10});
-  }
+  };
 
   this.saveDraftToServer = function(){
     var that = this; 
@@ -223,7 +223,7 @@ var DrawView = function (service) {
       title: $("#sketch-title").val(),
       base64str: this.board.getImg(), 
       publish: false, //TODO　grab from the form             
-    }
+    };
 
     var data = {saveDraft: true, user: JSON.parse(window.localStorage.getItem("elefindUser")), draft:draft};
 
@@ -252,6 +252,6 @@ var DrawView = function (service) {
             //            
         }
     });
-  }
+  };
 
-}
+};

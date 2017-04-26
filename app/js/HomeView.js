@@ -1,40 +1,40 @@
 var HomeView = function (service) {
     
     
-	this.render = function() {
+    this.render = function() {
 
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
 
-    	this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header: {main: lang.introduction}})); 
+        this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header: {main: lang.introduction}})); 
 
         
         //$('content', this.$el).html(employeeListView.$el);    
         //console.log(user);  
-    	return this;
-	};
+        return this;
+    };
 
     this.renderSideNav = function(){
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
         return this.sideNavTpl({lang:lang, user: user, isLoggedIn: isLoggedIn});
-    }
+    };
 
     this.continueRendering = function(){
         console.log("home continueRendering"); 
         $(document).ready(function(){
             $('.parallax').parallax();
         });
-    }
+    };
 
-	this.logOut = function() {
-    	service.logOut();
+    this.logOut = function() {
+        service.logOut();
         console.log(service.currentUser);
-	};
+    };
 
-	this.initialize = function () {
+    this.initialize = function () {
         // Define a div wrapper for the view (used to attach events)
         this.$el = $('<div/>');
         //this.$el.on("click", "'#sign-out", this.logOut);
@@ -42,7 +42,7 @@ var HomeView = function (service) {
     };
 
     this.initialize();
-}
+};
 
 function getRandomColor(){
     var i = Math.floor(Math.random()*13);

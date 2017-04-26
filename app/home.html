@@ -24,8 +24,8 @@
       <link type="text/css" rel="stylesheet" href = "css/print-home.css" media="print" />
       <link type="text/css" rel="stylesheet" href = "css/try.css" />
       <link type="text/css" rel="stylesheet" href = "css/neat-dropzone.css" />
-
-      <!--<link href="css/pageslider.css" rel="stylesheet">-->
+      <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href="css/pageslider.css" rel="stylesheet">-->
 
     </head>
 
@@ -974,6 +974,26 @@
         <td>{{author}}</td>-->
         <td>{{score}}</td>
       </tr>
+    </script>
+
+    <script> 
+      var $buoop = {
+        vs:{i:10,f:-2,o:-2,s:9,c:-6},
+        api:4, 
+        reminder: 0, 
+        text: "Sorry, Elefind doesn't support your browser: {brow_name}, please update to get the best experience on our site. <a{up_but}>update</a> <a{ignore_but}>ignore</a>",    
+        text_zh: "抱歉，寻象不支持您的浏览器: {brow_name}，请升级以获得最佳体验。 <a{up_but}>升级</a> <a{ignore_but}>忽略</a>",                   
+    // custom notification text (html)
+    // Placeholders {brow_name} will be replaced with the browser name, {up_but} with contents of the update link tag and {ignore_but} with contents for the ignore link.
+    // Example: Your browser, {brow_name}, is too old: <a{up_but}>update</a> or <a{ignore_but}>ignore</a>.
+      }; 
+      function $buo_f(){ 
+       var e = document.createElement("script"); 
+       e.src = "//browser-update.org/update.min.js"; 
+       document.body.appendChild(e);
+      };
+      try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+      catch(e){window.attachEvent("onload", $buo_f)}
     </script>
 
     </body>

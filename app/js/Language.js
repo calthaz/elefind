@@ -1,4 +1,4 @@
-EnglishLang = {
+var EnglishLang = {
 	//Navbar sideNav and page names
 	elefindBrand:"Elefind",
 	publicGallery:"Public Sketch Gallery",
@@ -134,10 +134,10 @@ EnglishLang = {
 	" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
 	errorComparingIcon: "close",
 	comparingError: "Searching ends with error"
-}
+};
 
 
-ChineseLang = {
+var ChineseLang = {
 	//Navbar sideNav and page names
 	elefindBrand:"寻象",
 	newSearch:"发起搜索",
@@ -166,110 +166,110 @@ ChineseLang = {
 	copyrightText:"2016 版权所有",
 	welcome:"欢迎！",
 	
-publicGallery:"公共画廊",
-publicAlbum:"公共相册",
-publicMatches:"Published Results",
-loginText:"登录探索更多",
-email:"电子邮件",
-applyRatio:"应用尺寸",
-maxPatchSize:"色块大小",
-maxPatchSizeExpl:"It controls how finely the searching process is, and it also greatly affects the speed of searching. Find your balance.",
-patchSmall:"精细",
-patchMedium:"中等",
-patchNoRestrict:"快速",
-centerPos:"中心位置",
-centerPosExpl:"Tell us which part of the target you are drawing. X means horizontal distence from the left, and Y means vertical distance from the top.",
-searchMethod:"Search Method",
-searchMethodExpl:"Choose what value of the pixels' color you want to base on to search.",
-RGB:"RGB 值",
-HSB:"HSB 值",
-greyScale:"灰度",
-preprocessing:"处理方法",
-preprocessingExpl:"Choose the preprocessing method you want to apply to each candidate photo.",
-equalize:"Equalization",
-smooth:"Smooth (not implemented)",
-compress:"压缩",
-maxAmRate:"Maximum Amplification Rate",
-maxAmRateExpl:"Choose how much larger at most you expect your target to be.",
-maxFolds:"最大倍数",
-maxFoldsExpl:"Choose how much larger at most you expect your target to be, in the other way.",
-searchRegion:"中心范围",
-searchRegionExpl:"Specify the area of where the center of your draft can be, in percentile ralative to the width/height of the candidate photo.",
-slidingStep:"滑动步长",
-slidingStepExpl:"指出滑动窗口的步长。越小越慢。",
-searchScope:"搜索范围",
-searchScopeExpl:"告诉我们你觉得目标图片会在哪里。",
-default:"默认",
-none:"无",
-apply:"apply",
-width:"宽",
-height:"高",
-advanced:"高级",
-draw:"作画",
-settings:"设置",
-progress:"progress",
-result:"result",
-save:"保存",
-next:"下一步",
+	publicGallery:"公共画廊",
+	publicAlbum:"公共相册",
+	publicMatches:"Published Results",
+	loginText:"登录探索更多",
+	email:"电子邮件",
+	applyRatio:"应用尺寸",
+	maxPatchSize:"色块大小",
+	maxPatchSizeExpl:"It controls how finely the searching process is, and it also greatly affects the speed of searching. Find your balance.",
+	patchSmall:"精细",
+	patchMedium:"中等",
+	patchNoRestrict:"快速",
+	centerPos:"中心位置",
+	centerPosExpl:"Tell us which part of the target you are drawing. X means horizontal distence from the left, and Y means vertical distance from the top.",
+	searchMethod:"Search Method",
+	searchMethodExpl:"Choose what value of the pixels' color you want to base on to search.",
+	RGB:"RGB 值",
+	HSB:"HSB 值",
+	greyScale:"灰度",
+	preprocessing:"处理方法",
+	preprocessingExpl:"Choose the preprocessing method you want to apply to each candidate photo.",
+	equalize:"Equalization",
+	smooth:"Smooth (not implemented)",
+	compress:"压缩",
+	maxAmRate:"Maximum Amplification Rate",
+	maxAmRateExpl:"Choose how much larger at most you expect your target to be.",
+	maxFolds:"最大倍数",
+	maxFoldsExpl:"Choose how much larger at most you expect your target to be, in the other way.",
+	searchRegion:"中心范围",
+	searchRegionExpl:"Specify the area of where the center of your draft can be, in percentile ralative to the width/height of the candidate photo.",
+	slidingStep:"滑动步长",
+	slidingStepExpl:"指出滑动窗口的步长。越小越慢。",
+	searchScope:"搜索范围",
+	searchScopeExpl:"告诉我们你觉得目标图片会在哪里。",
+	default:"默认",
+	none:"无",
+	apply:"apply",
+	width:"宽",
+	height:"高",
+	advanced:"高级",
+	draw:"作画",
+	settings:"设置",
+	progress:"progress",
+	result:"result",
+	save:"保存",
+	next:"下一步",
 
 
-myAlbum:"我的相册",
-drawingHeader:"画出你的印象",
-download:"下载",
-saveToServer:"保存到云端",
-searchSettingsHeader:"搜索选项设置",
-progressHeader:"In Progress",
-resultHeader:"Result List",
-introduction:"Intro to Elefind",
+	myAlbum:"我的相册",
+	drawingHeader:"画出你的印象",
+	download:"下载",
+	saveToServer:"保存到云端",
+	searchSettingsHeader:"搜索选项设置",
+	progressHeader:"In Progress",
+	resultHeader:"Result List",
+	introduction:"Intro to Elefind",
 
-privateAlbum:"Private Album",
-imageSaved:"Image saved!",
-by:"by",
-preview:"preview",
-author:"author",
-score:"score",
-title:"Title",
-delete:"delete",
-from:"from",
-to:"to",
-retypePassword:"Retype Password",
-brokenImage:"",
-noTitle:"No Title",
-noAuthor:"Anonymous User",
+	privateAlbum:"Private Album",
+	imageSaved:"Image saved!",
+	by:"by",
+	preview:"preview",
+	author:"author",
+	score:"score",
+	title:"Title",
+	delete:"delete",
+	from:"from",
+	to:"to",
+	retypePassword:"Retype Password",
+	brokenImage:"",
+	noTitle:"No Title",
+	noAuthor:"Anonymous User",
 
-targetTimeRange:"Time Range",
-targetTimeRangeExpl:"Give us a period of time during which you think your target photo was uploaded or created a record. ",
-startProcessingSketch: "Start processing sketch...",
-typicalMapGotten: "Processing sketch 50%...",
-startComparing: "Start comparing...",
-comparing: "Comparing",
-finishedComparing: "Finished!",
-startProcessingSketchIcon: "place",
-typicalMapGottenIcon: "compare",
-startComparingIcon: "send",
-comparingIcon: "keyboard_backspace",
-finishedComparingIcon: "done_all",
+	targetTimeRange:"Time Range",
+	targetTimeRangeExpl:"Give us a period of time during which you think your target photo was uploaded or created a record. ",
+	startProcessingSketch: "Start processing sketch...",
+	typicalMapGotten: "Processing sketch 50%...",
+	startComparing: "Start comparing...",
+	comparing: "Comparing",
+	finishedComparing: "Finished!",
+	startProcessingSketchIcon: "place",
+	typicalMapGottenIcon: "compare",
+	startComparingIcon: "send",
+	comparingIcon: "keyboard_backspace",
+	finishedComparingIcon: "done_all",
 
-changeLang: "English",
+	changeLang: "English",
 
-tempRegisterDeclaration:"<span>此网站是寻象<b>测试版</b>。"+
-	"您的邮箱<i>不会</i>被用来验证身份，"+
-	"也不会被用于除了登录本平台之外的其他目的。"+
-	"同时，开发者可以接触你提供给本平台的任何信息，比如照片，手绘图等，"+
-	"并且我们不会保证这些数据完好且不被公开。 <br/>"+
-	"点击注册表明您以理解上述声明且愿意注册该账号。</span>",
+	tempRegisterDeclaration:"<span>此网站是寻象<b>测试版</b>。"+
+		"您的邮箱<i>不会</i>被用来验证身份，"+
+		"也不会被用于除了登录本平台之外的其他目的。"+
+		"同时，开发者可以接触你提供给本平台的任何信息，比如照片，手绘图等，"+
+		"并且我们不会保证这些数据完好且不被公开。 <br/>"+
+		"点击注册表明您以理解上述声明且愿意注册该账号。</span>",
 
-galleryNotice:"<span>Due to the limited space on server, 超过2M的文件会被退回。 Administrators may also delete 任何文件. </span>",
+	galleryNotice:"<span>Due to the limited space on server, 超过2M的文件会被退回。 Administrators may also delete 任何文件. </span>",
 
-clearCanvasNote:"Clears the canvas.",
+	clearCanvasNote:"Clears the canvas.",
 
-dzDefaultMsg:"拖文件到此（或点击选择）上传",
-searchSettingsNotice:"<span>After some testing we've found the best combination of those parameters in the Advance part. "+
-	" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
-errorComparingIcon: "close",
-comparingError: "抱歉，搜索失败"
+	dzDefaultMsg:"拖文件到此（或点击选择）上传",
+	searchSettingsNotice:"<span>After some testing we've found the best combination of those parameters in the Advance part. "+
+		" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
+	errorComparingIcon: "close",
+	comparingError: "抱歉，搜索失败"
 
-}
+};
 
 
 
@@ -363,7 +363,7 @@ var Lang = function(language){
 
 	this.get(language);
 	*/
-}
+};
 /*
 */
 

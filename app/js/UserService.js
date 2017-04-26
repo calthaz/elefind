@@ -1,4 +1,3 @@
-
 var defaultSettings = {
 			//MANAGER_TYPE:"ImprSearch",
 			searchMethod:1,
@@ -49,7 +48,7 @@ var UserService = function(){
 			searchW:0.2,
 			searchH:0.2,
 			probFunc:1,
-		}
+		};
 
 		this.emptyUser = {
 			name:"",
@@ -79,7 +78,7 @@ var UserService = function(){
 			resetSettings: function(){
 				this.searchSettings = defaultSettings;
 			}
-		}
+		};
 
 		if(window.localStorage.getItem("elefindUser")){
 			this.currentUser=JSON.parse(window.localStorage.getItem("elefindUser"));
@@ -102,11 +101,11 @@ var UserService = function(){
 
 		deferred.resolve();
         return deferred.promise();
-	}
+	};
 
 	this.getCurSettings=function(){
 		return this.currentUser.searchSettings;
-	}
+	};
 
 	this.logOut = function(){
 		this.currentUser.name="";
@@ -120,36 +119,39 @@ var UserService = function(){
 		this.currentUser.friends="";
 		this.currentUser.priviledges="";
 		window.localStorage.setItem("elefindUser", JSON.stringify(this.currentUser));
-	}
+	};
 
 	this.printlogOut = function(){
 		console.log(this.currentUser.name);
 		//window.localStorage.setItem("elefindUser", JSON.stringify(this.currentUser));
-	}
+	};
 
 	this.updateUserInfo = function(){
 		//can be delayed
 		window.localStorage.setItem("elefindUser", JSON.stringify(this.currentUser));
+		this.currentUser=JSON.parse(window.localStorage.getItem("elefindUser"));
 		actionQueue.addAction("editProfile", "");
 		//
-	}
+	};
 
 	this.authenticate = function(email, password){
 		//requires instant connection
 		//some ajax
 		//window.localStorage.setItem("elefindUser", JSON.stringify(this.superUser));
 		if(!hasConnection()){
+			var user = JSON.parse(window.localStorage.getItem("elefindUser"));
+        	var lang = new Lang(user.language);
 			window.alert(lang.noInternetMsg+"No internet");
 			return;
 		}
 
-		userLogin = {
+		var userLogin = {
 			userLogin:{
 				email: email,
 				password: password
 			}
 			
-		}
+		};
 
 		var that = this; 
 
@@ -199,19 +201,21 @@ var UserService = function(){
                 
             }
         });
-	}
+	};
 
 	this.register = function(email, username, password, language){
 		//requires instant connection
 		//some ajax
 		//window.localStorage.setItem("elefindUser", JSON.stringify(this.superUser));
 		if(!hasConnection()){
+			var user = JSON.parse(window.localStorage.getItem("elefindUser"));
+        	var lang = new Lang(user.language);
 			window.alert(lang.noInternetMsg+"No internet");
 			return;
 		}
 		username = username.replace(" ", "_"); 
 
-		data = {
+		var data = {
 			userRegister:{
 				email: email,
 				password: password,
@@ -219,7 +223,7 @@ var UserService = function(){
 				language: language
 			}
 			
-		}
+		};
 
 		var that = this; 
 
@@ -270,5 +274,5 @@ var UserService = function(){
                 
             }
         });
-	}
-}
+	};
+};

@@ -1,39 +1,39 @@
 var SearchView = function (service) {
 
-	var findCommonFactor = function(a,b){
+    var findCommonFactor = function(a,b){
       var c=b;
       if(a<b){
         c=a;
         a=b;
         b=c;
       }
-      while(a%b!=0){
+      while(a%b!==0){
         c=a%b;
         a=b;
         b=c;
       }
       return c;
-    }
+    };
 
     
     this.sayHello = function(){
         console.log("hello!"); 
-    }
+    };
 
-	this.render = function() {
+    this.render = function() {
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
         var settings = JSON.parse(window.localStorage.getItem("userSettings")); 
         //"centerX":0.5,"centerY":0.5,"searchW":0.2,"searchH":0.2,
         settings.centerX *= 10;
         settings.centerY *= 10;
         settings.searchW *= 10;
         settings.searchH *= 10;
-    	this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header:{main:lang.searchSettingsHeader}}));
-    	$('main', this.$el).html(this.innerTpl({user:user, lang:lang, settings: settings}));
-    	return this;
-	};
+        this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header:{main:lang.searchSettingsHeader}}));
+        $('main', this.$el).html(this.innerTpl({user:user, lang:lang, settings: settings}));
+        return this;
+    };
 
     this.continueRendering = function(){
 
@@ -80,7 +80,7 @@ var SearchView = function (service) {
 
         
         //------------------------------------------------------------------
-    }
+    };
 
     this.isSearching = false;
     this.unfinishedCall = 0;
@@ -137,7 +137,7 @@ var SearchView = function (service) {
                     //            
                 }
             });
-    }
+    };
     this.lastClassName = ""; 
 
     this.requestProgress = function(){
@@ -231,7 +231,7 @@ Finished: Comparing finished in 3827 seconds
 
 */
         
-    }
+    };
 
     this.startSearch = function(){
         var user = service.currentUser;
@@ -257,12 +257,14 @@ Finished: Comparing finished in 3827 seconds
                 complete: function(data){ //No matter error or success. AND THIS DATA　IS NOT THAT DATA IN SUCCESS...
                     clearInterval(that.unfinishedCall);
                     that.isSearching = false; 
+                  
+                    var h = $("div#progress").css("height"); 
                     try{
                         ResultView.prototype.resultData = JSON.parse(data.responseText);
+                        window.localStorage.setItem("elefindResult", data.responseText);
                         $("div#progress").removeClass();
                         $("div#progress").addClass("finish");
                         //$("div#progress-field").append('<div class = "stage-label" style="top:'+h+'" id = "'+className+'">Label: Finished! </div>'); 
-                        var h = $("div#progress").css("height"); 
                         $(".stage-label").remove();
                         $("div#progress-field").append(that.stageLabelTpl({icon:lang.finishedComparingIcon, text:lang.finishedComparing, id: "finish-tag", top:h}));
                         $("#to-result").css("display", "inline-block"); 
@@ -271,12 +273,12 @@ Finished: Comparing finished in 3827 seconds
                     }catch(error){
                         $("div#progress").removeClass();
                         $("div#progress").addClass("finish");
-                        var h = $("div#progress").css("height"); 
                         $(".stage-label").remove();
                         $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.comparingError, id: "finish-tag", top:h})); 
                         $("#progress-field").addClass("stop-animation"); 
                         $("#to-gallery").css("display", "inline-block"); 
                         console.log("SEARCH FINISHED WITH ERROR"); 
+                        return; 
                     }                    
                     //window.location.hash = "#searchResult"; 
                     /*
@@ -288,18 +290,18 @@ Finished: Comparing finished in 3827 seconds
                 }
         });
         this.unfinishedCall = setInterval(function(){that.requestProgress();}, 500);
-    }
+    };
 
 
 
     this.renderSideNav = function(){
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
         return this.sideNavTpl({lang:lang, user: user, isLoggedIn: isLoggedIn});
-    }
+    };
 
-	this.initialize = function () {
+    this.initialize = function () {
         // Define a div wrapper for the view (used to attach events)
         this.$el = $('<div class="content-holder"/>');
         //this.$el.on('keyup', '.search-key', this.findByName);
@@ -307,4 +309,4 @@ Finished: Comparing finished in 3827 seconds
     };
 
     this.initialize();
-}
+};

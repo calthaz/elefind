@@ -4,22 +4,22 @@ var ProgressView = function(){
         //-----------------0----------------1-----------2---------3
     this.last = -1; 
 
-	this.render = function() {
-	    var user = service.currentUser;
-	    var lang = new Lang(user.language);
-	    var isLoggedIn = user.name != "";
-
-		this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header:{main:lang.progressHeader}}));
-		$('main', this.$el).html(this.innerTpl({user:user, lang:lang, header:{main:lang.progressHeader}}));
-		return this;
-	};
-
-	this.renderSideNav = function(){
+    this.render = function() {
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
+
+        this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header:{main:lang.progressHeader}}));
+        $('main', this.$el).html(this.innerTpl({user:user, lang:lang, header:{main:lang.progressHeader}}));
+        return this;
+    };
+
+    this.renderSideNav = function(){
+        var user = service.currentUser;
+        var lang = new Lang(user.language);
+        var isLoggedIn = user.name !== "";
         return this.sideNavTpl({lang:lang, user: user, isLoggedIn: isLoggedIn});
-    }
+    };
 
     this.initialize = function () {
         // Define a div wrapper for the view (used to attach events)
@@ -33,7 +33,7 @@ var ProgressView = function(){
     this.lastClassName = ""; 
 
     this.continueRendering = function(){
-    	//var canvas = document.getElementById('progress');
+        //var canvas = document.getElementById('progress');
         //this.ctx = canvas.getContext('2d');
         //this.ctx.lastX = 0;
         //this.ctx.lastY = 0; 
@@ -68,5 +68,5 @@ var ProgressView = function(){
             that.lastClassName = className; 
         }); 
 
-    }
-}
+    };
+};

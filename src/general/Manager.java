@@ -282,13 +282,16 @@ public abstract class Manager implements Runnable {
 		x1=y1=0;
 		//x2=draftW-1;
 		//y2=draftH-1;
+		//Just add one as a backup incase there can't be any window at all
+		CandiWindow cw = new CandiWindow(draftW,draftH,(int)(x1/amRate),(int)(y1/amRate),(int)((x1+draftW-1)/amRate),(int)((y1+draftH-1)/amRate));
+		winds.add(cw);
 		do{
 			//horizontal step
 			for(x1=0; x1+draftW<=w;x1+=step){ //TODO border check
 				//vertical step
 				for(y1=0;y1+draftH<=h;y1+=step){
 					if(isInRect(x1,y1,draftW,draftH,w,h)){
-						CandiWindow cw = new CandiWindow(draftW,draftH,(int)(x1/amRate),(int)(y1/amRate),(int)((x1+draftW-1)/amRate),(int)((y1+draftH-1)/amRate));
+						cw = new CandiWindow(draftW,draftH,(int)(x1/amRate),(int)(y1/amRate),(int)((x1+draftW-1)/amRate),(int)((y1+draftH-1)/amRate));
 						winds.add(cw);
 					}
 				}
@@ -308,7 +311,7 @@ public abstract class Manager implements Runnable {
 		int cx=x1+(draftW)/2;
 		int cy = y1+(draftH)/2;
 		double r =  Math.sqrt(Math.abs(cx-CENTER_X*w)*Math.abs(cx-CENTER_X*w) + Math.abs(cy-CENTER_Y*h)*Math.abs(cy-CENTER_Y*h)*contract*contract);//TODO times or divided by???
-		double likelihood = func(this.probFunc,2*r/(SEARCH_W*w));//TODO 2*r should be r*r right? 
+		double likelihood = func(this.probFunc,2*r/(SEARCH_W*w));//TODO 
 		//if(Math.abs(cx-CENTER_X*w)<=(w*SEARCH_W)/2 && Math.abs(cy-CENTER_Y*h)<=(h*SEARCH_H)/2)
 		//System.out.println((Math.abs(cy-CENTER_Y*h))+", "+ (Math.abs(cx-CENTER_X*w))+") "+ 2*r+"; \n "+(SEARCH_H*h)+"; "+(SEARCH_W*w)+"; "+likelihood);
 		

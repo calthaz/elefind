@@ -26,7 +26,8 @@ public class QueryAgent {
 			try {
 				//System.out.println("In query agent try");
 				rd = new TextSettingsReader(settingsPath);
-				PrintWriter wr=new PrintWriter(new FileWriter(rd.settings.get("progressPlace")),true);
+				String prg = rd.settings.get("progressPlace");
+				PrintWriter wr=new PrintWriter(new FileWriter(prg),true);
 				wr.println("Start: Thread start");
 				Manager manager;
 				if(rd.settings.get("MANAGER_TYPE").equals("ImprSearch")){

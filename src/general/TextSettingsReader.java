@@ -21,7 +21,7 @@ public class TextSettingsReader {
 				String str = sc.nextLine();
 				str = str.trim();
 				
-				if(str.indexOf("candiFolder")!=-1){
+				if(str.indexOf("candiFolder")==0){ //in case if someone is called "candiFolder" 
 					candiFolder +=str.substring(str.indexOf(":")+1).trim()+";";
 					settings.put("candiFolder", candiFolder);
 				}else{

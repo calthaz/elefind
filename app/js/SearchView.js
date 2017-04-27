@@ -53,9 +53,39 @@ var SearchView = function (service) {
         
         var that = this; 
 
+        var settings = defaultSettings; 
+        /*var defaultSettings = {
+            //MANAGER_TYPE:"ImprSearch",
+            searchMethod:1,
+            preprocessing:3,
+            maxPatchSize:1250,
+            maxAmRate:2,
+            maxFolds:2,
+            centerX:0.5,
+            centerY:0.5,
+            searchW:0.2,
+            searchH:0.2,
+            slidingStep:4
+        };*/
+
         $("#submit-settings-scope").on("click", function(event){
             //read search config from user
-            that.submitDataForSearching();
+            var select=document.getElementById("st-patch-size");
+            var index=select.selectedIndex; //序号，取当前选中选项的序号
+            settings.maxPatchSize = select.options[index].value;
+
+            settings.centerX = parseInt($("#center-x").val())/10;
+
+            settings.centerY = parseInt($("#center-y").val())/10;
+
+            settings.searchAlbums = [];
+            $("#st-scope-by-folder option:selected").each(function(){
+                settings.searchAlbums.push($(this).text()); //这里得到的就是
+            }); 
+            settings.startDate = $("#start-date").val();
+            settings.endDate = $("#end-date").val();
+
+            that.submitDataForSearching(settings);
         });  
 
         $(".settings-option").on("click mousePressed", function(event){
@@ -88,20 +118,20 @@ var SearchView = function (service) {
     this.relatingFileName = "";
 
 
-    this.submitDataForSearching = function(){
+    this.submitDataForSearching = function(settings){
         if(this.isSearching){
                 window.alert("Please wait. Current Search unfinished.");
                 return;
             }
 
             this.isSearching = true; 
-            
+            window.localStorage.setItem("userSettings", JSON.stringify(settings)); 
             $("#submit-settings-scope").addClass("disabled");
             window.location.hash = "#searchProgress"; 
             //grab user settings as well as th draft
             
             var searchData = {
-                searchConfig: JSON.parse(window.localStorage.getItem("userSettings")), 
+                searchConfig: settings, 
                 user: JSON.parse(window.localStorage.getItem("elefindUser")), 
                 draft: JSON.parse(window.localStorage.getItem("userSketch"))
             };
@@ -122,15 +152,27 @@ var SearchView = function (service) {
                 //contentType: false,
                 success:function(data, textStatus, jqXHR){
                     console.log(data);
-                    data = JSON.parse(data);
-                    that.draftPath = data.draftPath;
-                    that.relatingFileName = data.relatingFileName; 
-                    that.startSearch();
+                    try{
+                        data = JSON.parse(data);
+                        if(data.msg==="success"){
+                            that.draftPath = data.draftPath;
+                            that.relatingFileName = data.relatingFileName; 
+                            that.startSearch();
+                            return
+                        }else{
+                            window.alert(data.msg); //TODO language
+                        }
+                    }catch(e){
+                    }                   
+                    this.isSearching = false; 
+                    window.location.hash = "#searchSettings"; 
+
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     window.alert("Upload Settings failed. Try again");//+lang.uploadErrorMsg
                     console.log("Error: "+ textStatus+"|"+errorThrown);
                     that.isSearching = false; 
+                    window.location.hash = "#searchSettings"; 
                 },
                 complete: function(data){ //No matter error or success. 
                 //so what is the data?   
@@ -154,7 +196,7 @@ var SearchView = function (service) {
                 //contentType: false,
                 success:function(data, textStatus, jqXHR){
                     console.log(data);
-                    if(data.indexOf("<")==-1){
+                    if(data.indexOf("<")==-1 && that.isSearching){
                         data = JSON.parse(data);
                         //expect data = {"status":"Progress","stage":"processing file No.17 out of 21\r\n","processed":"17","total":"21"}
 

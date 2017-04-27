@@ -595,10 +595,9 @@
                     <span class = "settings-label">{{lang.maxPatchSize}}</span>
                   </div>               
                   <div class="input-field col s12 m8 l6">
-                    <select>
-                      <option value="1250" disabled selected>{{lang.default}}</option>
+                    <select id = "st-patch-size">
                       <option value="625">{{lang.patchSmall}}</option>
-                      <option value="1250">{{lang.patchMedium}}</option>
+                      <option value="1250" selected>{{lang.patchMedium}}</option>
                       <option value="100000">{{lang.patchNoRestrict}}</option>
                     </select>            
                     <span class="settings-text"> {{lang.maxPatchSizeExpl}}</span>      
@@ -611,11 +610,11 @@
                 <div class="input-field col s12 m8 l6">
                   <p class="range-field">
                     <label for="center-x">X</label>
-                    <input type="range" id="center-x" min="0" max="10" value="{{settings.centerX}}"/>                    
+                    <input type="range" id="center-x" min="2" max="8" value="{{settings.centerX}}"/>                    
                   </p>
                   <p class="range-field">
                     <label for="center-y">Y</label>
-                    <input type="range" id="center-y" min="0" max="10" value="{{settings.centerY}}"/>                    
+                    <input type="range" id="center-y" min="2" max="8" value="{{settings.centerY}}"/>                    
                   </p>
                   <span class = "settings-text">{{lang.centerPosExpl}}</span>
                 </div>
@@ -736,8 +735,7 @@
                   
                 </div>
                 <div class="input-field col s12 m8 l6">
-                  <select multiple>
-                    <option value="0">{{lang.default}}</option>
+                  <select multiple id = "st-scope-by-folder">
                     <option value="public" selected>{{lang.publicAlbum}}</option>
                     <option value="private">{{lang.privateAlbum}}</option>
                   </select>                  
@@ -1022,7 +1020,7 @@
       <script type="text/javascript" src="js/dropzone.js"></script>
 
 
-      <script type="text/javascript" src="js/Language.js"></script>
+      <!--<script type="text/javascript" src="js/Language.js"></script>
       <script type="text/javascript" src="js/HomeView.js"></script>
 
       <script type="text/javascript" src="js/DrawView.js"></script>
@@ -1035,7 +1033,8 @@
       <script type="text/javascript" src="js/AcSettingsView.js"></script>
       <script type="text/javascript" src="js/GridView.js"></script>
 
-      <script type="text/javascript" src="js/app.js"></script>
+      <script type="text/javascript" src="js/app.js"></script>-->
+      <script type="text/javascript" src="js/concat.js"></script>
 
       
   </html>

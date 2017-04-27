@@ -161,9 +161,8 @@ function hasConnection() {
     states[Connection.CELL_3G]  = 'Cell 3G connection';
     states[Connection.CELL_4G]  = 'Cell 4G connection';
     states[Connection.CELL]     = 'Cell generic connection';
-    states[Connection.NONE]     = 'No network connection'; //todo: only in corvoda &&navigator.connection.type==Connection.NONE
-    */
-    if(navigator.onLine === false || navigator.connection!==null){
+    states[Connection.NONE]     = 'No network connection'; //todo: only in corvoda || navigator.connection!==null&&navigator.connection.type==Connection.NONE*/
+    if(navigator.onLine === false ){
         return false;
     }else{
         return true;

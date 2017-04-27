@@ -107,10 +107,6 @@ if((isset($_GET["pw"])) && $_GET["pw"]==="arugvj132kuy"){
     echo "Access denied. "; 
 }
 
-function getDirPath($path){
-	return substr($path, 0, strlen($path)-1);
-}
-
 /*
 name:"admin",
 email:"zymdxlyx@sina.cn",

@@ -21,4 +21,8 @@
 	$users = "users";
 	$sketches = "sketches";
 	$usersearchsettings = "usersearchsettings"; 
+
+	function getDirPath($path){
+		return substr($path, 0, strlen($path)-1);
+	}
 ?>

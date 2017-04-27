@@ -39,6 +39,8 @@ var ResultView = function(){
             var entry = results[x]; 
             if(entry.vis == "public"){
                 entry.src = "../server/storage/"+"public_photos/"+entry.filename; 
+            }else{
+                entry.src = "../server/storage/"+"users/"+user.email+"/photos/"+entry.filename; 
             }
             var score = parseFloat(results[x].score);
             results[x].score = score.toFixed(3);

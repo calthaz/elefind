@@ -36,9 +36,9 @@ var EnglishLang = {
 	//searchSettings
 	maxPatchSize:"Patch Area",
 	maxPatchSizeExpl:"It controls how finely the searching process is, and it also greatly affects the speed of searching. Find your balance.",
-	patchSmall:"Very finely but slow",
+	patchSmall:"Fine",
 	patchMedium:"Medium",
-	patchNoRestrict:"Fast but rough",
+	patchNoRestrict:"Fast",
 	centerPos:"Center Position",
 	centerPosExpl:"Tell us which part of the target you are drawing. X means horizontal distence from the left, and Y means vertical distance from the top, relative to the dimension of the target.",
 	searchMethod:"Search Method",
@@ -133,7 +133,8 @@ var EnglishLang = {
 	searchSettingsNotice:"<span>After some testing we've found the best combination of those parameters in the Advance part. "+
 	" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
 	errorComparingIcon: "close",
-	comparingError: "Searching ends with error"
+	comparingError: "Searching ends with error",
+	noInternetMsg:""
 };
 
 
@@ -267,7 +268,8 @@ var ChineseLang = {
 	searchSettingsNotice:"<span>After some testing we've found the best combination of those parameters in the Advance part. "+
 		" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
 	errorComparingIcon: "close",
-	comparingError: "抱歉，搜索失败"
+	comparingError: "抱歉，搜索失败",
+	noInternetMsg:""
 
 };
 

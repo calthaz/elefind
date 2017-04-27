@@ -149,6 +149,9 @@ password: <input type="text" name="password">
 
 		$data["sql1"] = $sql; 
 
+		$sql = "INSERT INTO ".$usersearchsettings." (email, searchMethod, preprocessing, maxAmRate, maxFolds, centerX, centerY, searchW, searchH, slidingStep, maxPatchSize) VALUES ('".$info['email']."', '1', '3', '2', '2', '0.5', '0.5', '0.2', '0.2', '4', '1250')";
+		$result = $conn->query($sql);
+
 		$sql = "SELECT * FROM ".$users." WHERE email LIKE '".$info['email']."'";
 		$result = $conn->query($sql);
 		

@@ -164,7 +164,9 @@ public class ImprManager extends Manager {
 		} catch (IOException e) {
 				e.printStackTrace();
 		}
-		 
+		
+		PrintWriter progress = new PrintWriter(new FileWriter(progressFile,true),true);
+		
 		System.out.println("Processing image...");
 		if(wr!=null)wr.println("\n------"+Calendar.getInstance().getTime()+"------");
 		//Time processing time.
@@ -173,7 +175,16 @@ public class ImprManager extends Manager {
 		Impression imp = new Impression(imprDraft,rly,imprID,progressFile);
 		imprID = imp.getID();
 		System.out.println("Current Impression: "+imp);
+		
 		if(wr!=null)wr.println("Current Impression: "+imp);
+		if(imp.getColorPatchesCount()==0){
+			if(wr!=null)wr.println("Empty imp. Searching Ends.");
+			System.out.println("Empty imp. Searching Ends.");
+			progress.println("Fatal Error: Empty Draft");
+			progress.flush();
+			progress.close();
+			return; 
+		}
 		
 		time = (int)System.currentTimeMillis()-time;
 	    System.out.println("Processing has taken "+time+"ms.");
@@ -184,7 +195,7 @@ public class ImprManager extends Manager {
 	    	cbModel.addElement(imprID);
 	    }
 	    
-	    PrintWriter progress = new PrintWriter(new FileWriter(progressFile,true),true);
+	    
 	    progress.println("Progress: Start comparing");
 	    
 	    if(wr!=null)wr.println(printSettings());

@@ -44,7 +44,7 @@ var GridView = function(service, type){
     }); 
 
     $("#gallery").on("click", ".card-image img", function(){
-      var src =  $(this).attr("src");
+      var src =  $(this).attr("data-orig");
       //console.log(src);       
       $("#image-view-wrapper").html(that.imageViewTpl({
         src: src, 
@@ -122,7 +122,9 @@ var GridView = function(service, type){
             
             if(data.msg =="success"){
               var path = "";
+              var origPath = ""; 
               if(that.type=="publicAlbum"){
+
                 $(".row#gallery").append(that.uploadTileTpl());
                 $("div#upload-dropzone").dropzone({ 
                     url: "../server/UploadHandler.php", 
@@ -134,12 +136,19 @@ var GridView = function(service, type){
                     dictDefaultMessage: lang.dzDefaultMsg,
                   });//maxFileSize: 2 cause the browser to crash? 
 
-                path = "../server/storage/"+"public_photos/";
+                path = "../server/storage/"+"public_photos/thumbnail/";
+                origPath = "../server/storage/"+"public_photos/";
+
               }else if(that.type=="publicGallery"){
-                path = "../server/storage/"+"public_sketches/";
+
+                path = origPath = "../server/storage/"+"public_sketches/";
+
               }else if(that.type=="myGallery"){
-                path = "../server/storage/users/"+service.currentUser.email+"/sketches/";
-              }else{
+
+                path = origPath = "../server/storage/users/"+service.currentUser.email+"/sketches/";
+
+              }else{//myAlbum
+
                 $(".row#gallery").append(that.uploadTileTpl());
                 $("div#upload-dropzone").dropzone({ 
                     url: "../server/UploadHandler.php", 
@@ -150,7 +159,9 @@ var GridView = function(service, type){
                     maxFileSize: 2,
                     dictDefaultMessage: lang.dzDefaultMsg,
                   });//maxFileSize: 2 cause the browser to crash?
-                path = "../server/storage/users/"+service.currentUser.email+"/photos/";
+
+                path = "../server/storage/users/"+service.currentUser.email+"/photos/thumbnail/";
+                origPath = "../server/storage/users/"+service.currentUser.email+"/photos/";
               }
 
               if(data.files.length === 0) return; 
@@ -180,7 +191,8 @@ var GridView = function(service, type){
                 // Well, /./g matches with everything 
                 $(".row#gallery").append(that.imageTileTpl({
                   image:{
-                    src: path+file.filename, 
+                    src: path+file.filename,
+                    orig: origPath+file.filename,  
                     title: file.title, 
                     filename: classNameEncode(file.filename)
                   }, 
@@ -245,10 +257,12 @@ var renderImageView = function(){
     var img = this.parentNode.parentNode.children[0].children[0]; //[0] image-card
     console.log(img); 
     console.log($(img).css("background-image")); //url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
+    var imageURL = $(img).css("background-image");
+    imageURL = imageURL.replace(/"/g, "");
     if(type.className.indexOf("Gallery")!=-1){
-       window.localStorage.setItem("userSketch", JSON.stringify({type: 'old-sketch', src: $(img).css("background-image")})); 
+       window.localStorage.setItem("userSketch", JSON.stringify({type: 'old-sketch', src: imageURL})); 
     }else{
-      window.localStorage.setItem("userSketch", JSON.stringify({type: 'photo', src: $(img).css("background-image")})); 
+      window.localStorage.setItem("userSketch", JSON.stringify({type: 'photo', src: imageURL})); 
     }
    
     window.location.hash = "#searchSettings";
@@ -260,11 +274,12 @@ var renderImageView = function(){
     //console.log(img); 
     //console.log($(img).css("background-image")); //url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
     var filename = $(img).css("background-image");
-    filename = filename.substring(filename.lastIndexOf("/")+1, filename.indexOf('")'));
+    filename = filename.replace(/"/g, "");
+    filename = filename.substring(filename.lastIndexOf("/")+1, filename.indexOf(')'));
     filename = classNameEncode(filename); //filename.replace("@","at").replace(/[.]/g, "dt"); 
     //lastIndexOf() 从后向前搜索字符串。
     //jQuery.post( url [, data ] [, success ] [, dataType ] )
-    $.post("../server/ImageManager.php", {deletePic:$(img).css("background-image")}, function(data){
+    $.post("../server/ImageManager.php", {deletePic:$(img).css("background-image").replace(/"/g, "")}, function(data){
       if(data=="success"){
         //console.log("deleted a pic: "+filename); 
         $(".image-view").remove();

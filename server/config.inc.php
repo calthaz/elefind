@@ -12,6 +12,9 @@
 	$profilePicDir = join(DIRECTORY_SEPARATOR, array('storage', 'users', 'profile_pics', ''));
 	$userDir = "storage".DIRECTORY_SEPARATOR."users".DIRECTORY_SEPARATOR; 
 	
+	$thumbnail = "thumbnail".DIRECTORY_SEPARATOR;
+	$THUMB_SIZE = 200; 
+
 	$servername = "localhost";
 	$username = "elefind";
 	$password = "elefindtest";

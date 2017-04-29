@@ -134,6 +134,7 @@ password: <input type="text" name="password">
 		mkdir($userDir.$info['email']);
 		mkdir($userDir.$info['email'].DIRECTORY_SEPARATOR."sketches");
 		mkdir($userDir.$info['email'].DIRECTORY_SEPARATOR."photos");
+		mkdir(getDirPath($userDir.$info['email'].DIRECTORY_SEPARATOR."photos".DIRECTORY_SEPARATOR.$thumbnail));
 
 		//{"email":"mein@ele.com","password":"t","username":"julia","language":"zh"}
 		//$stmt = $conn->prepare("INSERT INTO users (username, password, email, title, date) VALUES (?, ?, ?, ?,?)");

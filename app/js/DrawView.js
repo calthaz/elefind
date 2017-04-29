@@ -205,8 +205,10 @@ var DrawView = function (service) {
           base64str: that.board.getImg(), 
           publish: false, 
         };
+        var str64 = that.board.getImg();
 
-        window.localStorage.setItem("userSketch", JSON.stringify(draft));
+        console.log(str64);
+        window.localStorage.setItem("userSketch", JSON.stringify(draft));//.replace("data:image/png;base64,", "canvas:")
         window.location.hash = "searchSettings"; 
 
       });

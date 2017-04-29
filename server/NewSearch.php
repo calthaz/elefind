@@ -48,8 +48,9 @@
  			$draftPath = saveDraft($draft, $useremail, $requestTime);
  		}else{ 			
  			$rawPath = $draft['src'];//url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
+ 			//url(http://ec2-34-208-42-160.us-west-2.compute.amazonaws.com/elefind/server/storage/public_sketches/6270_1493038123.png)
  			$filename = substr($rawPath, strpos($rawPath, "storage"));
- 			$filename = substr($filename, 0, strrpos($filename, '")'));
+ 			$filename = substr($filename, 0, strrpos($filename, ')'));//no ' " ' in Safari... 
  			//$filename = basename($filename);
  			$draftPath = str_replace("/",DIRECTORY_SEPARATOR, $filename); 
  		}
@@ -111,9 +112,9 @@
     				if(is_array($value)){
     					$hasSetFolder = true;
     					foreach ($value as $key2 => $value2) {
-    						if($value2 === "Public Album"){
+    						if($value2 === "public"){
     							$searchAlbums[] = $publicPhotoDir;
-    						}elseif($value2 === "Private Album" && !strpos($draftPath, "public")){
+    						}elseif($value2 === "private" && $useremail != ""){//second condition means is logged in...
     							$searchAlbums[] = $privatePhotoDir.$useremail.DIRECTORY_SEPARATOR."photos".DIRECTORY_SEPARATOR;
     						}
     					}
@@ -140,8 +141,8 @@
 		fwrite($settings, $txt);
 		$txt = "draftPath".":".$draftPath."\r\n";
 		fwrite($settings, $txt);
-		$txt = "searchMethod:1"."\r\n";
-		fwrite($settings, $txt);
+		//$txt = "searchMethod:1"."\r\n";
+		//fwrite($settings, $txt);
 
 		if(!$hasSetFolder){
 			$searchAlbums[] = $publicPhotoDir;
@@ -195,7 +196,7 @@
  		//how do I know where to get the progress??? 
  		//{startSearch: "start", relatingFileName: that.relatingFileName },
  		$filename = $_POST["relatingFileName"];
- 		$commandStr = 'java -jar ImprSearchJava'.DIRECTORY_SEPARATOR.'QueryAgent.jar '.$settingsDir.$filename;
+ 		$commandStr = 'java -jar ImprSearchJava'.DIRECTORY_SEPARATOR.'QueryAgent.jar '.$settingsDir.$filename.' 2>&1';
  		//'java -cp ImprSearchJava'.DIRECTORY_SEPARATOR.'bin general.QueryAgent '.$settingsDir.$filename;
  		$output="";
 
@@ -206,6 +207,7 @@
  		//} catch (Exception $e) {
 		if(!$result){
 			$result = file($progressDir.$_POST["relatingFileName"]);
+			print_r($output); 
 			print_r($result); 
 			exit();  
 		}

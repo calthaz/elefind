@@ -16,8 +16,9 @@
 
       <link rel="stylesheet" href="plugins/drawingboard/css/drawingboard.css">
 
-      <meta http-equiv="x-ua-compatible" content="IE=10">   
+      <meta http-equiv="x-ua-compatible" content="IE=10">  
 
+      <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon">
       <link rel="stylesheet" href="plugins/farbtastic/farbtastic.css" type="text/css" />
 
       <link type="text/css" rel="stylesheet" href = "css/custom.css" />
@@ -47,7 +48,7 @@
           <li>
               <a class="btn waves-effect waves-light button-collapse right" data-activates="slide-out">
               <!--<div ><img class="background"   src="img/side-nav-2.png"/> class="valign-wrapper"</div> valign-wrapper-->
-                <span id = "nav-1" class = "cyan lighten-1"><i class="material-icons md-24">more_vert</i></span>
+                <span id = "nav-1" class = "cyan lighten-1"><i class="material-icons md-24">&#xE5D4;</i></span>
                 <span id = "nav-2" class = "brown darken-3"></span>
                 <span id = "nav-3" class = "teal lighten-4"></span>
               </a>
@@ -357,15 +358,15 @@
         {{/if}}
       </div></li>
 
-      <li><a  href="#publicGallery" class="waves-effect waves-light"><i class="material-icons">collections_bookmark</i>{{lang.publicGallery}}</a></li>
-      <li><a href="#publicAlbum" class="waves-effect waves-light"><i class="material-icons">photo_library</i>{{lang.publicAlbum}}</a></li>
+      <li><a  href="#publicGallery" class="waves-effect waves-light"><i class="material-icons">&#xE431;</i>{{lang.publicGallery}}</a></li>
+      <li><a href="#publicAlbum" class="waves-effect waves-light"><i class="material-icons">&#xE413;</i>{{lang.publicAlbum}}</a></li>
       <li><a class="waves-effect waves-light"><i class="material-icons">link</i>{{lang.publicMatches}}</a></li>
 
       <li><div class="divider"></div></li>
 
       <li><a href="#drawingBoard" class="waves-effect waves-light"><i class="material-icons">search</i>{{lang.newSearch}}</a></li>
       {{#if isLoggedIn}}
-      <li><a href="#myGallery" class="waves-effect waves-light"><i class="material-icons">format_paint</i>{{lang.myGallery}}</a></li>
+      <li><a href="#myGallery" class="waves-effect waves-light"><i class="material-icons">&#xE243;</i>{{lang.myGallery}}</a></li>
       <li><a href="#myAlbum" class="waves-effect waves-light"><i class="material-icons">camera</i>{{lang.myAlbum}}</a></li>     
       <li><a href="#searchResult" class="waves-effect waves-light"><i class="material-icons">history</i>{{lang.history}}</a></li>
       {{/if}}
@@ -465,7 +466,7 @@
         <div class="nav-wrapper cyan darken-3">
           <a class="right">{{lang.accountSettings}}</a>
           <ul id="nav-mobile" class="left">
-            <li><a class="go-back"><i class="material-icons go-back">chevron_left</i></a></li>
+            <li><a class="go-back"><i class="material-icons go-back">&#xE5CB;</i></a></li>
           </ul>
         </div>
       </nav>
@@ -485,7 +486,7 @@
 
           <div class="row">
             <div class="input-field col s12 m6">
-              <i class="material-icons prefix">account_circle</i>
+              <i class="material-icons prefix">&#xE853;</i>
               <input value="{{user.name}}" id="username" type="text" class="validate">
               <label class = "active" for="username">{{lang.username}}</label>
             </div>
@@ -557,16 +558,16 @@
                 <!--class="dropdown-content"-->
                 <button data-activates="picker-wrapper" class="btn dropdown-button btn-flat transparent" >
                   <input type="text" id="color" name="color" value="#000000" disabled style="display: none;"/>
-                  <i id="color-lens" class="material-icons md-48">color_lens</i>
+                  <i id="color-lens" class="material-icons md-48">&#xE3B7;</i>
                 </button>
               </div>
               <ul id="picker-wrapper" class="dropdown-content" >
                 <li><div id="colorpicker"></div></li>
               </ul>
             </form>
-            <button class="btn" id = "save-to-phone"><span class="hide-on-small-only">{{lang.download}}</span> <i class="material-icons right">get_app</i></button>
-            <button class="btn" id = "save-to-server"><span class="hide-on-small-only">{{lang.saveToServer}}</span> <i class="material-icons right">cloud_upload</i></button>
-            <button class="btn next"><span class="hide-on-small-only">{{lang.next}}</span><i class="material-icons white-text right">chevron_right</i></button>
+            <button class="btn" id = "save-to-phone"><span class="hide-on-small-only">{{lang.download}}</span> <i class="material-icons right">&#xE884;</i></button>
+            <button class="btn" id = "save-to-server"><span class="hide-on-small-only">{{lang.saveToServer}}</span> <i class="material-icons right">&#xE2C3;</i></button>
+            <button class="btn next"><span class="hide-on-small-only">{{lang.next}}</span><i class="material-icons white-text right">&#xE5CC;</i></button>
         </div> 
       </div>
     </script>
@@ -639,7 +640,7 @@
               </div>
               
               <div id="advanced-settings" style="display: none;">
-              <div class="settings-option row">
+              <!--<div class="settings-option row">
                 <div class = "settings-info col s12 m4">
                   <span class = "settings-label">{{lang.searchMethod}}</span>
                   
@@ -653,8 +654,8 @@
                   </select>
                   <span class = "settings-text">{{lang.searchMethodExpl}}</span>
                 </div>
-              </div>
-              <div class="settings-option row">
+              </div>-->
+              <!--<div class="settings-option row">
                 <div class = "settings-info col s12 m4">
                   <span class = "settings-label">{{lang.preprocessing}}</span>
                   
@@ -666,11 +667,11 @@
                     <option value="1">{{lang.equalize}}</option>
                     <option value="2" disabled>{{lang.smooth}}</option>
                     <option value="3">{{lang.compress}}</option>
-                    <!--should be multipul selected... but not implemented in java-->
+                    should be multipul selected... but not implemented in java
                   </select>
                   <span class = "settings-text">{{lang.preprocessingExpl}}</span>
                 </div>
-              </div>
+              </div>-
               <div class="settings-option row">
                 <div class = "settings-info col s12 m4">
                   <span class = "settings-label">{{lang.maxAmRate}}</span>
@@ -682,7 +683,7 @@
                   </p>
                   <span class = "settings-text">{{lang.maxAmRateExpl}}</span>
                 </div>
-              </div>
+              </div>-->
               <div class="settings-option row">
                 <div class = "settings-info col s12 m4">
                   <span class = "settings-label">{{lang.maxFolds}}</span>
@@ -776,8 +777,8 @@
             </div>
           </div>
           <div class="row">
-            <a id = "to-result" href="#searchResult" class = "btn" style="display:none">{{lang.next}}<i class="material-icons white-text right">chevron_right</i></a>
-            <a id = "to-gallery" href="#myGallery" class = "btn" style="display:none">{{lang.myGallery}}<i class="material-icons white-text right">chevron_right</i></a>
+            <a id = "to-result" href="#searchResult" class = "btn" style="display:none">{{lang.next}}<i class="material-icons white-text right">&#xE5CC;</i></a>
+            <a id = "to-gallery" href="#myGallery" class = "btn" style="display:none">{{lang.myGallery}}<i class="material-icons white-text left">&#xE5CB;</i></a>
           </div>
       </div>
     </script>
@@ -785,7 +786,7 @@
     <script id = "stage-label" type="text/template">
       <div class="stage-label" id="{{id}}" style = "top: {{top}}">
         <div class = "pointer"></div>
-        <div class="stage-icon"><i class="material-icons">{{icon}}</i></div>
+        <div class="stage-icon"><i class="material-icons">{{{icon}}}</i></div>
         <span>{{text}}</span>
       </div>
     </script>
@@ -838,7 +839,7 @@
       <div class="image-view">
         <div class="image-self-wrapper">
           <div class = "image-self" style="background-image: url('{{src}}')">
-            <a class = "exit-view hide-on-med-and-up"><i class='material-icons'>arrow_back</i></a>
+            <a class = "exit-view hide-on-med-and-up"><i class='material-icons'>&#xE5C4;</i></a>
             <img class="hidden-image materialboxed" src ="{{src}}">
 
             
@@ -852,8 +853,14 @@
           <span class="view-date">{{date}}</span>
         </div>
         <div class="image-actions">
-          <a class="btn btn-flat waves-effect" id = "save-to-phone" href="{{src}}" download="{{title}}"><span class="">{{lang.download}}</span> <i class="material-icons right">get_app</i></a>
-          <a class="btn btn-flat waves-effect" id = "delete-pic"><span class="">{{lang.delete}}</span> <i class="material-icons right">delete</i></a>
+          <a class="btn btn-flat waves-effect" id = "save-to-phone" href="{{src}}" download="{{title}}">
+            <span class="">{{lang.download}}</span> 
+            <i class="material-icons right">&#xE884;</i>
+          </a>
+          <a class="btn btn-flat waves-effect" id = "delete-pic">
+            <span class="">{{lang.delete}}</span> 
+            <i class="material-icons right">delete</i>
+          </a>
           <!--<a class="" id = "save-to-server"><span class="hide-on-small-only">{{lang.saveToServer}}</span> <i class="material-icons right">cloud_upload</i></a>-->
         </div>
       </div>
@@ -863,7 +870,7 @@
       <div class="tile-wrapper" id={{image.filename}}>
         <div class="card hoverable">
           <div class="card-image">
-              <img data-caption="{{image.title}}" class = "" src="{{image.src}}" data-author="{{author}}" data-date="{{date}}" data-vis="{{visibility}}">
+              <img data-caption="{{image.title}}" class = "" src="{{image.src}}" data-orig = "{{image.orig}}" data-author="{{author}}" data-date="{{date}}" data-vis="{{visibility}}">
               {{#if image.title}}
               <span class="card-title">{{image.title}}</span>
               {{/if}}
@@ -962,7 +969,7 @@
     <script id = "result-tr" type="text/template">
       <tr>
         <td class="preview-image-wrapper">
-          <img alt="{{lang.brokenImage}}" data-caption= "{{title}}" class = "circle preview-image" src="{{src}}" data-author="{{authorname}}" data-date="{{date}}" data-vis="{{visibility}}">
+          <img alt="{{lang.brokenImage}}" data-caption= "{{title}}" class = "circle preview-image" src="{{src}}" data-orig="{{orig}}" data-author="{{authorname}}" data-date="{{date}}" data-vis="{{visibility}}">
         </td>
         <!--{{#if title}}
         <td>{{title}}</td>

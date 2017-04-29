@@ -226,6 +226,11 @@ h3.page-header span.page-header-prefix {
   line-height: 1;
   cursor: pointer;
 }
+.image-view .exit-view i {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
 .image-view .view-title {
   display: block;
   margin: 0;
@@ -720,12 +725,15 @@ div.pointer {
   background-color: #80b4ba;
   width: 32px;
   height: 32px;
-  -webkit-transform: translate(-20px, 0px) rotate(45deg);
-  -moz-transform: translate(-20px, 0px) rotate(45deg);
-  -o-transform: translate(-20px, 0px) rotate(45deg);
-  -ms-transform: translate(-20px, 0px) rotate(45deg);
-  transform: translate(-20px, 0px) rotate(45deg);
+  -webkit-transform: translate(-16px, 7px) rotate(45deg);
+  -moz-transform: translate(-16px, 7px) rotate(45deg);
+  -o-transform: translate(-16px, 7px) rotate(45deg);
+  -ms-transform: translate(-16px, 7px) rotate(45deg);
+  transform: translate(-16px, 7px) rotate(45deg);
   z-index: -1;
+  transform-origin: 50% 50%;
+  top: 0;
+  left: 0;
 }
 footer a {
   color: #fff;

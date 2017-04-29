@@ -92,6 +92,7 @@ if((isset($_GET["pw"])) && $_GET["pw"]==="arugvj132kuy"){
 	    mkdir(getDirPath($privatePhotoDir));
 	    mkdir(getDirPath($publicDraftDir));
 	    mkdir(getDirPath($publicPhotoDir));
+        mkdir(getDirPath($publicPhotoDir.$thumbnail));
 	    mkdir(getDirPath($settingsDir));
 	    mkdir(getDirPath($progressDir));
 	    mkdir(getDirPath($resultDir));

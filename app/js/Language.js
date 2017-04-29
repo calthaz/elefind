@@ -3,7 +3,7 @@ var EnglishLang = {
 	elefindBrand:"Elefind",
 	publicGallery:"Public Sketch Gallery",
 	publicAlbum:"Public Album",
-	publicMatches:"Published Results",
+	publicMatches:"Published Results [N/A]",
 	newSearch:"New Search",
 	myGallery:"My Sketch Gallery",
 	myAlbum:"My Photo Album",
@@ -52,9 +52,9 @@ var EnglishLang = {
 	smooth:"Smooth (not implemented)",
 	compress:"Compress",
 	maxAmRate:"Maximum Amplification Rate",
-	maxAmRateExpl:"Choose how much larger at most you expect your target to be.",
+	maxAmRateExpl:"Choose how much larger you expect your target to be ??? how to express it?.",
 	maxFolds:"Maximum Folds",
-	maxFoldsExpl:"Choose how much larger at most you expect your target to be, in the other way.",
+	maxFoldsExpl:"Choose how much larger at most you expect your target to be than your sketch, measured by photo-size/sketch-size.",
 	searchRegion:"Search Region",
 	searchRegionExpl:"Specify the area of where the center of your draft can be, in percentile ralative to the width/height of the candidate photo.",
 	slidingStep:"Sliding Step",
@@ -62,7 +62,7 @@ var EnglishLang = {
 	searchScope:"Searching Scope",
 	searchScopeExpl:"Tell us where you expect to find your candidate.",
 	targetTimeRange:"Time Range",
-	targetTimeRangeExpl:"Give us a period of time during which you think your target photo was uploaded or created a record. ",
+	targetTimeRangeExpl:"[Optional]Give us a period of time during which you think your target photo was uploaded or created a record. ",
 	drawingHeader:"Draw your Impression",
 	download:"download",
 	saveToServer:"save to server",
@@ -87,8 +87,8 @@ var EnglishLang = {
 	startProcessingSketchIcon: "place",
 	typicalMapGottenIcon: "compare",
 	startComparingIcon: "send",
-	comparingIcon: "keyboard_backspace",
-	finishedComparingIcon: "done_all", 
+	comparingIcon: "&#xE317;", //"keyboard_backspace",
+	finishedComparingIcon: "&#xE877;",//"done_all", 
 
 	//other
 	copyrightText:"Copyright 2016",
@@ -130,11 +130,12 @@ var EnglishLang = {
 
 	dzDefaultMsg:"Drop files here to upload, or click to choose",
 
-	searchSettingsNotice:"<span>After some testing we've found the best combination of those parameters in the Advance part. "+
-	" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
+	searchSettingsNotice:"",
 	errorComparingIcon: "close",
 	comparingError: "Searching ends with error",
-	noInternetMsg:""
+	noInternetMsg:"",
+	emptyDraftError:"You've uploaded an empty sketch.",
+	illegalArgsError:"Bad searching config"
 };
 
 
@@ -169,7 +170,7 @@ var ChineseLang = {
 	
 	publicGallery:"公共画廊",
 	publicAlbum:"公共相册",
-	publicMatches:"Published Results",
+	publicMatches:"Published Results[未开放]",
 	loginText:"登录探索更多",
 	email:"电子邮件",
 	applyRatio:"应用尺寸",
@@ -202,14 +203,14 @@ var ChineseLang = {
 	searchScopeExpl:"告诉我们你觉得目标图片会在哪里。",
 	default:"默认",
 	none:"无",
-	apply:"apply",
+	apply:"应用",
 	width:"宽",
 	height:"高",
 	advanced:"高级",
 	draw:"作画",
 	settings:"设置",
-	progress:"progress",
-	result:"result",
+	progress:"进度",
+	result:"结果",
 	save:"保存",
 	next:"下一步",
 
@@ -219,37 +220,37 @@ var ChineseLang = {
 	download:"下载",
 	saveToServer:"保存到云端",
 	searchSettingsHeader:"搜索选项设置",
-	progressHeader:"In Progress",
-	resultHeader:"Result List",
+	progressHeader:"搜索中",
+	resultHeader:"结果列表",
 	introduction:"Intro to Elefind",
 
-	privateAlbum:"Private Album",
-	imageSaved:"Image saved!",
-	by:"by",
-	preview:"preview",
-	author:"author",
-	score:"score",
-	title:"Title",
-	delete:"delete",
-	from:"from",
-	to:"to",
-	retypePassword:"Retype Password",
+	privateAlbum:"个人相册",
+	imageSaved:"已保存",
+	by:"来自",
+	preview:"预览",
+	author:"作者",
+	score:"得分",
+	title:"标题",
+	delete:"删除",
+	from:"从",
+	to:"到",
+	retypePassword:"再次输入密码",
 	brokenImage:"",
-	noTitle:"No Title",
-	noAuthor:"Anonymous User",
+	noTitle:"无标题",
+	noAuthor:"匿名用户",
 
-	targetTimeRange:"Time Range",
-	targetTimeRangeExpl:"Give us a period of time during which you think your target photo was uploaded or created a record. ",
-	startProcessingSketch: "Start processing sketch...",
-	typicalMapGotten: "Processing sketch 50%...",
-	startComparing: "Start comparing...",
-	comparing: "Comparing",
-	finishedComparing: "Finished!",
+	targetTimeRange:"时间范围",
+	targetTimeRangeExpl:"[可选]Give us a period of time during which you think your target photo was uploaded or created a record. ",
+	startProcessingSketch: "开始处理手绘...",
+	typicalMapGotten: "手绘处理50%...",
+	startComparing: "开始比较...",
+	comparing: "比较中",
+	finishedComparing: "完成!",
 	startProcessingSketchIcon: "place",
 	typicalMapGottenIcon: "compare",
 	startComparingIcon: "send",
-	comparingIcon: "keyboard_backspace",
-	finishedComparingIcon: "done_all",
+	comparingIcon: "&#xE317;", //"keyboard_backspace",
+	finishedComparingIcon: "&#xE877;",//"done_all", 
 
 	changeLang: "English",
 
@@ -260,16 +261,17 @@ var ChineseLang = {
 		"并且我们不会保证这些数据完好且不被公开。 <br/>"+
 		"点击注册表明您以理解上述声明且愿意注册该账号。</span>",
 
-	galleryNotice:"<span>Due to the limited space on server, 超过2M的文件会被退回。 Administrators may also delete 任何文件. </span>",
+	galleryNotice:"<span>Due to the limited space on server, 超过2M的文件会被退回。 管理员可能删除任何文件. </span>",
 
-	clearCanvasNote:"Clears the canvas.",
+	clearCanvasNote:"会清空画板",
 
 	dzDefaultMsg:"拖文件到此（或点击选择）上传",
-	searchSettingsNotice:"<span>After some testing we've found the best combination of those parameters in the Advance part. "+
-		" Therefore we've disabled the settings there. Their values will not be uploaded. </span>",
+	searchSettingsNotice:"",
 	errorComparingIcon: "close",
 	comparingError: "抱歉，搜索失败",
-	noInternetMsg:""
+	noInternetMsg:"没有网络连接",
+	emptyDraftError:"您上传了空的手绘",
+	illegalArgsError:"搜索选项设置不当"
 
 };
 

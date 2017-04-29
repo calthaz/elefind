@@ -78,11 +78,12 @@
  		
 	}elseif(isset($_POST["deletePic"])){
 		
-		$rawPath = $_POST['deletePic'];//url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
+		$rawPath = $_POST['deletePic'];//url(http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png)//no " in safari
 		$filename = substr($rawPath, strpos($rawPath, "storage"));
-		$filename = substr($filename, 0, strrpos($filename, '")'));
+		$filename = substr($filename, 0, strrpos($filename, ')'));
 		//$filename = basename($filename);
 		$filePath = str_replace("/",DIRECTORY_SEPARATOR, $filename); 
+		$thumbPath = str_replace("photos/","photos".DIRECTORY_SEPARATOR.$thumbnail, $filename); 
 		$filename = basename($filePath); 
 
 		// Create connection
@@ -94,8 +95,12 @@
 
 		if(strpos($filePath, "photos")){
 			$sql = "DELETE FROM ".$photos." WHERE filename LIKE '";
+			if(file_exists($thumbPath)){
+    			unlink($thumbPath);
+    		}
 		}else{
 			$sql = "DELETE FROM ".$sketches." WHERE filename LIKE '";
+			
 		}
 		
 		$sqlresult = $conn->query($sql.$filename."'");
@@ -105,11 +110,12 @@
 		//if($sqlresult){
 			//echo "SQL delete failed"; //no way to know if the entry in sql is deleted or not...
 		//}else{
-			if(!unlink($filePath)){
-				echo "delete pic failed";
-			}else{
-				echo "success"; 
-			}
+		if(!unlink($filePath)){
+			echo "delete pic failed";
+		}else{
+
+			echo "success"; 
+		}
 		//}
 
 		

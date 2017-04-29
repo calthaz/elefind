@@ -38,9 +38,11 @@ var ResultView = function(){
         for(var x in results){
             var entry = results[x]; 
             if(entry.vis == "public"){
-                entry.src = "../server/storage/"+"public_photos/"+entry.filename; 
+                entry.src = "../server/storage/"+"public_photos/thumbnail/"+entry.filename; 
+                entry.orig = "../server/storage/"+"public_photos/"+entry.filename; 
             }else{
-                entry.src = "../server/storage/"+"users/"+user.email+"/photos/"+entry.filename; 
+                entry.src = "../server/storage/"+"users/"+user.email+"/photos/thumbnail/"+entry.filename; 
+                entry.orig = "../server/storage/"+"users/"+user.email+"/photos/"+entry.filename; 
             }
             var score = parseFloat(results[x].score);
             results[x].score = score.toFixed(3);
@@ -52,7 +54,7 @@ var ResultView = function(){
             //var img = $(this).children('img');
             //console.log(img); 
             var tmpl = that.imageViewTpl({
-                src: img.attr("src"), 
+                src: img.attr("data-orig"), 
                 author: img.attr("data-author"), 
                 title: img.attr("data-caption"), 
                 date: img.attr("data-date"), 

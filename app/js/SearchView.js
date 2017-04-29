@@ -53,7 +53,7 @@ var SearchView = function (service) {
         
         var that = this; 
 
-        var settings = defaultSettings; 
+        var settings = JSON.parse(window.localStorage.getItem("userSettings"));
         /*var defaultSettings = {
             //MANAGER_TYPE:"ImprSearch",
             searchMethod:1,
@@ -78,12 +78,22 @@ var SearchView = function (service) {
 
             settings.centerY = parseInt($("#center-y").val())/10;
 
+            //settings.maxAmRate = parseInt($("#max-am-rate").val()); //no use
+            settings.maxFolds = parseInt($("#max-folds").val());
+
+            settings.searchW = parseInt($("#search-w").val())/10;
+            settings.searchH = parseInt($("#search-h").val())/10;
+
+            settings.slidingStep = parseInt($("#sliding-step").val());
+
             settings.searchAlbums = [];
             $("#st-scope-by-folder option:selected").each(function(){
-                settings.searchAlbums.push($(this).text()); //这里得到的就是
+                settings.searchAlbums.push($(this).val()); //这里得到的就是
             }); 
             settings.startDate = $("#start-date").val();
             settings.endDate = $("#end-date").val();
+
+            console.log(settings);
 
             that.submitDataForSearching(settings);
         });  
@@ -199,7 +209,9 @@ var SearchView = function (service) {
                     if(data.indexOf("<")==-1 && that.isSearching){
                         data = JSON.parse(data);
                         //expect data = {"status":"Progress","stage":"processing file No.17 out of 21\r\n","processed":"17","total":"21"}
-
+                        //or data = {"status":false,"stage":false}
+                        if(!data.status)return; 
+                    
                         var h = $("div#progress").css("height"); 
                         $("#"+that.lastClassName).css("top", h); 
 
@@ -226,10 +238,12 @@ var SearchView = function (service) {
                             console.log(percent);                             
                             $("div#progress-field").append(that.stageLabelTpl({icon:lang.comparingIcon, text:lang.comparing+" "+percent+"%...", id: className, top:h}));
 
+                        }else if(data.status == "Error" || data.status == "Fatal Error"){ 
+                            className = "error-tag";
+                            $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:data.stage, id: "error-tag", top:h}));      
                         }else{                       
                             className="finish";
                             $("div#progress-field").append(that.stageLabelTpl({icon:lang.finishedComparingIcon, text:lang.finishedComparing, id: className, top:h}));
-
                         }
 
                         $("div#progress").addClass(className);
@@ -238,7 +252,7 @@ var SearchView = function (service) {
                         //document.getElementById(className).scrollIntoView(); //too ugly 
                         $('html, body').animate({
                             scrollTop: $("#"+className).offset().top
-                        }, 800);
+                        }, 400);
                         that.lastClassName = className; 
                         //$("#progress-wrapper").append("<p>"+data.status+"|"+data.stage+"|"+(parseInt(data.processed)/parseInt(data.total))+"| . yeah</p>"); 
                     }
@@ -315,8 +329,16 @@ Finished: Comparing finished in 3827 seconds
                     }catch(error){
                         $("div#progress").removeClass();
                         $("div#progress").addClass("finish");
-                        $(".stage-label").remove();
-                        $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.comparingError, id: "finish-tag", top:h})); 
+                        $(".stage-label:not(#error-tag)").remove();
+                        if(data.responseText.indexOf("Empty Draft")!==-1){
+                            $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.emptyDraftError, id: "finish-tag", top:h})); 
+                        }else if(data.responseText.indexOf("Illegal args")!==-1){
+                            $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.illegalArgsError, id: "finish-tag", top:h})); 
+                        }else{
+                            $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.comparingError, id: "finish-tag", top:h})); 
+                        }
+                        
+
                         $("#progress-field").addClass("stop-animation"); 
                         $("#to-gallery").css("display", "inline-block"); 
                         console.log("SEARCH FINISHED WITH ERROR"); 

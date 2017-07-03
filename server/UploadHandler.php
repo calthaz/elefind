@@ -119,7 +119,8 @@
 			$dirList[] = $privateDraftDir.$row['email'].DIRECTORY_SEPARATOR."photos".DIRECTORY_SEPARATOR; 
 		}
 		$dirList[] = $publicPhotoDir;	
-
+		
+		clearstatcache();
 		//sort out photos' thumbnails
 		foreach ($dirList as $key => $curDir) {
 			echo "<br/>";

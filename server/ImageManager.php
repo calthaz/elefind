@@ -1,13 +1,5 @@
 <?php
-	$privateDraftDir = "storage\\users\\"; // then: \\useremail\\sketches
-	$privatePhotoDir = "storage\\users\\"; // then: \\useremail\\photos
-	$publicDraftDir = "storage\\public_sketches\\";
-	$publicPhotoDir = "storage\\public_photos\\";
-
-	$servername = "localhost";
-	$username = "elefind";
-	$password = "elefindtest";
-	$dbname = "elefind";
+	require "config.inc.php"; 
 
 	$dataToReturn = array();
 
@@ -16,10 +8,10 @@
 
 		if(isset($_POST["myGallery"])){
 			$handle = opendir($privateDraftDir.$user['email']. DIRECTORY_SEPARATOR ."sketches");
-			$sql = "SELECT * FROM sketches WHERE filename LIKE '";
+			$sql = "SELECT * FROM ".$sketches." WHERE filename LIKE '";
 		}else{
 			$handle = opendir($privateDraftDir.$user['email']. DIRECTORY_SEPARATOR ."photos");
-			$sql = "SELECT * FROM photos WHERE filename LIKE '";
+			$sql = "SELECT * FROM ".$photos." WHERE filename LIKE '";
 		}
 		
 
@@ -49,7 +41,8 @@
             			$fileinfo = array();
 
         				$fileinfo['filename']=$row['filename'];
-        				$fileinfo['author']=$row['author'];
+        				$fileinfo['author']=$row['author']; //todo 
+        				$fileinfo['authorname']=$row['authorname'];
         				$fileinfo['title']=$row['title'];
         				$fileinfo['visibility']=$row['visibility'];
         				$fileinfo['date'] = $row['date'];
@@ -85,11 +78,12 @@
  		
 	}elseif(isset($_POST["deletePic"])){
 		
-		$rawPath = $_POST['deletePic'];//url("http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png")
+		$rawPath = $_POST['deletePic'];//url(http://localhost/elefind/server/storage/users/zymdxlyx@sina.cn/sketches/zymdxlyx@sina.cn_1477905731.png)//no " in safari
 		$filename = substr($rawPath, strpos($rawPath, "storage"));
-		$filename = substr($filename, 0, strrpos($filename, '")'));
+		$filename = substr($filename, 0, strrpos($filename, ')'));
 		//$filename = basename($filename);
-		$filePath = str_replace("/","\\", $filename); 
+		$filePath = str_replace("/",DIRECTORY_SEPARATOR, $filename); 
+		$thumbPath = str_replace("photos/","photos".DIRECTORY_SEPARATOR.$thumbnail, $filename); 
 		$filename = basename($filePath); 
 
 		// Create connection
@@ -100,9 +94,13 @@
 		} 
 
 		if(strpos($filePath, "photos")){
-			$sql = "DELETE FROM photos WHERE filename LIKE '";
+			$sql = "DELETE FROM ".$photos." WHERE filename LIKE '";
+			if(file_exists($thumbPath)){
+    			unlink($thumbPath);
+    		}
 		}else{
-			$sql = "DELETE FROM sketches WHERE filename LIKE '";
+			$sql = "DELETE FROM ".$sketches." WHERE filename LIKE '";
+			
 		}
 		
 		$sqlresult = $conn->query($sql.$filename."'");
@@ -112,11 +110,12 @@
 		//if($sqlresult){
 			//echo "SQL delete failed"; //no way to know if the entry in sql is deleted or not...
 		//}else{
-			if(!unlink($filePath)){
-				echo "delete pic failed";
-			}else{
-				echo "success"; 
-			}
+		if(!unlink($filePath)){
+			echo "delete pic failed";
+		}else{
+
+			echo "success"; 
+		}
 		//}
 
 		
@@ -126,10 +125,10 @@
 	}elseif((isset($_POST["publicAlbum"])||isset($_POST['publicGallery']))){
 		if(isset($_POST["publicAlbum"])){
 			$handle = opendir($publicPhotoDir);
-			$sql = "SELECT * FROM photos WHERE filename LIKE '";
+			$sql = "SELECT * FROM ".$photos." WHERE filename LIKE '";
 		}else{
 			$handle = opendir($publicDraftDir);
-			$sql = "SELECT * FROM sketches WHERE filename LIKE '";
+			$sql = "SELECT * FROM ".$sketches." WHERE filename LIKE '";
 		}
 		
 
@@ -158,7 +157,8 @@
             			$fileinfo = array();
 
         				$fileinfo['filename']=$row['filename'];
-        				$fileinfo['author']=$row['author'];
+        				$fileinfo['author']=$row['author'];//todo check
+        				$fileinfo['authorname']=$row['authorname'];
         				$fileinfo['title']=$row['title'];
         				$fileinfo['visibility']=$row['visibility'];
         				$fileinfo['date'] = $row['date'];
@@ -189,7 +189,7 @@
 
 	function saveDraft($draft, $useremail, $requestTime){
 
-		global $privateDraftDir, $publicDraftDir, $servername, $username, $dbname, $password; //Oh shit! 
+		global $privateDraftDir, $publicDraftDir, $servername, $username, $dbname, $password, $users, $sketches, $photos; //Oh shit! 
 		
 		$dataToReturn = array();
 
@@ -204,13 +204,18 @@
 		//echo $draft['base64str'];
  		//$requestTime = ;
 
- 		$sql = "SELECT username FROM users WHERE email LIKE '".$useremail."'";
+ 		$sql = "SELECT username FROM ".$users." WHERE email LIKE '".$useremail."'";
 		$result = $conn->query($sql);
 
+		$username = ""; 
 		if($result->num_rows <= 0){
 			//means unregistered user
 			$draft["publish"]=true;
 			$useremail="";
+			$username="";
+		}else{
+			$row = $result->fetch_assoc();
+			$username = $row['username']; 
 		}
 
 		$draftPath = "";
@@ -221,12 +226,12 @@
 
 		$title = $draft['title']; 
 
-		$stmt = $conn->prepare("INSERT INTO sketches (filename, author, visibility, title, date) VALUES (?, ?, ?, ?,?)");
-		$stmt->bind_param('sssss', $filename, $useremail, $vis, $title, $date);
+		$stmt = $conn->prepare("INSERT INTO ".$sketches." (filename, author, authorname, visibility, title, date) VALUES (?, ?, ?, ?, ?,?)");
+		$stmt->bind_param('ssssss', $filename, $useremail, $username, $vis, $title, $date);
 
 		if($useremail!=""){
 			$filename = $useremail."_".$requestTime.".png";
-			$draftPath = $privateDraftDir.$useremail."\\sketches\\".$useremail."_".$requestTime.".png";
+			$draftPath = $privateDraftDir.$useremail.DIRECTORY_SEPARATOR."sketches".DIRECTORY_SEPARATOR.$useremail."_".$requestTime.".png";
 			$vis = "private";
 
 			$ifp = fopen( $draftPath, "wb" ); 

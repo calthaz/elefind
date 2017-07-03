@@ -13,17 +13,7 @@ password: <input type="text" name="password">
 
 	//echo "I'm here!!";
     //class UserManager{
-	$servername = "localhost";
-	$username = "elefind";
-	$password = "elefindtest";
-	$dbname = "elefind";
-
-	//echo json_encode(array("key", "value"));
-	//echo json_encode($_POST); 
-	//echo json_encode($_GET); 
-
-	$profilePicDir = "storage\\users\\profile_pics\\";
-	$userDir = "storage\\users\\";
+	require "config.inc.php"; 
 
 	//public function __construct(){
 	// Create connection
@@ -40,7 +30,7 @@ password: <input type="text" name="password">
 		$info = $_POST['userLogin'];//array('email'=>$_POST['email'], 'password' => $_POST['password']);//////
 		$data = array();
 
-		$sql = "SELECT password FROM users WHERE email LIKE '".$info['email']."'";
+		$sql = "SELECT password FROM ".$users." WHERE email LIKE '".$info['email']."'";
 		$result = $conn->query($sql);
 
 		$msg="default";
@@ -50,7 +40,7 @@ password: <input type="text" name="password">
     		while($row = $result->fetch_assoc()) {        			
         		if($row['password']==md5($info['password'])){
         			$msg = "success";
-        			$sql = "SELECT * FROM users WHERE email LIKE '".$info['email']."'";
+        			$sql = "SELECT * FROM ".$users." WHERE email LIKE '".$info['email']."'";
         			$result = $conn->query($sql);
         			$row = $result->fetch_assoc();
         			$user['name']=$row['username'];
@@ -82,7 +72,7 @@ password: <input type="text" name="password">
 		$msg = "default";
 
 		//$sql = "UPDATE users SET password = '".md5('test')."' WHERE email = 'admin@elefind.com'";
-		$sql = "SELECT username FROM users WHERE email LIKE '".$user['email']."'";
+		$sql = "SELECT username FROM ".$users." WHERE email LIKE '".$user['email']."'";
 		$result = $conn->query($sql);
 		
 		if($result->num_rows > 0){
@@ -107,7 +97,7 @@ password: <input type="text" name="password">
 	}elseif(isset($_POST['userRegister'])){
 		$info = $_POST['userRegister'];
 
-		$sql = "SELECT password FROM users WHERE email LIKE '".$info['email']."'";
+		$sql = "SELECT password FROM ".$users." WHERE email LIKE '".$info['email']."'";
 		$result = $conn->query($sql);
 		if($result->num_rows > 0){
 
@@ -142,24 +132,28 @@ password: <input type="text" name="password">
 		}
 
 		mkdir($userDir.$info['email']);
-		mkdir($userDir.$info['email']."\\sketches");
-		mkdir($userDir.$info['email']."\\photos");
+		mkdir($userDir.$info['email'].DIRECTORY_SEPARATOR."sketches");
+		mkdir($userDir.$info['email'].DIRECTORY_SEPARATOR."photos");
+		mkdir(getDirPath($userDir.$info['email'].DIRECTORY_SEPARATOR."photos".DIRECTORY_SEPARATOR.$thumbnail));
 
 		//{"email":"mein@ele.com","password":"t","username":"julia","language":"zh"}
 		//$stmt = $conn->prepare("INSERT INTO users (username, password, email, title, date) VALUES (?, ?, ?, ?,?)");
 		//$stmt->bind_param('sssss', $filename, $useremail, $vis, $title, $date);profile_pic_url, '".$profilePicDir.$info['email']."', 
 
-		$sql = "INSERT INTO users (username, password, email, language, reg_date, priviledges, server_draft_folder, server_photo_folder) VALUES ('"
-		.$info['username']."', '".md5($info['password'])."', '"
+		$sql = "INSERT INTO ".$users." (username, password, email, language, reg_date, priviledges, server_draft_folder, server_photo_folder) VALUES ('"
+		.htmlspecialchars($info['username'], ENT_SUBSTITUTE)."', '".md5($info['password'])."', '"
 		.$info['email']."', '".$info['language']."', '"
 		.date('Y-m-d')."', 'user', '"
-		.$userDir.$info['email']."\\sketches', '".$userDir.$info['email']."\\photos')"; 
+		.$userDir.$info['email'].DIRECTORY_SEPARATOR."sketches', '".$userDir.$info['email'].DIRECTORY_SEPARATOR."photos')"; 
 
 		$result = $conn->query($sql);
 
 		$data["sql1"] = $sql; 
 
-		$sql = "SELECT * FROM users WHERE email LIKE '".$info['email']."'";
+		$sql = "INSERT INTO ".$usersearchsettings." (email, searchMethod, preprocessing, maxAmRate, maxFolds, centerX, centerY, searchW, searchH, slidingStep, maxPatchSize) VALUES ('".$info['email']."', '1', '3', '2', '2', '0.5', '0.5', '0.2', '0.2', '4', '1250')";
+		$result = $conn->query($sql);
+
+		$sql = "SELECT * FROM ".$users." WHERE email LIKE '".$info['email']."'";
 		$result = $conn->query($sql);
 		
 		if($result){

@@ -1,4 +1,3 @@
-
 var defaultSettings = {
 			//MANAGER_TYPE:"ImprSearch",
 			searchMethod:1,
@@ -49,43 +48,43 @@ var UserService = function(){
 			searchW:0.2,
 			searchH:0.2,
 			probFunc:1,
-		}
+		};
 
-		this.superUser = {
-			name:"admin",
-			email:"zymdxlyx@sina.cn",
-			password:"tempPass",
-			profilePic:"img/admin.png",
+		this.emptyUser = {
+			name:"",
+			email:"",
+			password:"",
+			profilePic:"..\\server\\storage\\users\\profile_pics\\original\\user.png",
 			language:"en",
-			draftFolderURL:"undecided",
-			photoAlbumURL:"undecided",
-			searchSettings: curSettings,
-			friends:"",
-			priviledges:"all",
+			//draftFolderURL:"undecided",
+			//photoAlbumURL:"undecided",
+			//searchSettings: curSettings,
+			//friends:"",
+			priviledges:"user",
 			logOut: function(){
 
 				this.name="";
 				this.email="";
 				this.password="";
-				this.profilePic="";
-				this.language="zh";
-				this.draftFolderURL="undecided";
-				this.photoAlbumURL="undecided";
-				this.searchSettings= defaultSettings;
-				this.friends="";
+				this.profilePic="..\\server\\storage\\users\\profile_pics\\original\\user.png";
+				this.language="en";
+				//this.draftFolderURL="undecided";
+				//this.photoAlbumURL="undecided";
+				//this.searchSettings= defaultSettings;
+				//this.friends="";
 				this.priviledges="";
 
 			},
 			resetSettings: function(){
 				this.searchSettings = defaultSettings;
 			}
-		}
+		};
 
 		if(window.localStorage.getItem("elefindUser")){
 			this.currentUser=JSON.parse(window.localStorage.getItem("elefindUser"));
 			console.log("Has user");
 		}else{
-			window.localStorage.setItem("elefindUser", JSON.stringify(this.superUser));
+			window.localStorage.setItem("elefindUser", JSON.stringify(this.emptyUser));
 			this.currentUser=JSON.parse(window.localStorage.getItem("elefindUser"));
 			console.log("add user");
 		}
@@ -102,54 +101,57 @@ var UserService = function(){
 
 		deferred.resolve();
         return deferred.promise();
-	}
+	};
 
 	this.getCurSettings=function(){
 		return this.currentUser.searchSettings;
-	}
+	};
 
 	this.logOut = function(){
 		this.currentUser.name="";
 		this.currentUser.email="";
 		this.currentUser.password="";
 		this.currentUser.profilePic="";
-		this.currentUser.language="zh";
+		this.currentUser.language="en";
 		this.currentUser.draftFolderURL="undecided";
 		this.currentUser.photoAlbumURL="undecided";
 		this.currentUser.searchSettings= defaultSettings;
 		this.currentUser.friends="";
 		this.currentUser.priviledges="";
 		window.localStorage.setItem("elefindUser", JSON.stringify(this.currentUser));
-	}
+	};
 
 	this.printlogOut = function(){
 		console.log(this.currentUser.name);
 		//window.localStorage.setItem("elefindUser", JSON.stringify(this.currentUser));
-	}
+	};
 
 	this.updateUserInfo = function(){
 		//can be delayed
 		window.localStorage.setItem("elefindUser", JSON.stringify(this.currentUser));
+		this.currentUser=JSON.parse(window.localStorage.getItem("elefindUser"));
 		actionQueue.addAction("editProfile", "");
 		//
-	}
+	};
 
 	this.authenticate = function(email, password){
 		//requires instant connection
 		//some ajax
 		//window.localStorage.setItem("elefindUser", JSON.stringify(this.superUser));
 		if(!hasConnection()){
+			var user = JSON.parse(window.localStorage.getItem("elefindUser"));
+        	var lang = new Lang(user.language);
 			window.alert(lang.noInternetMsg+"No internet");
 			return;
 		}
 
-		userLogin = {
+		var userLogin = {
 			userLogin:{
 				email: email,
 				password: password
 			}
 			
-		}
+		};
 
 		var that = this; 
 
@@ -170,11 +172,17 @@ var UserService = function(){
             	data=JSON.parse(data);
             	if(data.msg =="success"){
             		//window.alert("you are logged in!");
-            		window.localStorage.setItem("elefindUser", JSON.stringify(data.user));
-            		that.currentUser=data.user;
+            		var loc = {};
+            		loc.name = data.user.name;
+            		loc.email = data.user.email;
+            		loc.priviledges = data.user.priviledges; 
+            		loc.language = data.user.language;
+            		loc.profilePic = data.user.profilePic; 
+            		window.localStorage.setItem("elefindUser", JSON.stringify(loc));
+            		that.currentUser=loc;
             		//location.reload();//!! Too violent
             		$(window).trigger('hashchange');//
-            		Materialize.toast(Lang(data.user.language).welcome, 4000);
+            		Materialize.toast(Lang(loc.language).welcome, 4000);
             		return true;
             	}else if(data.msg == "denied"){
             		window.alert("wrong password.");
@@ -182,7 +190,7 @@ var UserService = function(){
             	}else{
             		window.alert("You are not logged in, but I don't know why. Error: "+data.msg);
             	}
-                console.log(data);
+                //console.log(data);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 console.log('ERRORS:' + textStatus +"errorThrown"+errorThrown);
@@ -193,18 +201,21 @@ var UserService = function(){
                 
             }
         });
-	}
+	};
 
 	this.register = function(email, username, password, language){
 		//requires instant connection
 		//some ajax
 		//window.localStorage.setItem("elefindUser", JSON.stringify(this.superUser));
 		if(!hasConnection()){
+			var user = JSON.parse(window.localStorage.getItem("elefindUser"));
+        	var lang = new Lang(user.language);
 			window.alert(lang.noInternetMsg+"No internet");
 			return;
 		}
+		username = username.replace(" ", "_"); 
 
-		data = {
+		var data = {
 			userRegister:{
 				email: email,
 				password: password,
@@ -212,7 +223,7 @@ var UserService = function(){
 				language: language
 			}
 			
-		}
+		};
 
 		var that = this; 
 
@@ -237,16 +248,22 @@ var UserService = function(){
             	data=JSON.parse(data);
             	if(data.msg =="success"){
             		//window.alert("you are logged in!");
-            		window.localStorage.setItem("elefindUser", JSON.stringify(data.user));
-            		that.currentUser=data.user;
+            		var loc = {};
+            		loc.name = data.user.name;
+            		loc.email = data.user.email;
+            		loc.priviledges = data.user.priviledges; 
+            		loc.language = data.user.language;
+            		loc.profilePic = data.user.profilePic; 
+            		window.localStorage.setItem("elefindUser", JSON.stringify(loc));
+            		that.currentUser=loc;
             		//location.reload();//!! Too violent
             		$(window).trigger('hashchange');//
-            		Materialize.toast(Lang(data.user.language).welcome, 4000);
+            		Materialize.toast(Lang(loc.language).welcome, 4000);
 
             	}else{
             		window.alert("You are not registered, but I don't know why. Error: "+data.msg);
             	}
-                console.log(data);
+                //console.log(data);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 console.log('ERRORS:' + textStatus +"errorThrown"+errorThrown);
@@ -257,5 +274,5 @@ var UserService = function(){
                 
             }
         });
-	}
-}
+	};
+};

@@ -36,7 +36,7 @@
             //if($userLang == "zh"){
                 //$string = file_get_contents("/languages/zh.json");
             //}else{
-                $string = file_get_contents("languages\\en.json");
+                $string = file_get_contents("languages".DIRECTORY_SEPARATOR."en.json");
             //}
         
         // show default site or prompt for language

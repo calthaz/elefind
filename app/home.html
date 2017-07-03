@@ -16,16 +16,17 @@
 
       <link rel="stylesheet" href="plugins/drawingboard/css/drawingboard.css">
 
-      <meta http-equiv="x-ua-compatible" content="IE=10">   
+      <meta http-equiv="x-ua-compatible" content="IE=10">  
 
+      <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon">
       <link rel="stylesheet" href="plugins/farbtastic/farbtastic.css" type="text/css" />
 
       <link type="text/css" rel="stylesheet" href = "css/custom.css" />
       <link type="text/css" rel="stylesheet" href = "css/print-home.css" media="print" />
       <link type="text/css" rel="stylesheet" href = "css/try.css" />
-      <link type="text/css" rel="stylesheet" href = "css/dropzone.css" />
-
-      <!--<link href="css/pageslider.css" rel="stylesheet">-->
+      <link type="text/css" rel="stylesheet" href = "css/neat-dropzone.css" />
+      <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href="css/pageslider.css" rel="stylesheet">-->
 
     </head>
 
@@ -47,7 +48,7 @@
           <li>
               <a class="btn waves-effect waves-light button-collapse right" data-activates="slide-out">
               <!--<div ><img class="background"   src="img/side-nav-2.png"/> class="valign-wrapper"</div> valign-wrapper-->
-                <span id = "nav-1" class = "cyan lighten-1"><i class="material-icons md-24">more_vert</i></span>
+                <span id = "nav-1" class = "cyan lighten-1"><i class="material-icons md-24">&#xE5D4;</i></span>
                 <span id = "nav-2" class = "brown darken-3"></span>
                 <span id = "nav-3" class = "teal lighten-4"></span>
               </a>
@@ -249,7 +250,7 @@
          This is implemented with the Haar algorithm found <a target="_blank" href="http://grail.cs.washington.edu/projects/query/"><i class="material-icons">launch</i>here</a>. </p>
       </div>
 
-      <div class="hero" style = "background-image: url('img/about-us.jpg')">
+      <div class="hero" id="team-intro" style = "background-image: url('img/about-us.jpg')">
         <div class="container image-overlay">
           <h2 class="page-header" ><span class="page-header-prefix">{{lang.part2}}Part 6 </span>{{lang.space}} About Us</h2>
         </div>
@@ -314,7 +315,7 @@
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="white-text">{{lang.about}}</h5>
-                <p class="white-text">One Girl, two elephants, three imaginary friends and four real ones. <a href="#" style="text-decoration: underline;">more</a></p>
+                <p class="white-text">One Girl, two elephants, three real friends. <a href="#" style="text-decoration: underline;">more</a></p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">{{lang.team}}</h5>
@@ -322,9 +323,6 @@
                   <li><a class="white-text-m" href="#!">Caltha</a></li>
                   <li><a class="white-text-m" href="http://www.cnblogs.com/turtlegood/" target="_blank">Turtle</a></li>
                   <li><a class="white-text-m" href="#!">Luo</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Edmud</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Francine</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Edmod</a></li>
                 </ul>
               </div>
             </div>
@@ -332,7 +330,7 @@
       <div class="footer-copyright secondary-color">
             <div class="container">
               {{lang.copyrightText}}
-            <a class="grey-text text-lighten-4 right hide-on-med-and-up" href="#!">{{lang.about}}</a>
+              <a class="grey-text text-lighten-4 right switch-lang" >{{lang.changeLang}}</a>
             </div>
       </div>
     </footer>
@@ -360,15 +358,15 @@
         {{/if}}
       </div></li>
 
-      <li><a  href="#publicGallery" class="waves-effect waves-light"><i class="material-icons">collections_bookmark</i>{{lang.publicGallery}}</a></li>
-      <li><a href="#publicAlbum" class="waves-effect waves-light"><i class="material-icons">photo_library</i>{{lang.publicAlbum}}</a></li>
+      <li><a  href="#publicGallery" class="waves-effect waves-light"><i class="material-icons">&#xE431;</i>{{lang.publicGallery}}</a></li>
+      <li><a href="#publicAlbum" class="waves-effect waves-light"><i class="material-icons">&#xE413;</i>{{lang.publicAlbum}}</a></li>
       <li><a class="waves-effect waves-light"><i class="material-icons">link</i>{{lang.publicMatches}}</a></li>
 
       <li><div class="divider"></div></li>
 
       <li><a href="#drawingBoard" class="waves-effect waves-light"><i class="material-icons">search</i>{{lang.newSearch}}</a></li>
       {{#if isLoggedIn}}
-      <li><a href="#myGallery" class="waves-effect waves-light"><i class="material-icons">format_paint</i>{{lang.myGallery}}</a></li>
+      <li><a href="#myGallery" class="waves-effect waves-light"><i class="material-icons">&#xE243;</i>{{lang.myGallery}}</a></li>
       <li><a href="#myAlbum" class="waves-effect waves-light"><i class="material-icons">camera</i>{{lang.myAlbum}}</a></li>     
       <li><a href="#searchResult" class="waves-effect waves-light"><i class="material-icons">history</i>{{lang.history}}</a></li>
       {{/if}}
@@ -449,6 +447,11 @@
             <label for="choose-zh">中文</label>
           </p>
         </div>
+        <div class='row'>
+          <div class="notice">
+            {{{lang.tempRegisterDeclaration}}}
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <a id="register" class="waves-effect waves-primary btn-flat">{{lang.register}}</a>
@@ -463,7 +466,7 @@
         <div class="nav-wrapper cyan darken-3">
           <a class="right">{{lang.accountSettings}}</a>
           <ul id="nav-mobile" class="left">
-            <li><a class="go-back"><i class="material-icons go-back">chevron_left</i></a></li>
+            <li><a class="go-back"><i class="material-icons go-back">&#xE5CB;</i></a></li>
           </ul>
         </div>
       </nav>
@@ -471,7 +474,7 @@
     <main>
     <div id="top-container" class="container">
       <div class="row">
-        <h5 class="brown-text text-darken-2 secondary-d">{{lang.greetUser}} {{user.email}}</h5>
+        <h5 class="brown-text text-darken-2 secondary-d">{{lang.greetUser}} {{user.name}}</h5>
       </div>
       
       <div class="row">
@@ -483,7 +486,7 @@
 
           <div class="row">
             <div class="input-field col s12 m6">
-              <i class="material-icons prefix">account_circle</i>
+              <i class="material-icons prefix">&#xE853;</i>
               <input value="{{user.name}}" id="username" type="text" class="validate">
               <label class = "active" for="username">{{lang.username}}</label>
             </div>
@@ -543,7 +546,7 @@
                 <label class="active" for="height-ratio">{{lang.height}}</label>
               </div>
               <div class="col s4 m3">
-                <a id="reset-canvas-size" class="btn">{{lang.applyRatio}}</a>
+                <a id="reset-canvas-size" class="btn tool-tipped" data-position="bottom" data-delay="10" data-tooltip="{{lang.clearCanvasNote}}">{{lang.applyRatio}}</a>
               </div>
             </div>
           </div>
@@ -555,16 +558,16 @@
                 <!--class="dropdown-content"-->
                 <button data-activates="picker-wrapper" class="btn dropdown-button btn-flat transparent" >
                   <input type="text" id="color" name="color" value="#000000" disabled style="display: none;"/>
-                  <i id="color-lens" class="material-icons md-48">color_lens</i>
+                  <i id="color-lens" class="material-icons md-48">&#xE3B7;</i>
                 </button>
               </div>
               <ul id="picker-wrapper" class="dropdown-content" >
                 <li><div id="colorpicker"></div></li>
               </ul>
             </form>
-            <button class="btn" id = "save-to-phone"><span class="hide-on-small-only">{{lang.download}}</span> <i class="material-icons right">get_app</i></button>
-            <button class="btn" id = "save-to-server"><span class="hide-on-small-only">{{lang.saveToServer}}</span> <i class="material-icons right">cloud_upload</i></button>
-            <button class="btn next"><span class="hide-on-small-only">{{lang.next}}</span><i class="material-icons white-text right">chevron_right</i></button>
+            <button class="btn" id = "save-to-phone"><span class="hide-on-small-only">{{lang.download}}</span> <i class="material-icons right">&#xE884;</i></button>
+            <button class="btn" id = "save-to-server"><span class="hide-on-small-only">{{lang.saveToServer}}</span> <i class="material-icons right">&#xE2C3;</i></button>
+            <button class="btn next"><span class="hide-on-small-only">{{lang.next}}</span><i class="material-icons white-text right">&#xE5CC;</i></button>
         </div> 
       </div>
     </script>
@@ -584,6 +587,7 @@
       </div>-->
 
       <div class="container">
+          <div class="notice">{{{lang.searchSettingsNotice}}}</div>
           <h3 class="page-header"><span class="page-header-prefix">{{lang.step1}}#</span>{{lang.searchSettingsHeader}}</h3>
           <div class = "">
             <form id="search-settings">
@@ -592,10 +596,9 @@
                     <span class = "settings-label">{{lang.maxPatchSize}}</span>
                   </div>               
                   <div class="input-field col s12 m8 l6">
-                    <select>
-                      <option value="1250" disabled selected>{{lang.default}}</option>
+                    <select id = "st-patch-size">
                       <option value="625">{{lang.patchSmall}}</option>
-                      <option value="1250">{{lang.patchMedium}}</option>
+                      <option value="1250" selected>{{lang.patchMedium}}</option>
                       <option value="100000">{{lang.patchNoRestrict}}</option>
                     </select>            
                     <span class="settings-text"> {{lang.maxPatchSizeExpl}}</span>      
@@ -608,11 +611,11 @@
                 <div class="input-field col s12 m8 l6">
                   <p class="range-field">
                     <label for="center-x">X</label>
-                    <input type="range" id="center-x" min="0" max="10" value="{{settings.centerX}}"/>                    
+                    <input type="range" id="center-x" min="2" max="8" value="{{settings.centerX}}"/>                    
                   </p>
                   <p class="range-field">
                     <label for="center-y">Y</label>
-                    <input type="range" id="center-y" min="0" max="10" value="{{settings.centerY}}"/>                    
+                    <input type="range" id="center-y" min="2" max="8" value="{{settings.centerY}}"/>                    
                   </p>
                   <span class = "settings-text">{{lang.centerPosExpl}}</span>
                 </div>
@@ -637,7 +640,7 @@
               </div>
               
               <div id="advanced-settings" style="display: none;">
-              <div class="settings-option row">
+              <!--<div class="settings-option row">
                 <div class = "settings-info col s12 m4">
                   <span class = "settings-label">{{lang.searchMethod}}</span>
                   
@@ -651,8 +654,8 @@
                   </select>
                   <span class = "settings-text">{{lang.searchMethodExpl}}</span>
                 </div>
-              </div>
-              <div class="settings-option row">
+              </div>-->
+              <!--<div class="settings-option row">
                 <div class = "settings-info col s12 m4">
                   <span class = "settings-label">{{lang.preprocessing}}</span>
                   
@@ -664,11 +667,11 @@
                     <option value="1">{{lang.equalize}}</option>
                     <option value="2" disabled>{{lang.smooth}}</option>
                     <option value="3">{{lang.compress}}</option>
-                    <!--should be multipul selected... but not implemented in java-->
+                    should be multipul selected... but not implemented in java
                   </select>
                   <span class = "settings-text">{{lang.preprocessingExpl}}</span>
                 </div>
-              </div>
+              </div>-
               <div class="settings-option row">
                 <div class = "settings-info col s12 m4">
                   <span class = "settings-label">{{lang.maxAmRate}}</span>
@@ -680,7 +683,7 @@
                   </p>
                   <span class = "settings-text">{{lang.maxAmRateExpl}}</span>
                 </div>
-              </div>
+              </div>-->
               <div class="settings-option row">
                 <div class = "settings-info col s12 m4">
                   <span class = "settings-label">{{lang.maxFolds}}</span>
@@ -733,8 +736,7 @@
                   
                 </div>
                 <div class="input-field col s12 m8 l6">
-                  <select multiple>
-                    <option value="0">{{lang.default}}</option>
+                  <select multiple id = "st-scope-by-folder">
                     <option value="public" selected>{{lang.publicAlbum}}</option>
                     <option value="private">{{lang.privateAlbum}}</option>
                   </select>                  
@@ -775,7 +777,8 @@
             </div>
           </div>
           <div class="row">
-            <a id = "to-result" href="#searchResult" class = "btn" style="display:none">{{lang.next}}<i class="material-icons white-text right">chevron_right</i></a>
+            <a id = "to-result" href="#searchResult" class = "btn" style="display:none">{{lang.next}}<i class="material-icons white-text right">&#xE5CC;</i></a>
+            <a id = "to-gallery" href="#myGallery" class = "btn" style="display:none">{{lang.myGallery}}<i class="material-icons white-text left">&#xE5CB;</i></a>
           </div>
       </div>
     </script>
@@ -783,7 +786,7 @@
     <script id = "stage-label" type="text/template">
       <div class="stage-label" id="{{id}}" style = "top: {{top}}">
         <div class = "pointer"></div>
-        <div class="stage-icon"><i class="material-icons">{{icon}}</i></div>
+        <div class="stage-icon"><i class="material-icons">{{{icon}}}</i></div>
         <span>{{text}}</span>
       </div>
     </script>
@@ -804,6 +807,7 @@
 
     <script id = "grid-gallery" type="text/template">
       <div class="container">
+        <div class="notice">{{{lang.galleryNotice}}}</div>
         <h3 class="page-header"><span class="page-header-prefix">{{header.prefix}}#</span>{{header.main}}</h3>
         <div class = "row {{type}}">
           <div class = "col s12 m7">
@@ -835,7 +839,7 @@
       <div class="image-view">
         <div class="image-self-wrapper">
           <div class = "image-self" style="background-image: url('{{src}}')">
-            <a class = "exit-view hide-on-med-and-up"><i class='material-icons'>arrow_back</i></a>
+            <a class = "exit-view hide-on-med-and-up"><i class='material-icons'>&#xE5C4;</i></a>
             <img class="hidden-image materialboxed" src ="{{src}}">
 
             
@@ -849,8 +853,14 @@
           <span class="view-date">{{date}}</span>
         </div>
         <div class="image-actions">
-          <a class="btn btn-flat waves-effect" id = "save-to-phone" href="{{src}}" download="{{title}}"><span class="">{{lang.download}}</span> <i class="material-icons right">get_app</i></a>
-          <a class="btn btn-flat waves-effect" id = "delete-pic"><span class="">{{lang.delete}}</span> <i class="material-icons right">delete</i></a>
+          <a class="btn btn-flat waves-effect" id = "save-to-phone" href="{{src}}" download="{{title}}">
+            <span class="">{{lang.download}}</span> 
+            <i class="material-icons right">&#xE884;</i>
+          </a>
+          <a class="btn btn-flat waves-effect" id = "delete-pic">
+            <span class="">{{lang.delete}}</span> 
+            <i class="material-icons right">delete</i>
+          </a>
           <!--<a class="" id = "save-to-server"><span class="hide-on-small-only">{{lang.saveToServer}}</span> <i class="material-icons right">cloud_upload</i></a>-->
         </div>
       </div>
@@ -860,7 +870,7 @@
       <div class="tile-wrapper" id={{image.filename}}>
         <div class="card hoverable">
           <div class="card-image">
-              <img data-caption="{{image.title}}" class = "" src="{{image.src}}" data-author="{{author}}" data-date="{{date}}" data-vis="{{visibility}}">
+              <img data-caption="{{image.title}}" class = "" src="{{image.src}}" data-orig = "{{image.orig}}" data-author="{{author}}" data-date="{{date}}" data-vis="{{visibility}}">
               {{#if image.title}}
               <span class="card-title">{{image.title}}</span>
               {{/if}}
@@ -883,6 +893,22 @@
         <div class="card-panel white-text blue-grey hoverable upload-tile" style="background-color: {{style}}">
           <div id="upload-dropzone" class="dropzone"></div>
         </div>
+      </div>
+    </script>
+
+    <script id="dz-preview-template" type="text/template">
+      <div class="dz-preview"> 
+        <div class="dz-file-preview">
+          <div class="dz-details">
+            <img data-dz-thumbnail />
+            <div class="dz-filename"><span data-dz-name></span></div>
+            <div class="dz-size" data-dz-size></div>
+          </div>
+          <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+          <div class="dz-success-mark"><i class="material-icons">check</i></div>
+          <div class="dz-error-mark"><i class="material-icons">close</i></div>
+        </div>
+        <div class="dz-error-message"><span data-dz-errormessage></span></div>
       </div>
     </script>
 
@@ -943,7 +969,7 @@
     <script id = "result-tr" type="text/template">
       <tr>
         <td class="preview-image-wrapper">
-          <img alt="{{lang.brokenImage}}" data-caption= "{{title}}" class = "circle preview-image" src="{{src}}" data-author="{{author}}" data-date="{{date}}" data-vis="{{visibility}}">
+          <img alt="{{lang.brokenImage}}" data-caption= "{{title}}" class = "circle preview-image" src="{{src}}" data-orig="{{orig}}" data-author="{{authorname}}" data-date="{{date}}" data-vis="{{visibility}}">
         </td>
         <!--{{#if title}}
         <td>{{title}}</td>
@@ -955,6 +981,26 @@
       </tr>
     </script>
 
+    <script> 
+      var $buoop = {
+        vs:{i:10,f:-2,o:-2,s:9,c:-6},
+        api:4, 
+        reminder: 0, 
+        text: "Sorry, Elefind doesn't support your browser: {brow_name}, please update to get the best experience on our site. <a{up_but}>update</a> <a{ignore_but}>ignore</a>",    
+        text_zh: "抱歉，寻象不支持您的浏览器: {brow_name}，请升级以获得最佳体验。 <a{up_but}>升级</a> <a{ignore_but}>忽略</a>",                   
+    // custom notification text (html)
+    // Placeholders {brow_name} will be replaced with the browser name, {up_but} with contents of the update link tag and {ignore_but} with contents for the ignore link.
+    // Example: Your browser, {brow_name}, is too old: <a{up_but}>update</a> or <a{ignore_but}>ignore</a>.
+      }; 
+      function $buo_f(){ 
+       var e = document.createElement("script"); 
+       e.src = "//browser-update.org/update.min.js"; 
+       document.body.appendChild(e);
+      };
+      try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+      catch(e){window.attachEvent("onload", $buo_f)}
+    </script>
+
     </body>
 
       <!--Import jQuery before materialize.js-->
@@ -962,7 +1008,7 @@
       <script type="text/javascript" src="js/jquery.min.js"></script>
       <!--<script src="js/pageslider.js"></script>-->
       <script src="js/router.js"></script>
-      <script type="text/javascript" src="cordova.js"></script>
+      <!--This is the web version <script type="text/javascript" src="cordova.js"></script>-->
 
       <script type="text/javascript" src="js/template/materialize.js"></script>
 
@@ -981,7 +1027,7 @@
       <script type="text/javascript" src="js/dropzone.js"></script>
 
 
-      <script type="text/javascript" src="js/Language.js"></script>
+      <!--<script type="text/javascript" src="js/Language.js"></script>
       <script type="text/javascript" src="js/HomeView.js"></script>
 
       <script type="text/javascript" src="js/DrawView.js"></script>
@@ -994,7 +1040,8 @@
       <script type="text/javascript" src="js/AcSettingsView.js"></script>
       <script type="text/javascript" src="js/GridView.js"></script>
 
-      <script type="text/javascript" src="js/app.js"></script>
+      <script type="text/javascript" src="js/app.js"></script>-->
+      <script type="text/javascript" src="js/concat.js"></script>
 
       
   </html>

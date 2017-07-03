@@ -1,6 +1,4 @@
-// We use an "Immediate Function" to initialize the application to avoid leaving anything behind in the global scope
-//(function () {
-	if (navigator.notification) { // Override default HTML alert with native dialog
+if (navigator.notification) { // Override default HTML alert with native dialog
             window.alert = function (message) {
                 navigator.notification.alert(
                     message,    // message
@@ -53,6 +51,8 @@
     GridView.prototype.uploadTileTpl = Handlebars.compile($("#upload-tile").html());
     GridView.prototype.sideNavTpl = Handlebars.compile($("#side-nav").html());
     GridView.prototype.imageViewTpl = Handlebars.compile($("#image-view").html());
+
+    var dropzoneTmpl = document.getElementById('dz-preview-template').innerHTML; 
     
     //var slider = new PageSlider($('body'));
 
@@ -174,7 +174,7 @@
       } else if(event.target==document.getElementById('sign-out')){
         signOut();
       }else if($(event.target).hasClass('go-back')){
-      	window.history.back();
+        window.history.back();
       }else if($(event.target).hasClass("sync")){
         actionQueue.process();
       }
@@ -188,16 +188,29 @@
     $("body").on("click", ".go-back", function(){
       window.history.back();
     });
+    $("body").on("click", ".switch-lang", function(){
+        var user = service.currentUser;
+        if(user == undefined || user.language == undefined) return; //Shouldn't be undefined
+        if(user.language === "en") {
+            user.language = "zh";
+        }else{
+            user.language = "en";
+        }
+        //var lang = new Lang(user.language);
+        service.updateUserInfo();
+        window.location.reload(); 
+       // Materialize.toast(lang.setSuccessMsg, 4000);
+    });
 
     window.addEventListener("online", function(){
       console.log("Get online and process");
       actionQueue.process();
     });//, false
     window.addEventListener('offline', function(){
-    actionQueue.saveActions()}); //unload??
+    actionQueue.saveActions();}); //unload??
       
     window.addEventListener('onBeforeUnload', function(){
-    actionQueue.saveActions()});
+    actionQueue.saveActions();});
 
     /* ---------------------------------- Local Functions ---------------------------------- */
     function renderViewWithSideNav(view){
@@ -243,12 +256,12 @@
 
     var signIn = function(){
       service.authenticate($("#login-email").val().trim(),$("#login-password").val().trim()); 
-    }
+    };
 
     var register = function(){
         console.log("registering!");
         var error = false; 
-      if($("#register-username").val().trim()!=""){
+      if($("#register-username").val().trim()!==""){
             //user.name=$("#username").val().trim();
             if($("#username").hasClass("invalid")){
                 $("#username").removeClass("invalid");
@@ -259,7 +272,7 @@
             error=true;
         }   
         //if($("#old-password").val().trim() == user.password){
-        if($("#register-password").val().trim()!=""){
+        if($("#register-password").val().trim()!==""){
             if($("#register-password").val().trim() == $("#register-password-2").val().trim()){
                 //user.password = $("#register-password").val().trim();
                 if($("#register-password").hasClass("invalid")){
@@ -277,8 +290,6 @@
             }
         }
         if(!error){
-            service.register($("#register-email").val().trim(), $("#register-username").val().trim(), $("#register-password").val().trim(), $("form input[name='lang']:checked").val()); 
+            service.register($("#register-email").val().trim(), $("#register-username").val().trim(), $("#register-password").val().trim(), $("input[name='lang']:checked").val()); 
         }
-    }
-
-//}());
+    };

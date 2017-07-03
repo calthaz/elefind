@@ -1,39 +1,39 @@
 var SearchView = function (service) {
 
-	var findCommonFactor = function(a,b){
+    var findCommonFactor = function(a,b){
       var c=b;
       if(a<b){
         c=a;
         a=b;
         b=c;
       }
-      while(a%b!=0){
+      while(a%b!==0){
         c=a%b;
         a=b;
         b=c;
       }
       return c;
-    }
+    };
 
     
     this.sayHello = function(){
         console.log("hello!"); 
-    }
+    };
 
-	this.render = function() {
+    this.render = function() {
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
         var settings = JSON.parse(window.localStorage.getItem("userSettings")); 
         //"centerX":0.5,"centerY":0.5,"searchW":0.2,"searchH":0.2,
         settings.centerX *= 10;
         settings.centerY *= 10;
         settings.searchW *= 10;
         settings.searchH *= 10;
-    	this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header:{main:lang.searchSettingsHeader}}));
-    	$('main', this.$el).html(this.innerTpl({user:user, lang:lang, settings: settings}));
-    	return this;
-	};
+        this.$el.html(this.template({lang:lang, user: user, isLoggedIn: isLoggedIn, header:{main:lang.searchSettingsHeader}}));
+        $('main', this.$el).html(this.innerTpl({user:user, lang:lang, settings: settings}));
+        return this;
+    };
 
     this.continueRendering = function(){
 
@@ -53,9 +53,49 @@ var SearchView = function (service) {
         
         var that = this; 
 
+        var settings = JSON.parse(window.localStorage.getItem("userSettings"));
+        /*var defaultSettings = {
+            //MANAGER_TYPE:"ImprSearch",
+            searchMethod:1,
+            preprocessing:3,
+            maxPatchSize:1250,
+            maxAmRate:2,
+            maxFolds:2,
+            centerX:0.5,
+            centerY:0.5,
+            searchW:0.2,
+            searchH:0.2,
+            slidingStep:4
+        };*/
+
         $("#submit-settings-scope").on("click", function(event){
             //read search config from user
-            that.submitDataForSearching();
+            var select=document.getElementById("st-patch-size");
+            var index=select.selectedIndex; //序号，取当前选中选项的序号
+            settings.maxPatchSize = select.options[index].value;
+
+            settings.centerX = parseInt($("#center-x").val())/10;
+
+            settings.centerY = parseInt($("#center-y").val())/10;
+
+            //settings.maxAmRate = parseInt($("#max-am-rate").val()); //no use
+            settings.maxFolds = parseInt($("#max-folds").val());
+
+            settings.searchW = parseInt($("#search-w").val())/10;
+            settings.searchH = parseInt($("#search-h").val())/10;
+
+            settings.slidingStep = parseInt($("#sliding-step").val());
+
+            settings.searchAlbums = [];
+            $("#st-scope-by-folder option:selected").each(function(){
+                settings.searchAlbums.push($(this).val()); //这里得到的就是
+            }); 
+            settings.startDate = $("#start-date").val();
+            settings.endDate = $("#end-date").val();
+
+            console.log(settings);
+
+            that.submitDataForSearching(settings);
         });  
 
         $(".settings-option").on("click mousePressed", function(event){
@@ -80,7 +120,7 @@ var SearchView = function (service) {
 
         
         //------------------------------------------------------------------
-    }
+    };
 
     this.isSearching = false;
     this.unfinishedCall = 0;
@@ -88,20 +128,20 @@ var SearchView = function (service) {
     this.relatingFileName = "";
 
 
-    this.submitDataForSearching = function(){
+    this.submitDataForSearching = function(settings){
         if(this.isSearching){
                 window.alert("Please wait. Current Search unfinished.");
                 return;
             }
 
             this.isSearching = true; 
-            
+            window.localStorage.setItem("userSettings", JSON.stringify(settings)); 
             $("#submit-settings-scope").addClass("disabled");
             window.location.hash = "#searchProgress"; 
             //grab user settings as well as th draft
             
             var searchData = {
-                searchConfig: JSON.parse(window.localStorage.getItem("userSettings")), 
+                searchConfig: settings, 
                 user: JSON.parse(window.localStorage.getItem("elefindUser")), 
                 draft: JSON.parse(window.localStorage.getItem("userSketch"))
             };
@@ -122,22 +162,34 @@ var SearchView = function (service) {
                 //contentType: false,
                 success:function(data, textStatus, jqXHR){
                     console.log(data);
-                    data = JSON.parse(data);
-                    that.draftPath = data.draftPath;
-                    that.relatingFileName = data.relatingFileName; 
-                    that.startSearch();
+                    try{
+                        data = JSON.parse(data);
+                        if(data.msg==="success"){
+                            that.draftPath = data.draftPath;
+                            that.relatingFileName = data.relatingFileName; 
+                            that.startSearch();
+                            return
+                        }else{
+                            window.alert(data.msg); //TODO language
+                        }
+                    }catch(e){
+                    }                   
+                    this.isSearching = false; 
+                    window.location.hash = "#searchSettings"; 
+
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     window.alert("Upload Settings failed. Try again");//+lang.uploadErrorMsg
                     console.log("Error: "+ textStatus+"|"+errorThrown);
                     that.isSearching = false; 
+                    window.location.hash = "#searchSettings"; 
                 },
                 complete: function(data){ //No matter error or success. 
                 //so what is the data?   
                     //            
                 }
             });
-    }
+    };
     this.lastClassName = ""; 
 
     this.requestProgress = function(){
@@ -154,14 +206,17 @@ var SearchView = function (service) {
                 //contentType: false,
                 success:function(data, textStatus, jqXHR){
                     console.log(data);
-                    if(data.indexOf("<")==-1){
+                    if(data.indexOf("<")==-1 && that.isSearching){
                         data = JSON.parse(data);
                         //expect data = {"status":"Progress","stage":"processing file No.17 out of 21\r\n","processed":"17","total":"21"}
-
+                        //or data = {"status":false,"stage":false}
+                        if(!data.status)return; 
+                    
                         var h = $("div#progress").css("height"); 
                         $("#"+that.lastClassName).css("top", h); 
 
                         $("div#progress").removeClass();
+                        $(".stage-label").remove();
 
                         var className = ""; 
                         if(data.status == "Start"){                        
@@ -183,10 +238,12 @@ var SearchView = function (service) {
                             console.log(percent);                             
                             $("div#progress-field").append(that.stageLabelTpl({icon:lang.comparingIcon, text:lang.comparing+" "+percent+"%...", id: className, top:h}));
 
+                        }else if(data.status == "Error" || data.status == "Fatal Error"){ 
+                            className = "error-tag";
+                            $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:data.stage, id: "error-tag", top:h}));      
                         }else{                       
                             className="finish";
                             $("div#progress-field").append(that.stageLabelTpl({icon:lang.finishedComparingIcon, text:lang.finishedComparing, id: className, top:h}));
-
                         }
 
                         $("div#progress").addClass(className);
@@ -195,7 +252,7 @@ var SearchView = function (service) {
                         //document.getElementById(className).scrollIntoView(); //too ugly 
                         $('html, body').animate({
                             scrollTop: $("#"+className).offset().top
-                        }, 800);
+                        }, 400);
                         that.lastClassName = className; 
                         //$("#progress-wrapper").append("<p>"+data.status+"|"+data.stage+"|"+(parseInt(data.processed)/parseInt(data.total))+"| . yeah</p>"); 
                     }
@@ -230,7 +287,7 @@ Finished: Comparing finished in 3827 seconds
 
 */
         
-    }
+    };
 
     this.startSearch = function(){
         var user = service.currentUser;
@@ -245,7 +302,7 @@ Finished: Comparing finished in 3827 seconds
                 //processData: false,
                 //contentType: false,
                 success:function(data, textStatus, jqXHR){
-                    console.log(data);
+                    //console.log(data);
 
                 },
                 error: function(jqXHR, textStatus, errorThrown){
@@ -256,15 +313,37 @@ Finished: Comparing finished in 3827 seconds
                 complete: function(data){ //No matter error or success. AND THIS DATA　IS NOT THAT DATA IN SUCCESS...
                     clearInterval(that.unfinishedCall);
                     that.isSearching = false; 
-                    ResultView.prototype.resultData = JSON.parse(data.responseText);
-                     $("div#progress").removeClass();
-                     $("div#progress").addClass("finish");
-                     //$("div#progress-field").append('<div class = "stage-label" style="top:'+h+'" id = "'+className+'">Label: Finished! </div>'); 
-                     var h = $("div#progress").css("height"); 
-                     
-                    $("div#progress-field").append(that.stageLabelTpl({icon:lang.finishedComparingIcon, text:lang.finishedComparing, id: "finish-tag", top:h}));
-                    $("#to-result").css("display", "inline-block"); 
-                    console.log("SEARCH FINISHED"); 
+                  
+                    var h = $("div#progress").css("height"); 
+                    try{
+                        ResultView.prototype.resultData = JSON.parse(data.responseText);
+                        window.localStorage.setItem("elefindResult", data.responseText);
+                        $("div#progress").removeClass();
+                        $("div#progress").addClass("finish");
+                        //$("div#progress-field").append('<div class = "stage-label" style="top:'+h+'" id = "'+className+'">Label: Finished! </div>'); 
+                        $(".stage-label").remove();
+                        $("div#progress-field").append(that.stageLabelTpl({icon:lang.finishedComparingIcon, text:lang.finishedComparing, id: "finish-tag", top:h}));
+                        $("#to-result").css("display", "inline-block"); 
+                        $("#progress-field").addClass("stop-animation"); 
+                        console.log("SEARCH FINISHED"); 
+                    }catch(error){
+                        $("div#progress").removeClass();
+                        $("div#progress").addClass("finish");
+                        $(".stage-label:not(#error-tag)").remove();
+                        if(data.responseText.indexOf("Empty Draft")!==-1){
+                            $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.emptyDraftError, id: "finish-tag", top:h})); 
+                        }else if(data.responseText.indexOf("Illegal args")!==-1){
+                            $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.illegalArgsError, id: "finish-tag", top:h})); 
+                        }else{
+                            $("div#progress-field").append(that.stageLabelTpl({icon:lang.errorComparingIcon, text:lang.comparingError, id: "finish-tag", top:h})); 
+                        }
+                        
+
+                        $("#progress-field").addClass("stop-animation"); 
+                        $("#to-gallery").css("display", "inline-block"); 
+                        console.log("SEARCH FINISHED WITH ERROR"); 
+                        return; 
+                    }                    
                     //window.location.hash = "#searchResult"; 
                     /*
                     //well. the document is not loaded yet. so ...
@@ -275,18 +354,18 @@ Finished: Comparing finished in 3827 seconds
                 }
         });
         this.unfinishedCall = setInterval(function(){that.requestProgress();}, 500);
-    }
+    };
 
 
 
     this.renderSideNav = function(){
         var user = service.currentUser;
         var lang = new Lang(user.language);
-        var isLoggedIn = user.name != "";
+        var isLoggedIn = user.name !== "";
         return this.sideNavTpl({lang:lang, user: user, isLoggedIn: isLoggedIn});
-    }
+    };
 
-	this.initialize = function () {
+    this.initialize = function () {
         // Define a div wrapper for the view (used to attach events)
         this.$el = $('<div class="content-holder"/>');
         //this.$el.on('keyup', '.search-key', this.findByName);
@@ -294,4 +373,4 @@ Finished: Comparing finished in 3827 seconds
     };
 
     this.initialize();
-}
+};

@@ -300,8 +300,9 @@ public class ImageEntry implements Candidate, Query{
 	}*/
 	//sample: storage\public_photos\zymdxlyx@sina.cn_14778224580.jpg compared with 0zymdxlyx@sina.cn_1477905378.png-imp wins 0 color patches. Score:0.0, 
 	public String toString(){
-		String str=path+" compared with "+pairedImprID+"|Image Entry info: |";
-		for(ArrayList<ArrayList<int[]>> sign: coefficients){
+		String str=path+" compared with "+pairedImprID;
+		/* No use to print them now+"|Image Entry info: |"
+		 * for(ArrayList<ArrayList<int[]>> sign: coefficients){
 			//str+="new component:\n";
 			for(ArrayList<int[]> group: sign){
 				//str+="new group:\n";
@@ -310,7 +311,7 @@ public class ImageEntry implements Candidate, Query{
 				}
 			}
 			//str+="\n";
-		}
+		}*/
 		if(this.pairedImprID != null){
 			str+=". Score:"+score;
 		}

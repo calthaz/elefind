@@ -145,14 +145,15 @@ public class QueryManager extends Manager{
 	}
 	
 	public void loadFiles(File inFile) {
-		candiPathList.clear();
+		//candiPathList.clear();
 		loadRecursively(inFile);
-		try {
+		/*
+		 * Not now
+		 * try {
 			addToDataBase();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	@Override
@@ -228,6 +229,7 @@ public class QueryManager extends Manager{
 	@Override
 	public void run() {
 		try {
+			addToDataBase();
 			findCandidates();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -306,6 +308,8 @@ public class QueryManager extends Manager{
 		time = (int)System.currentTimeMillis()-time;
  	    System.out.println("Comparing has taken "+time+"ms.");
  	   progress.println("Finished: "+"Comparing has taken "+time+"ms.");
+ 	   progress.flush();
+ 	   progress.close();
  	    if(wr!=null)wr.println("Comparing has taken "+time+"ms.");
  	    wr.flush();
 	}
